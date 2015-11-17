@@ -99,9 +99,22 @@ WSGI_APPLICATION = 'instag.wsgi.application'
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    # Raises ImproperlyConfigured exception if DATABASE_URL not in
-    # os.environ
-    'default': env.db(),
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'instag_db',
+        'USER': 'instag',
+        'PASSWORD': 'instagpw',
+        'HOST': '127.0.0.1',
+        'PORT': '',
+    },
+    'read': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'instag_db',
+        'USER': 'instag',
+        'PASSWORD': 'instagpw',
+        'HOST': '127.0.0.1',
+        'PORT': '',
+    },
 }
 
 # Internationalization
