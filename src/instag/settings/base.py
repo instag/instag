@@ -64,7 +64,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-#     'djangocms_instagram',
     'django.contrib.auth',
     'django_admin_bootstrapped',
     'django.contrib.admin',
@@ -72,15 +71,32 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'authtools',
     'crispy_forms',
     'easy_thumbnails',
-
     'profiles',
     'accounts',
+#     'connected_accounts',
+#     'connected_accounts.providers',    
+#     'djangocms_instagram',
 
 )
+
+CONNECTED_ACCOUNTS_INSTAGRAM_CONSUMER_KEY = '3dc77d748ec9434fba8d92569824b5ea'
+CONNECTED_ACCOUNTS_INSTAGRAM_CONSUMER_SECRET = '44dafb59c4d94095a0a326022d7e82c1'
+
+
+# DJANGOCMS_INSTAGRAM_PLUGIN_MODULE = ('Generic')
+# DJANGOCMS_INSTAGRAM_PLUGIN_NAME = _('Instagram')
+# DJANGOCMS_INSTAGRAM_PAGE_ONLY = False
+# DJANGOCMS_INSTAGRAM_PARENT_CLASSES = None
+# DJANGOCMS_INSTAGRAM_REQUIRE_PARENT = False
+# DJANGOCMS_INSTAGRAM_TEXT_ENABLED = False
+# DJANGOCMS_INSTAGRAM_DEFAULT_TEMPLATE = 'djangocms_instagram/default.html'
+# DJANGOCMS_INSTAGRAM_TEMPLATES = (
+#     ('djangocms_instagram/default.html', _('Default')),
+# )
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
