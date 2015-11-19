@@ -1,3 +1,6 @@
 <li {% if active_link == "home" %}class="active"{% endif %}><a href="{% url 'home' %}">Home</a></li>
 <li {% if active_link == "about" %}class="active"{% endif %}><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'minsta:instagram_oauth' %}">oauth</a></li>
+                    <li><a href="{% url 'minsta:instagram' %}">instagram</a></li>
+
 
