@@ -5,7 +5,7 @@ from django.core.cache import cache
 from instagram.client import InstagramAPI
 from mezzanine.conf import settings
 
-from mezzanine_instagram.models import Tag
+from minsta.models import Tag
 
 logger = logging.getLogger(__name__)
 
@@ -15,6 +15,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         settings.use_editable()
+        print settings.INSTAGRAM_CLIENT_ID
+        print settings.INSTAGRAM_CLIENT_SECRET
+        
         api = InstagramAPI(
             client_id=settings.INSTAGRAM_CLIENT_ID,
             client_secret=settings.INSTAGRAM_CLIENT_SECRET

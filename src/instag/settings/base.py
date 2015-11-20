@@ -81,12 +81,17 @@ INSTALLED_APPS = (
 #     'connected_accounts',
 #     'connected_accounts.providers',    
 #     'djangocms_instagram',
+)
 
+DASHBOARD_TAGS = (
+    ("mezzanine_tags.recent_actions", 'instagram_tags.instagram',),
 )
 
 CONNECTED_ACCOUNTS_INSTAGRAM_CONSUMER_KEY = '3dc77d748ec9434fba8d92569824b5ea'
 CONNECTED_ACCOUNTS_INSTAGRAM_CONSUMER_SECRET = '44dafb59c4d94095a0a326022d7e82c1'
 
+INSTAGRAM_CLIENT_ID = '3dc77d748ec9434fba8d92569824b5ea'
+INSTAGRAM_CLIENT_SECRET = '44dafb59c4d94095a0a326022d7e82c1'
 
 # DJANGOCMS_INSTAGRAM_PLUGIN_MODULE = ('Generic')
 # DJANGOCMS_INSTAGRAM_PLUGIN_NAME = _('Instagram')

@@ -46,6 +46,7 @@ class InstagramOAuthView(RedirectView):
         code = self.request.GET.get("code")
         settings.use_editable()
         site = Site.objects.get_current()
+        
         conf = {
             "redirect_uri": "http://{0}{1}".format(site.domain, reverse('instagram_oauth')),
             "client_id": settings.INSTAGRAM_CLIENT_ID,
