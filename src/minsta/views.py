@@ -20,6 +20,14 @@ logger = logging.getLogger(__name__)
 class InstagramView(TemplateView):
     template_name = "instagram/instagram.html"
     def get_context_data(self, *args, **kwargs):
+        
+        print 11111
+        print self.request.GET.get("code")
+        print args
+        print kwargs
+        print TemplateView
+        
+        
         try:
             instagram = Instagram.objects.all()[0]
             api = InstagramAPI(access_token=instagram.access_token)
