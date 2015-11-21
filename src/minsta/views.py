@@ -9,25 +9,46 @@ from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, RedirectView, DeleteView, View
 from instagram import InstagramAPIError
 from instagram.client import InstagramAPI
+from instagram_url import api as in_api
 from mezzanine.conf import settings
 
 from .models import Instagram, Media
 
 
 logger = logging.getLogger(__name__)
-
+client_id = settings.INSTAGRAM_CLIENT_ID
+client_secret = settings.INSTAGRAM_CLIENT_SECRET
+redirect_uri = "http://127.0.0.1:8060/minsta/"
+api_insta = InstagramAPI(client_id=client_id, client_secret=client_secret, redirect_uri=redirect_uri)
 
 class InstagramView(TemplateView):
     template_name = "instagram/instagram.html"
     def get_context_data(self, *args, **kwargs):
         
-        print self.request.GET.get("code")
-        print args
-        print kwargs
-        print TemplateView
+        site_user = self.request.user
+        
+        print site_user.id
         
         
+        code = self.request.GET.get('code')
+        url = None
+        access_token = None
+        in_player = None
+
+        if code:
+            try:
+                url = api_insta.get_authorize_url(scope=["relationships"])
+                access_token, insta_user = api_insta.exchange_code_for_access_token(code)
+                self.request.session['access_token'] = access_token
+                
+                if insta_user:
+                    in_player = in_api.get_instagram_player(insta_user, code, access_token, site_user)
+            except:
+                pass
         
+        else:
+            access_token = self.request.session.get('access_token',None)
+            in_player = in_api.get_instagram_player_token(access_token)
         
         
         try:

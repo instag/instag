@@ -78,9 +78,7 @@ INSTALLED_APPS = (
     'profiles',
     'accounts',
     'minsta',
-#     'connected_accounts',
-#     'connected_accounts.providers',    
-#     'djangocms_instagram',
+    'instagram_url',
 )
 
 DASHBOARD_TAGS = (
