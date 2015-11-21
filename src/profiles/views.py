@@ -26,6 +26,7 @@ class ShowProfile(LoginRequiredMixin, generic.TemplateView):
 
 
 class EditProfile(LoginRequiredMixin, generic.TemplateView):
+    
     template_name = "profiles/edit_profile.html"
     http_method_names = ['get', 'post']
 

@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 from django.core.urlresolvers import reverse_lazy
 from os.path import dirname, join, exists
 
+SITE_ID = 1
 
 # Build paths inside the project like this: join(BASE_DIR, "directory")
 BASE_DIR = dirname(dirname(dirname(__file__)))
@@ -76,15 +77,19 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'profiles',
     'accounts',
-#     'connected_accounts',
-#     'connected_accounts.providers',    
-#     'djangocms_instagram',
+    'minsta',
+    'instagram_url',
+)
 
+DASHBOARD_TAGS = (
+    ("mezzanine_tags.recent_actions", 'instagram_tags.instagram',),
 )
 
 CONNECTED_ACCOUNTS_INSTAGRAM_CONSUMER_KEY = '3dc77d748ec9434fba8d92569824b5ea'
 CONNECTED_ACCOUNTS_INSTAGRAM_CONSUMER_SECRET = '44dafb59c4d94095a0a326022d7e82c1'
 
+INSTAGRAM_CLIENT_ID = '3dc77d748ec9434fba8d92569824b5ea'
+INSTAGRAM_CLIENT_SECRET = '44dafb59c4d94095a0a326022d7e82c1'
 
 # DJANGOCMS_INSTAGRAM_PLUGIN_MODULE = ('Generic')
 # DJANGOCMS_INSTAGRAM_PLUGIN_NAME = _('Instagram')

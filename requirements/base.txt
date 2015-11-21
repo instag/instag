@@ -8,3 +8,5 @@ easy-thumbnails>=2.2
 mysql-python
 django-cms>=3.0
 django-connected
+python-instagram
+mezzanine
