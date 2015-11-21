@@ -8,3 +8,4 @@ easy-thumbnails>=2.2
 mysql-python
 python-instagram
 mezzanine
+instagram
