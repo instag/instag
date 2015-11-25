@@ -8,9 +8,17 @@
 #     execute_from_command_line(sys.argv)
 import os
 import sys
+import site
 
-sys.path.append('/var/www/instag')
-sys.path.append('/var/www/instag/src')
+envpath = '/var/www/instag/instag/lib/python2.6/site-packages'
+
+# we add currently directory to path and change to it
+pwd = os.path.dirname(os.path.abspath(__file__))
+os.chdir(pwd)
+sys.path = [pwd] + sys.path
+
+# Append paths
+site.addsitedir(envpath)
 
 from hostname import HOSTNAME
 if __name__ == "__main__":
