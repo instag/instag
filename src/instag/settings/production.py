@@ -2,6 +2,7 @@
 #    DJANGO_SETTINGS_MODULE=instag.settings.production
 from .base import *             # NOQA
 import logging.config
+print 222
 
 # For security and performance reasons, DEBUG is turned off
 DEBUG = False

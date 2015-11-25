@@ -13,7 +13,7 @@ from hostname import HOSTNAME
 if __name__ == "__main__":
     if HOSTNAME.startswith('followkr01.cafe24.com'): #本番
         print "本番"
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.production")
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
     else:
         print "local"
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.development")
