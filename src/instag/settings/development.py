@@ -1,7 +1,6 @@
 from .base import *             # NOQA
 import sys
 import logging.config
-print 1111
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 TEMPLATE_DEBUG = True

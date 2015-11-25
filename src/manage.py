@@ -7,6 +7,9 @@
 #     from django.core.management import execute_from_command_line
 #     execute_from_command_line(sys.argv)
 
+sys.path.append('/var/www/instag')
+sys.path.append('/var/www/instag/src')
+
 import os
 import sys
 from hostname import HOSTNAME
