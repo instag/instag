@@ -6,12 +6,12 @@
 #     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings")
 #     from django.core.management import execute_from_command_line
 #     execute_from_command_line(sys.argv)
+import os
+import sys
 
 sys.path.append('/var/www/instag')
 sys.path.append('/var/www/instag/src')
 
-import os
-import sys
 from hostname import HOSTNAME
 if __name__ == "__main__":
     if HOSTNAME.startswith('followkr01.cafe24.com'): #本番
