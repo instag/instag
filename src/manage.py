@@ -1,13 +1,24 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import os
 import sys
 
+# if __name__ == "__main__":
+#     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings")
+#     from django.core.management import execute_from_command_line
+#     execute_from_command_line(sys.argv)
+
+import os
+import sys
+from hostname import HOSTNAME
 if __name__ == "__main__":
-    # CHANGED manage.py will use development settings by
-    # default. Change the DJANGO_SETTINGS_MODULE environment variable
-    # for using the environment specific settings file.
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.development")
-
+    if HOSTNAME.startswith('followkr01.cafe24.com'): #本番
+        print "本番"
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
+    else:
+        print "local"
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.development")
+    
+#     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "fairy.settings")
     from django.core.management import execute_from_command_line
-
     execute_from_command_line(sys.argv)
