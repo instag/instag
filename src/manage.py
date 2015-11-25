@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import os
-import sys
-
+# import os
+# import sys
 # if __name__ == "__main__":
 #     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings")
 #     from django.core.management import execute_from_command_line
@@ -14,7 +13,7 @@ from hostname import HOSTNAME
 if __name__ == "__main__":
     if HOSTNAME.startswith('followkr01.cafe24.com'): #本番
         print "本番"
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.production")
     else:
         print "local"
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.development")
