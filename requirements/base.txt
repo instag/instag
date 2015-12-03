@@ -6,4 +6,6 @@ django-admin-bootstrapped>=2.4.0
 django-authtools>=1.2.0
 easy-thumbnails>=2.2
 MySQL-python==1.2.3
-mysql-python
+pip install --upgrade django-crispy-forms
+pip install django-uuidfield
+pip install Django==1.8.1

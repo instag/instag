@@ -128,6 +128,7 @@ DATABASES = {
         'PASSWORD': 'instagpw',
         'HOST': '127.0.0.1',
         'PORT': '',
+        'OPTIONS': {"init_command": "SET storage_engine=MyISAM",}        
     },
     'read': {
         'ENGINE': 'django.db.backends.mysql',
@@ -136,6 +137,7 @@ DATABASES = {
         'PASSWORD': 'instagpw',
         'HOST': '127.0.0.1',
         'PORT': '',
+        'OPTIONS': {"init_command": "SET storage_engine=MyISAM",}
     },
 }
 
