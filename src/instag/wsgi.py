@@ -15,7 +15,7 @@ from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
 
 # virtualenvのパッケージパス
-site.addsitedir("/home/ec2-user/.virtualenvs/instag/lib/python2.7/site-packages")
+#site.addsitedir("/home/ec2-user/.virtualenvs/instag/lib/python2.7/site-packages")
 sys.path.append('/var/www/instag')
 sys.path.append('/var/www/instag/src')
 sys.path.append('/var/www/instag/src/instag')
