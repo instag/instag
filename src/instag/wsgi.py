@@ -17,9 +17,10 @@ https://docs.djangoproject.com/en/dev/howto/deployment/wsgi/
 
 
 
+import site
+site.addsitedir('/home/ec2-user/.virtualenvs/instag/lib/python2.7/site-packages')
 
 import os
-import site
 import sys
 
 # sys.path.append('/home/ec2-user/.virtualenvs/instag/lib/python2.7/site-packages')
@@ -34,8 +35,9 @@ sys.path = [pwd] + sys.path
 
 print __file__
 print pwd
+os.environ['DJANGO_SETTINGS_MODULE'] = 'instag.settings.production'
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.production")
+# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
 
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
