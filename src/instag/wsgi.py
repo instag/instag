@@ -9,10 +9,14 @@ https://docs.djangoproject.com/en/dev/howto/deployment/wsgi/
 """
 
 
-import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.production")
-from django.core.wsgi import get_wsgi_application
-application = get_wsgi_application()
+# import os
+# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
+# from django.core.wsgi import get_wsgi_application
+# application = get_wsgi_application()
+
+
+
+
 
 
 # import site
@@ -42,5 +46,30 @@ application = get_wsgi_application()
 #         application = DebuggedApplication(application, evalex=True)
 #     except ImportError:
 #         pass
+
+
+
+
+import os
+import sys
+import site
+
+envpath = '/home/ec2-user/.virtualenvs/instag/lib/python2.7/site-packages'
+
+# we add currently directory to path and change to it
+pwd = os.path.dirname(os.path.abspath(__file__))
+os.chdir(pwd)
+sys.path = [pwd] + sys.path
+# Append paths
+site.addsitedir(envpath)
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
+
+
+from django.core.management import execute_from_command_line
+execute_from_command_line(sys.argv)
+    
+    
+    
     
     
