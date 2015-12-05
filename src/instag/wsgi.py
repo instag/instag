@@ -29,6 +29,9 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
 # site.addsitedir("/home/ec2-user/.virtualenvs/instag/lib/python2.7/site-packages")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.production")
 
+print os.path.abspath(__file__)
+
+
 
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
