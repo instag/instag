@@ -15,7 +15,7 @@ import sys
 site.addsitedir("/home/ec2-user/.virtualenvs/instag/lib/python2.7/site-packages")
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.production")
 
 print os.path.dirname(os.path.abspath(__file__))
 print os.path.dirname(os.path.abspath(__file__)) + '/..'
