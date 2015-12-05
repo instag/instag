@@ -29,9 +29,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
 # site.addsitedir("/home/ec2-user/.virtualenvs/instag/lib/python2.7/site-packages")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings")
 
-import django.core.handlers.wsgi
-application = django.core.handlers.wsgi.WSGIHandler()
-
+import django
 # from django import core
 # from django.core.wsgi import get_wsgi_application
 # application = get_wsgi_application()
