@@ -63,7 +63,7 @@ sys.path = [pwd] + sys.path
 # Append paths
 site.addsitedir(envpath)
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "src.instag.settings.production")
 
 
 from django.core.management import execute_from_command_line
