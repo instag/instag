@@ -19,57 +19,22 @@ https://docs.djangoproject.com/en/dev/howto/deployment/wsgi/
 
 
 
-# import site
-# site.addsitedir('/home/ec2-user/.virtualenvs/instag/lib/python2.7/site-packages')
-# import os
-# import sys
-# 
-# sys.path.append('/var/www/instag')
-# sys.path.append('/var/www/instag/src')
-# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "apple.settings")
-# 
-# os.environ['DJANGO_SETTINGS_MODULE'] = 'instag.settings'
-#  
-# from django.core.wsgi import get_wsgi_application
-# application = get_wsgi_application()
-# from django.conf import settings
-# if settings.DEBUG:
-#     try:
-#         import django.views.debug
-#         import six
-#         from werkzeug.debug import DebuggedApplication
-#  
-#         def null_technical_500_response(request, exc_type, exc_value, tb):
-#             six.reraise(exc_type, exc_value, tb)
-#  
-#         django.views.debug.technical_500_response = null_technical_500_response
-#         application = DebuggedApplication(application, evalex=True)
-#     except ImportError:
-#         pass
-
-
-
-
+import site
+site.addsitedir('/home/ec2-user/.virtualenvs/instag/lib/python2.7/site-packages')
 import os
 import sys
-import site
-
-envpath = '/home/ec2-user/.virtualenvs/instag/lib/python2.7/site-packages'
-
-# we add currently directory to path and change to it
-pwd = os.path.dirname(os.path.abspath(__file__))
-os.chdir(pwd)
-sys.path = [pwd] + sys.path
-# Append paths
-site.addsitedir(envpath)
-
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "src.instag.settings.production")
+ 
+sys.path.append('/var/www/instag')
+sys.path.append('/var/www/instag/src')
+# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
+ 
+os.environ['DJANGO_SETTINGS_MODULE'] = 'instag.settings.production'
+  
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
 
 
-from django.core.management import execute_from_command_line
-execute_from_command_line(sys.argv)
-    
-    
+
     
     
     
