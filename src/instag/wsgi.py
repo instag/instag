@@ -26,8 +26,8 @@ import sys
 # site.addsitedir("/home/ec2-user/.virtualenvs/instag/lib/python2.7/site-packages")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
 
-from django.core.wsgi import get_wsgi_application
-application = get_wsgi_application()
+# from django.core.wsgi import get_wsgi_application
+# application = get_wsgi_application()
 
 
 # Wrap werkzeug debugger if DEBUG is on
