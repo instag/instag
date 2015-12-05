@@ -22,9 +22,9 @@ import os
 import site
 import sys
 
-sys.path.append('/home/ec2-user/.virtualenvs/instag/lib/python2.7/site-packages')
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
+# sys.path.append('/home/ec2-user/.virtualenvs/instag/lib/python2.7/site-packages')
+# sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+# sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
 # site.addsitedir("/home/ec2-user/.virtualenvs/instag/lib/python2.7/site-packages")
 
 
@@ -35,7 +35,7 @@ sys.path = [pwd] + sys.path
 print __file__
 print pwd
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
 
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
