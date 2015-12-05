@@ -33,7 +33,7 @@ print os.path.abspath(__file__)
 print sys.path
 
 
-
+from django import core
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
 
