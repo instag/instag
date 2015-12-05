@@ -39,12 +39,11 @@ paths = (
    )
 
 for path in paths:
-   sys.path.insert(0,path)
+    print path
+    sys.path.insert(0,path)
 
-
-os.environ['DJANGO_SETTINGS_MODULE'] = 'instag.settings.production'
-
-# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
+# os.environ['DJANGO_SETTINGS_MODULE'] = 'instag.settings.production'
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
 
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
