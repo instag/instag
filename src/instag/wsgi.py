@@ -23,7 +23,6 @@ import sys
 
 sys.path.append('/var/www/instag')
 sys.path.append('/var/www/instag/src')
-sys.path.append('/var/www/instag/src/instag')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "apple.settings")
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'instag.settings'
