@@ -29,12 +29,18 @@ import sys
 # site.addsitedir("/home/ec2-user/.virtualenvs/instag/lib/python2.7/site-packages")
 
 
-pwd = os.path.dirname(os.path.abspath(__file__))
-os.chdir(pwd)
-sys.path = [pwd] + sys.path
 
-print __file__
-print pwd
+print os.path.dirname(__file__)
+ 
+# paths = (
+#    os.path.abspath(os.path.join(os.path.dirname(__file__), '../application/module')),
+#    os.path.abspath(os.path.join(os.path.dirname(__file__), '../application/submodule')),
+#    os.path.abspath(os.path.join(os.path.dirname(__file__), '../application/website')),
+#    os.path.abspath(os.path.join(os.path.dirname(__file__), '../application')),
+#    os.path.abspath(os.path.join(os.path.dirname(__file__), '../')),
+#    )
+
+
 os.environ['DJANGO_SETTINGS_MODULE'] = 'instag.settings.production'
 
 # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
