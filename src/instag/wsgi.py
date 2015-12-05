@@ -15,10 +15,7 @@ import sys
 site.addsitedir("/home/ec2-user/.virtualenvs/instag/lib/python2.7/site-packages")
 # sys.path.append('/var/www/instag')
 sys.path.append('/var/www/instag/src')
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
-
-print sys.path
-print os.environ
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production111")
 
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
