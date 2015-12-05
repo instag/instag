@@ -31,14 +31,15 @@ import sys
 
 
 print os.path.dirname(__file__)
+# /var/www/instag/src/instag
  
-# paths = (
-#    os.path.abspath(os.path.join(os.path.dirname(__file__), '../application/module')),
-#    os.path.abspath(os.path.join(os.path.dirname(__file__), '../application/submodule')),
-#    os.path.abspath(os.path.join(os.path.dirname(__file__), '../application/website')),
-#    os.path.abspath(os.path.join(os.path.dirname(__file__), '../application')),
-#    os.path.abspath(os.path.join(os.path.dirname(__file__), '../')),
-#    )
+paths = (
+   os.path.abspath(os.path.join(os.path.dirname(__file__), '../instag')),
+   os.path.abspath(os.path.join(os.path.dirname(__file__), '../')),
+   )
+
+for path in paths:
+   sys.path.insert(0,path)
 
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'instag.settings.production'
