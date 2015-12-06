@@ -27,10 +27,15 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
 # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings_dev")
 
+print 11
 from django.core.wsgi import get_wsgi_application
+print 22
 
 from dj_static import Cling
+
+print 33
 application = Cling(get_wsgi_application())
+print 444
 
 
 
