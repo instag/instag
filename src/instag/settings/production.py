@@ -1,6 +1,6 @@
 # In production set the environment variable like this:
 #    DJANGO_SETTINGS_MODULE=instag.settings.production
-print 222
+print "call production"
 from .base import *             # NOQA
 import logging.config
 
