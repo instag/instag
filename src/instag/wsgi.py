@@ -9,29 +9,30 @@ https://docs.djangoproject.com/en/dev/howto/deployment/wsgi/
 """
 
 
-# import os
-# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
-# from django.core.wsgi import get_wsgi_application
-# application = get_wsgi_application()
-
-
-
-
-
-
-import site
-site.addsitedir('/var/www/instag/instag/lib/python2.7/site-packages')
+print 1111
 import os
-import sys
- 
-sys.path.append('/var/www/instag')
-sys.path.append('/var/www/instag/src')
-# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
- 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'instag.settings.production'
-  
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
+
+
+
+
+
+
+# import site
+# site.addsitedir('/var/www/instag/instag/lib/python2.7/site-packages')
+# import os
+# import sys
+#  
+# sys.path.append('/var/www/instag')
+# sys.path.append('/var/www/instag/src')
+# # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
+#  
+# os.environ['DJANGO_SETTINGS_MODULE'] = 'instag.settings.production'
+#   
+# from django.core.wsgi import get_wsgi_application
+# application = get_wsgi_application()
 
 
 
