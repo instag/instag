@@ -137,7 +137,10 @@ DATABASES = {
         'PASSWORD': 'instagpw',
         'HOST': '127.0.0.1',
         'PORT': '',
-        'OPTIONS': {"init_command": "SET storage_engine=MyISAM",}
+        'OPTIONS': {
+                    'init_command': 'SET storage_engine=MyISAM',
+                    'autocommit': True,
+                    }
     },
 }
 
