@@ -74,7 +74,10 @@ DATABASES = {
         'PASSWORD': 'instagpw',
         'HOST': 'ec2-52-192-255-178.ap-northeast-1.compute.amazonaws.com',
         'PORT': '3306',
-        'OPTIONS': {"init_command": "SET storage_engine=MyISAM",}        
+        'OPTIONS': {
+                    "init_command": "SET storage_engine=MyISAM",
+                    'autocommit': True,
+                    }        
     },
     'read': {
         'ENGINE': 'django.db.backends.mysql',

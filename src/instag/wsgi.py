@@ -35,10 +35,6 @@ for path in paths:
    sys.path.insert(0,path)
  
 os.environ['DJANGO_SETTINGS_MODULE'] = 'instag.settings.production'
- 
-# import django.core.handlers.wsgi
-# application = django.core.handlers.wsgi.WSGIHandler()
-
 
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
