@@ -64,3 +64,29 @@ LOGGING = {
 }
 
 logging.config.dictConfig(LOGGING)
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'instag_db',
+        'USER': 'instag',
+        'PASSWORD': 'instagpw',
+        'HOST': 'ec2-52-192-255-178.ap-northeast-1.compute.amazonaws.com',
+        'PORT': '',
+        'OPTIONS': {"init_command": "SET storage_engine=MyISAM",}        
+    },
+    'read': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'instag_db',
+        'USER': 'instag',
+        'PASSWORD': 'instagpw',
+        'HOST': 'ec2-52-192-255-178.ap-northeast-1.compute.amazonaws.com',
+        'PORT': '',
+        'OPTIONS': {
+                    'init_command': 'SET storage_engine=MyISAM',
+                    'autocommit': True,
+                    }
+    },
+}
+

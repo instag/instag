@@ -120,30 +120,6 @@ WSGI_APPLICATION = 'instag.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'instag_db',
-        'USER': 'instag',
-        'PASSWORD': 'instagpw',
-        'HOST': '127.0.0.1',
-        'PORT': '',
-        'OPTIONS': {"init_command": "SET storage_engine=MyISAM",}        
-    },
-    'read': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'instag_db',
-        'USER': 'instag',
-        'PASSWORD': 'instagpw',
-        'HOST': '127.0.0.1',
-        'PORT': '',
-        'OPTIONS': {
-                    'init_command': 'SET storage_engine=MyISAM',
-                    'autocommit': True,
-                    }
-    },
-}
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/
