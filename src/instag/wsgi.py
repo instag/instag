@@ -17,27 +17,27 @@ https://docs.djangoproject.com/en/dev/howto/deployment/wsgi/
 
 
 
+
+
+
+
+import site
+site.addsitedir('/var/www/instag/instag/lib/python2.7/site-packages')
+
 import os
-
 import sys
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
 
+paths = (
+   os.path.abspath(os.path.join(os.path.dirname(__file__), '../instag')),
+   os.path.abspath(os.path.join(os.path.dirname(__file__), '../')),
+   )
+for path in paths:
+   sys.path.insert(0,path)
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
-# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings_dev")
+os.environ['DJANGO_SETTINGS_MODULE'] = 'instag.settings.production'
 
-print 11
-from django.core.wsgi import get_wsgi_application
-print 22
-
-from dj_static import Cling
-
-print 33
-application = Cling(get_wsgi_application())
-print 444
-
-
+import django.core.handlers.wsgi
+application = django.core.handlers.wsgi.WSGIHandler()
 
 
 
