@@ -9,6 +9,9 @@ https://docs.djangoproject.com/en/dev/howto/deployment/wsgi/
 """
 
 
+import site
+site.addsitedir('/home/ec2-user/.virtualenvs/tag/lib/python2.7/site-packages')
+
 
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
