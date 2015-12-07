@@ -12,7 +12,7 @@ if HOSTNAME.startswith('ip-172-31-22-249'):
     CONFIG = {
         'client_id': '3dc77d748ec9434fba8d92569824b5ea',
         'client_secret': '44dafb59c4d94095a0a326022d7e82c1',
-        'redirect_uri': 'http://ec2-52-192-255-178.ap-northeast-1.compute.amazonaws.com/instag/minsta/'
+        'redirect_uri': 'http://ec2-52-192-255-178.ap-northeast-1.compute.amazonaws.com/minsta/'
     }
 else:
     CONFIG = {
