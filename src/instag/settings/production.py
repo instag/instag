@@ -1,6 +1,7 @@
 # In production set the environment variable like this:
 #    DJANGO_SETTINGS_MODULE=instag.settings.production
 print "call production"
+print BASE_DIR
 from .base import *             # NOQA
 import logging.config
 
@@ -75,7 +76,7 @@ DATABASES = {
         'PORT': '3306',
         'OPTIONS': {
                     "init_command": "SET storage_engine=MyISAM",
-                    'autocommit': True,
+#                     'autocommit': True,
                     }        
     },
     'read': {
@@ -87,7 +88,7 @@ DATABASES = {
         'PORT': '3306',
         'OPTIONS': {
                     'init_command': 'SET storage_engine=MyISAM',
-                    'autocommit': True,
+#                     'autocommit': True,
                     }
     },
 }

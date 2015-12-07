@@ -16,5 +16,7 @@ pip install django-authtools==1.2.0
 pip install easy-thumbnails==2.2
 pip install MySQL-python==1.2.3
 pip install Django==1.8.6
+pip install python-instagram
+pip install mezzanine
 
 
