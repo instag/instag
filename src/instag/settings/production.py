@@ -8,6 +8,13 @@ import logging.config
 DEBUG = False
 TEMPLATE_DEBUG = False
 
+
+ALLOWED_HOSTS = [
+    'ec2-52-192-255-178.ap-northeast-1.compute.amazonaws.com', # Allow domain and subdomains
+    'ec2-52-192-255-178.ap-northeast-1.compute.amazonaws.com/instag', # Allow domain and subdomains
+]
+
+
 # Must mention ALLOWED_HOSTS in production!
 # ALLOWED_HOSTS = ["instag.com"]
 
