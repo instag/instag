@@ -22,7 +22,9 @@ https://docs.djangoproject.com/en/dev/howto/deployment/wsgi/
 
 
 import site
-site.addsitedir('/var/www/instag/instag/lib/python2.7/site-packages')
+# site.addsitedir('/var/www/instag/instag/lib/python2.7/site-packages')
+site.addsitedir('/home/ec2-user/.virtualenvs/tag/lib/python2.7/site-packages')
+
  
 import os
 import sys
