@@ -1,6 +1,11 @@
 <li {% if active_link == "home" %}class="active"{% endif %}><a href="{% url 'home' %}">Home</a></li>
 <li {% if active_link == "about" %}class="active"{% endif %}><a href="{% url 'about' %}">About</a></li>
-                    <li><a href="{% url 'minsta:instagram' %}">MY샵</a></li>
-                    <li><a href="{{url_test}}">샵 오픈</a></li>
 
+{% if user.name %}
+	<li><a href="{% url 'minsta:instagram' %}">MY샵</a></li>
+	<li><a href="{{url_test}}">샵 오픈</a></li>
+{% else %}
+	<li><a href="{% url 'accounts:login' %}">MY샵</a></li>
+	<li><a href="{% url 'accounts:login' %}">샵 오픈</a></li>
+{% endif %}
 

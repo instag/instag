@@ -26,23 +26,22 @@ class InstagramView(TemplateView):
     def get_context_data(self, *args, **kwargs):
         
         site_user = self.request.user
-        
-        print site_user.id
-        
-        
         code = self.request.GET.get('code')
         url = None
         access_token = None
         in_player = None
+        insta_user = None
 
         if code:
             try:
                 url = api_insta.get_authorize_url(scope=["relationships"])
                 access_token, insta_user = api_insta.exchange_code_for_access_token(code)
                 self.request.session['access_token'] = access_token
-                
                 if insta_user:
-                    in_player = in_api.get_instagram_player(insta_user, code, access_token, site_user)
+                    in_player = in_api.get_instagram_player(insta_user,
+                                                            code,
+                                                            access_token, 
+                                                            site_user)
             except:
                 pass
         
@@ -52,10 +51,13 @@ class InstagramView(TemplateView):
         
         
         try:
-            instagram = Instagram.objects.all()[0]
+            instagram = Instagram.get_or_create_user(access_token, 
+                                                     in_player.user_name, 
+                                                     in_player.user_id)
             api = InstagramAPI(access_token=instagram.access_token)
             try:
                 media, discard = api.user_recent_media(user_id=instagram.user_id, count=24)
+                
             except InstagramAPIError as e:
                 logger.error(e)
                 return {"media": []}

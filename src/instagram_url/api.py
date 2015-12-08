@@ -30,7 +30,6 @@ def get_instagram_player(user, code, access_token, site_user):
         result.user_site_id = site_user.id
         result.oauth_token = access_token
         result.save()
-        
     except:
         return None    
     return result    
