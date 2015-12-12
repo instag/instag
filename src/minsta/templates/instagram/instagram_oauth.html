@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 
 {% block container %}
-  {% for instagram in media %}
+	<br />
+	<br />
+	<br />
+  <p>오픈 완료</p>
   <img src="{{ instagram.images.thumbnail.url }}" width="{{ instagram.images.thumbnail.width }}" height="{{ instagram.images.thumbnail.height }}">
-  {% empty %}
   <p>There're no images to display.</p>
-  {% endfor %}
 {% endblock container %}

@@ -30,7 +30,7 @@ redirect_uri = "http://127.0.0.1:8060/minsta/"
 api_insta = InstagramAPI(client_id=client_id, client_secret=client_secret, redirect_uri=redirect_uri)
 
 class InstagramView(TemplateView):
-    template_name = "instagram/instagram.html"
+    template_name = "instagram/instagram_oauth.html"
     def get_context_data(self, *args, **kwargs):
         
         site_user = self.request.user
@@ -39,10 +39,12 @@ class InstagramView(TemplateView):
         access_token = None
         in_player = None
         insta_user = None
-
+        
+        print 111
+        # instagram apiからcode取得したら
         if code:
+            print 222
             try:
-                url = api_insta.get_authorize_url(scope=["relationships"])
                 access_token, insta_user = api_insta.exchange_code_for_access_token(code)
                 self.request.session['access_token'] = access_token
                 if insta_user:
@@ -57,56 +59,6 @@ class InstagramView(TemplateView):
             access_token = self.request.session.get('access_token',None)
             in_player = in_api.get_instagram_player_token(access_token)
         
-        
-        
-        
-        endpoint = '/media/657988443280050001_25025320'
-        params = {
-            'access_token': access_token,
-            'count': 10,
-        }
-        secret = client_secret
-        sig = generate_sig(endpoint, params, secret)
-        
-        
-        
-        try:
-            instagram = Instagram.get_or_create_user(access_token, 
-                                                     in_player.user_name, 
-                                                     in_player.user_id)
-            
-#             api = InstagramAPI(client_secret=client_secret,access_token=instagram.access_token)
-            
-            print 1111
-            api = client.InstagramAPI(access_token=access_token, client_secret=client_secret)
-            print access_token
-            print client_secret
-            print 222
-            
-
-            print 3333
-            print api
-            media, next = api.user_recent_media()
-            print 44444
-            print media
-
-            
-            try:
-                    print 999
-#                     print api
-#                     media, next = api.user_recent_media()
-#                     print 44444
-#                     print media
-#                 media, discard = api.user_recent_media(user_id=instagram.user_id,count=10)
-
-            except InstagramAPIError as e:
-                print e
-                logger.error(e)
-                return {"media": []}
-            return {"media": media}
-        except IndexError:
-            return {"media": []}
-
 
 class InstagramTagsView(TemplateView):
     template_name = "instagram/instagram.html"
