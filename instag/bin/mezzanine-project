@@ -1,9 +1,0 @@
-#!/Users/free31/git/instag/instag/bin/python
-# EASY-INSTALL-ENTRY-SCRIPT: 'Mezzanine==4.0.1','console_scripts','mezzanine-project'
-__requires__ = 'Mezzanine==4.0.1'
-import sys
-from pkg_resources import load_entry_point
-
-sys.exit(
-   load_entry_point('Mezzanine==4.0.1', 'console_scripts', 'mezzanine-project')()
-)

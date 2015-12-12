@@ -1,5 +1,4 @@
-import logging
-
+# -*- coding: UTF-8 -*-
 from braces.views import JSONResponseMixin, AjaxResponseMixin
 from django.core.cache import cache
 from django.contrib.auth.decorators import user_passes_test
@@ -11,9 +10,18 @@ from instagram import InstagramAPIError
 from instagram.client import InstagramAPI
 from instagram_url import api as in_api
 from mezzanine.conf import settings
-
 from .models import Instagram, Media
+from instagram import client, subscriptions
 
+import logging
+import hmac
+from hashlib import sha256
+
+def generate_sig(endpoint, params, secret):
+    sig = endpoint
+    for key in sorted(params.keys()):
+        sig += '|%s=%s' % (key, params[key])
+    return hmac.new(secret, sig, sha256).hexdigest()
 
 logger = logging.getLogger(__name__)
 client_id = settings.INSTAGRAM_CLIENT_ID
@@ -50,15 +58,49 @@ class InstagramView(TemplateView):
             in_player = in_api.get_instagram_player_token(access_token)
         
         
+        
+        
+        endpoint = '/media/657988443280050001_25025320'
+        params = {
+            'access_token': access_token,
+            'count': 10,
+        }
+        secret = client_secret
+        sig = generate_sig(endpoint, params, secret)
+        
+        
+        
         try:
             instagram = Instagram.get_or_create_user(access_token, 
                                                      in_player.user_name, 
                                                      in_player.user_id)
-            api = InstagramAPI(access_token=instagram.access_token)
+            
+#             api = InstagramAPI(client_secret=client_secret,access_token=instagram.access_token)
+            
+            print 1111
+            api = client.InstagramAPI(access_token=access_token, client_secret=client_secret)
+            print access_token
+            print client_secret
+            print 222
+            
+
+            print 3333
+            print api
+            media, next = api.user_recent_media()
+            print 44444
+            print media
+
+            
             try:
-                media, discard = api.user_recent_media(user_id=instagram.user_id, count=24)
-                
+                    print 999
+#                     print api
+#                     media, next = api.user_recent_media()
+#                     print 44444
+#                     print media
+#                 media, discard = api.user_recent_media(user_id=instagram.user_id,count=10)
+
             except InstagramAPIError as e:
+                print e
                 logger.error(e)
                 return {"media": []}
             return {"media": media}
