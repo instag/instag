@@ -10,8 +10,8 @@ TEMPLATE_DEBUG = False
 
 
 ALLOWED_HOSTS = [
-    'ec2-54-238-249-128.ap-northeast-1.compute.amazonaws.com',
-    'ec2-54-238-249-128.ap-northeast-1.compute.amazonaws.com/instag',
+    'ec2-52-68-85-32.ap-northeast-1.compute.amazonaws.com',
+    'ec2-52-68-85-32.ap-northeast-1.compute.amazonaws.com/instag',
     'whois.co.kr',
     'wishtag.net',
 ]
@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': 'instag_db',
         'USER': 'instag',
         'PASSWORD': 'instagpw',
-        'HOST': 'ec2-54-238-249-128.ap-northeast-1.compute.amazonaws.com',
+        'HOST': 'ec2-52-68-85-32.ap-northeast-1.compute.amazonaws.com',
         'PORT': '3306',
         'OPTIONS': {
                     "init_command": "SET storage_engine=MyISAM",
@@ -94,7 +94,7 @@ DATABASES = {
         'NAME': 'instag_db',
         'USER': 'instag',
         'PASSWORD': 'instagpw',
-        'HOST': 'ec2-54-238-249-128.ap-northeast-1.compute.amazonaws.com',
+        'HOST': 'ec2-52-68-85-32.ap-northeast-1.compute.amazonaws.com',
         'PORT': '3306',
         'OPTIONS': {
                     'init_command': 'SET storage_engine=MyISAM',
