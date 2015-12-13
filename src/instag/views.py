@@ -15,7 +15,7 @@ CONFIG = {
     'redirect_uri': 'http://127.0.0.1:8060/minsta/'
 }
 
-if HOSTNAME.startswith('ip-172-31-22-249'):
+if HOSTNAME.startswith('wishtag.net'):
     CONFIG = {
         'client_id': '3dc77d748ec9434fba8d92569824b5ea',
         'client_secret': '44dafb59c4d94095a0a326022d7e82c1',

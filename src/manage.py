@@ -27,7 +27,7 @@ if __name__ == "__main__":
     if HOSTNAME.startswith('followkr01.cafe24.com'): #本番
         print "本番 cafe24"
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
-    elif HOSTNAME.startswith('ip-172-31-22-249'): #本番
+    elif HOSTNAME.startswith('wishtag.net'): #本番
         print "本番 ec2"
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
     else:
