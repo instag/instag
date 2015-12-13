@@ -14,6 +14,7 @@ ALLOWED_HOSTS = [
     'ec2-52-68-85-32.ap-northeast-1.compute.amazonaws.com/instag',
     'whois.co.kr',
     'wishtag.net',
+    'www.wishtag.net',
 ]
 
 
