@@ -10,8 +10,8 @@ TEMPLATE_DEBUG = False
 
 
 ALLOWED_HOSTS = [
-    'ec2-52-192-255-178.ap-northeast-1.compute.amazonaws.com', # Allow domain and subdomains
-    'ec2-52-192-255-178.ap-northeast-1.compute.amazonaws.com/instag', # Allow domain and subdomains
+    'ec2-54-238-249-128.ap-northeast-1.compute.amazonaws.com', # Allow domain and subdomains
+    'ec2-54-238-249-128.ap-northeast-1.compute.amazonaws.com/instag', # Allow domain and subdomains
 ]
 
 
@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'instag_db',
         'USER': 'instag',
         'PASSWORD': 'instagpw',
-        'HOST': 'ec2-52-192-255-178.ap-northeast-1.compute.amazonaws.com',
+        'HOST': 'ec2-54-238-249-128.ap-northeast-1.compute.amazonaws.com',
         'PORT': '3306',
         'OPTIONS': {
                     "init_command": "SET storage_engine=MyISAM",
@@ -92,7 +92,7 @@ DATABASES = {
         'NAME': 'instag_db',
         'USER': 'instag',
         'PASSWORD': 'instagpw',
-        'HOST': 'ec2-52-192-255-178.ap-northeast-1.compute.amazonaws.com',
+        'HOST': 'ec2-54-238-249-128.ap-northeast-1.compute.amazonaws.com',
         'PORT': '3306',
         'OPTIONS': {
                     'init_command': 'SET storage_engine=MyISAM',
