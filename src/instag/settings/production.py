@@ -10,8 +10,10 @@ TEMPLATE_DEBUG = False
 
 
 ALLOWED_HOSTS = [
-    'ec2-54-238-249-128.ap-northeast-1.compute.amazonaws.com', # Allow domain and subdomains
-    'ec2-54-238-249-128.ap-northeast-1.compute.amazonaws.com/instag', # Allow domain and subdomains
+    'ec2-54-238-249-128.ap-northeast-1.compute.amazonaws.com',
+    'ec2-54-238-249-128.ap-northeast-1.compute.amazonaws.com/instag',
+    'whois.co.kr',
+    'wishtag.net',
 ]
 
 

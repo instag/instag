@@ -33,6 +33,7 @@ class InstagramView(TemplateView):
     template_name = "instagram/instagram_oauth.html"
     def get_context_data(self, *args, **kwargs):
         
+        
         site_user = self.request.user
         code = self.request.GET.get('code')
         url = None
@@ -40,7 +41,6 @@ class InstagramView(TemplateView):
         in_player = None
         insta_user = None
         
-        print 111
         # instagram apiからcode取得したら
         if code:
             print 222
