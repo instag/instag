@@ -17,8 +17,6 @@ pwd = os.path.dirname(os.path.abspath(__file__))
 os.chdir(pwd)
 sys.path = [pwd] + sys.path
 
-print __file__
-print pwd
 # Append paths
 site.addsitedir(envpath)
 

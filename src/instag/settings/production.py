@@ -1,6 +1,5 @@
 # In production set the environment variable like this:
 #    DJANGO_SETTINGS_MODULE=instag.settings.production
-print "call production"
 from .base import *             # NOQA
 import logging.config
 
@@ -28,8 +27,6 @@ loaders = [
         'django.template.loaders.app_directories.Loader',
     ]),
 ]
-
-print BASE_DIR
 
 TEMPLATES[0]['OPTIONS'].update({"loaders": loaders})
 TEMPLATES[0].update({"APP_DIRS": False})

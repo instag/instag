@@ -8,7 +8,6 @@ session_opts = {
     'session.auto': True,
 }
 
-print 222
 CONFIG = {
     'client_id': '3dc77d748ec9434fba8d92569824b5ea',
     'client_secret': '44dafb59c4d94095a0a326022d7e82c1',
@@ -41,16 +40,7 @@ class HomePage(generic.TemplateView):
     def get_context_data(self, *args, **kwargs):
         url = unauthenticated_api.get_authorize_url(scope=["likes","comments"])
         url_test = '<a href="%s">Connect with Instagram</a>' % url
-        
-        
         site_user = self.request.user
-        
-        print "======== START"
-        print site_user.id
-        print "======== END"
-        
-        
-        
         return {"url_test": url, "blocked_media": "test"}
     
 

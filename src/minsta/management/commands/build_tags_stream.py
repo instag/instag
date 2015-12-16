@@ -15,9 +15,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         settings.use_editable()
-        print settings.INSTAGRAM_CLIENT_ID
-        print settings.INSTAGRAM_CLIENT_SECRET
-        
         api = InstagramAPI(
             client_id=settings.INSTAGRAM_CLIENT_ID,
             client_secret=settings.INSTAGRAM_CLIENT_SECRET

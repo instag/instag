@@ -9,11 +9,6 @@ class Instagram(models.Model):
     
     @classmethod
     def get_or_create_user(cls, access_token, username, user_id):
-        
-        print 888888
-        print user_id
-        print 888888
-        
         result = Instagram.objects.get_or_create(user_id=user_id)[0]
         result.access_token = access_token
         result.username = username
