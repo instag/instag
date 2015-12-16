@@ -25,6 +25,12 @@ class InstagramPlayer(models.Model):
     relation_flg = models.IntegerField(u'relation_flg', default=0, db_index=True)
     created_at = models.DateTimeField(u'作成日時', auto_now_add=True)
     updated_at = models.DateTimeField(u'更新日時', auto_now=True)
+    
+    @classmethod
+    def get_instagram_play(cls, user_site_id):
+        
+        return cls.objects.get(user_site_id=user_site_id)
+        
 
 class InstagramPlayerFollowHistory(models.Model):
     user_id = models.IntegerField(u'uer_id', default=0, db_index=True)

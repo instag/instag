@@ -9,6 +9,7 @@ from django.views.generic import TemplateView, RedirectView, DeleteView, View
 from instagram import InstagramAPIError
 from instagram.client import InstagramAPI
 from instagram_url import api as in_api
+from instagram_url.models import InstagramPlayer
 from mezzanine.conf import settings
 from .models import Instagram, Media
 from instagram import client, subscriptions
@@ -17,11 +18,13 @@ import logging
 import hmac
 from hashlib import sha256
 
-def generate_sig(endpoint, params, secret):
-    sig = endpoint
-    for key in sorted(params.keys()):
-        sig += '|%s=%s' % (key, params[key])
-    return hmac.new(secret, sig, sha256).hexdigest()
+CONFIG = {
+    'client_id': '3dc77d748ec9434fba8d92569824b5ea',
+    'client_secret': '44dafb59c4d94095a0a326022d7e82c1',
+    'redirect_uri': 'http://127.0.0.1:8060/minsta/'
+}
+
+unauthenticated_api = client.InstagramAPI(**CONFIG)
 
 logger = logging.getLogger(__name__)
 client_id = settings.INSTAGRAM_CLIENT_ID
@@ -43,22 +46,24 @@ class InstagramView(TemplateView):
         
         # instagram apiからcode取得したら
         if code:
-            print 222
-            try:
-                access_token, insta_user = api_insta.exchange_code_for_access_token(code)
+            
+            if 'access_token' in self.request.session:
+                # DB에서 취득
+                access_token = self.request.session['access_token']
+                instagram_player = InstagramPlayer.get_instagram_play(site_user.id)
+                return {"profile_picture": instagram_player.profile_picture}
+            
+            else:
+                # DB에서 취득
+                access_token, user_info = unauthenticated_api.exchange_code_for_access_token(code)
                 self.request.session['access_token'] = access_token
-                if insta_user:
-                    in_player = in_api.get_instagram_player(insta_user,
+                if user_info:
+                    instagram_player = in_api.get_instagram_player(user_info,
                                                             code,
                                                             access_token, 
                                                             site_user)
-            except:
-                pass
-        
-        else:
-            access_token = self.request.session.get('access_token',None)
-            in_player = in_api.get_instagram_player_token(access_token)
-        
+                    
+                return {"profile_picture": instagram_player.profile_picture}
 
 class InstagramTagsView(TemplateView):
     template_name = "instagram/instagram.html"
