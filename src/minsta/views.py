@@ -61,12 +61,19 @@ class InstagramView(TemplateView):
             print 2222
             # DB에서 취득
             access_token, user_info = unauthenticated_api.exchange_code_for_access_token(code)
+            print 33333
+            print access_token
+            print 44444
+            print user_info
+            print site_user
+
             # self.request.session['access_token'] = access_token
             if user_info:
+                print 55555
                 instagram_player = in_api.get_instagram_player(user_info,
-                                                        code,
-                                                        access_token,
-                                                        site_user)
+                                                               code,
+                                                               access_token,
+                                                               site_user)
 
             return {"profile_picture": instagram_player.profile_picture}
 
