@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-import bottle
+from common import template_text as T
 from django.core.management.base import BaseCommand
 from instagram import client
 from instagram_url.models import InstagramPlayer
-from common import template_text as T
 
-bottle.debug(True)
 CONFIG = T.CONFIG
 
 unauthenticated_api = client.InstagramAPI(**CONFIG)

@@ -12,9 +12,9 @@ from django.views.generic import TemplateView, RedirectView, DeleteView, View
 from instagram import client
 from instagram.client import InstagramAPI
 from instagram_url import api as in_api
-from mezzanine.conf import settings
-import bottle
 from instagram_url.models import InstagramPlayer
+from mezzanine.conf import settings
+
 from .models import Instagram, Media
 
 CONFIG = T.CONFIG
