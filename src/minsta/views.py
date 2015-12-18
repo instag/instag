@@ -1,23 +1,21 @@
 # -*- coding: UTF-8 -*-
+import logging
+
 from braces.views import JSONResponseMixin, AjaxResponseMixin
-from django.core.cache import cache
+from common import template_text as T
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.sites.models import Site
+from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, RedirectView, DeleteView, View
-from instagram import InstagramAPIError
+from instagram import client
 from instagram.client import InstagramAPI
 from instagram_url import api as in_api
-from instagram_url.models import InstagramPlayer
 from mezzanine.conf import settings
-from .models import Instagram, Media
-from instagram import client, subscriptions
-from common import template_text as T
 
-import logging
-import hmac
-from hashlib import sha256
+from .models import Instagram, Media
+
 CONFIG = T.CONFIG
 unauthenticated_api = client.InstagramAPI(**CONFIG)
 
@@ -30,17 +28,11 @@ class InstagramView(TemplateView):
     def get_context_data(self, *args, **kwargs):
 
         site_user = self.request.user
-        print site_user
         code = self.request.GET.get('code')
         url = None
         access_token = None
         in_player = None
         insta_user = None
-
-        if site_user:
-            print "site_user ON"
-        else:
-            print "site_user OFF"
 
         if site_user and code:
 
@@ -51,18 +43,10 @@ class InstagramView(TemplateView):
             #     instagram_player = InstagramPlayer.get_instagram_play(site_user.id)
             #     return {"profile_picture": instagram_player.profile_picture}
             # else:
-            print 2222
             # DB에서 취득
             access_token, user_info = unauthenticated_api.exchange_code_for_access_token(code)
-            print 33333
-            print access_token
-            print 44444
-            print user_info
-            print site_user
-
             # self.request.session['access_token'] = access_token
             if user_info:
-                print 55555
                 instagram_player = in_api.get_instagram_player(user_info,
                                                                code,
                                                                access_token,
