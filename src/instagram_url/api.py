@@ -73,7 +73,3 @@ def set_instagram_tag(user, code, access_token):
 def get_instagram_player_all():
         
         return InstagramPlayer.objects.all()
-        
-        
-        
-    

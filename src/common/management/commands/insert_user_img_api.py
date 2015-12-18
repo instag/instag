@@ -4,6 +4,7 @@ import bottle
 from django.core.management.base import BaseCommand
 from instagram import client
 from instagram_url.models import InstagramPlayer
+from common import template_text as T
 
 bottle.debug(True)
 
@@ -15,12 +16,7 @@ session_opts = {
 
 app = beaker.middleware.SessionMiddleware(bottle.app(), session_opts)
 
-CONFIG = {
-    'client_id': '3dc77d748ec9434fba8d92569824b5ea',
-    'client_secret': '44dafb59c4d94095a0a326022d7e82c1',
-    'redirect_uri': 'http://localhost:8515/oauth_callback'
-}
-
+CONFIG = T.CONFIG
 unauthenticated_api = client.InstagramAPI(**CONFIG)
 
 class Command(BaseCommand):

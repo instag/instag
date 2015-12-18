@@ -35,8 +35,7 @@ api_insta = InstagramAPI(client_id=client_id, client_secret=client_secret, redir
 class InstagramView(TemplateView):
     template_name = "instagram/instagram_oauth.html"
     def get_context_data(self, *args, **kwargs):
-        
-        
+
         site_user = self.request.user
         print site_user
         code = self.request.GET.get('code')
