@@ -1,6 +1,8 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+*.xml
+*.idea
 
 # Installer logs
 pip-log.txt

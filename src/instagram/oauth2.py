@@ -121,9 +121,6 @@ class OAuth2Request(object):
         self.api = api
 
     def _generate_sig(self, endpoint, params, secret):
-        print 1111
-        print endpoint
-        print 222
         sig = endpoint
         for key in sorted(params.keys()):
             sig += '|%s=%s' % (key, params[key])
@@ -172,7 +169,6 @@ class OAuth2Request(object):
                 params['client_id'] = self.api.client_id
             if include_secret and self.api.client_secret:
                 params['client_secret'] = self.api.client_secret
-            print "&sig=%s" % self._generate_sig(path, params, self.api.client_secret)
             return "&sig=%s" % self._generate_sig(path, params, self.api.client_secret)
         else:
             return ''

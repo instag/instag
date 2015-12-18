@@ -38,32 +38,38 @@ class InstagramView(TemplateView):
         
         
         site_user = self.request.user
+        print site_user
         code = self.request.GET.get('code')
         url = None
         access_token = None
         in_player = None
         insta_user = None
-        
-        # instagram apiからcode取得したら
-        if code:
-            
-            if 'access_token' in self.request.session:
-                # DB에서 취득
-                access_token = self.request.session['access_token']
-                instagram_player = InstagramPlayer.get_instagram_play(site_user.id)
-                return {"profile_picture": instagram_player.profile_picture}
-            
-            else:
-                # DB에서 취득
-                access_token, user_info = unauthenticated_api.exchange_code_for_access_token(code)
-                self.request.session['access_token'] = access_token
-                if user_info:
-                    instagram_player = in_api.get_instagram_player(user_info,
-                                                            code,
-                                                            access_token, 
-                                                            site_user)
-                    
-                return {"profile_picture": instagram_player.profile_picture}
+
+        if site_user:
+            print "site_user ON"
+        else:
+            print "site_user OFF"
+
+        if site_user and code:
+
+            # if 'access_token' in self.request.session:
+            #     print 111
+            #     # DB에서 취득
+            #     access_token = self.request.session['access_token']
+            #     instagram_player = InstagramPlayer.get_instagram_play(site_user.id)
+            #     return {"profile_picture": instagram_player.profile_picture}
+            # else:
+            print 2222
+            # DB에서 취득
+            access_token, user_info = unauthenticated_api.exchange_code_for_access_token(code)
+            # self.request.session['access_token'] = access_token
+            if user_info:
+                instagram_player = in_api.get_instagram_player(user_info,
+                                                        code,
+                                                        access_token,
+                                                        site_user)
+
+            return {"profile_picture": instagram_player.profile_picture}
 
 class InstagramTagsView(TemplateView):
     template_name = "instagram/instagram.html"

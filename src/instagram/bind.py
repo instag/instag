@@ -56,7 +56,6 @@ def bind_method(**config):
         exclude_format = config.get('exclude_format', False)
 
         def __init__(self, api, *args, **kwargs):
-            print "init"
             self.api = api
             self.as_generator = kwargs.pop("as_generator", False)
             if self.as_generator:
