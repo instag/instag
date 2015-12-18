@@ -13,24 +13,17 @@ from instagram_url.models import InstagramPlayer
 from mezzanine.conf import settings
 from .models import Instagram, Media
 from instagram import client, subscriptions
+from common import template_text as T
 
 import logging
 import hmac
 from hashlib import sha256
-
-CONFIG = {
-    'client_id': '3dc77d748ec9434fba8d92569824b5ea',
-    'client_secret': '44dafb59c4d94095a0a326022d7e82c1',
-    'redirect_uri': 'http://127.0.0.1:8060/minsta/'
-}
-
+CONFIG = T.CONFIG
 unauthenticated_api = client.InstagramAPI(**CONFIG)
 
 logger = logging.getLogger(__name__)
 client_id = settings.INSTAGRAM_CLIENT_ID
 client_secret = settings.INSTAGRAM_CLIENT_SECRET
-redirect_uri = "http://127.0.0.1:8060/minsta/"
-api_insta = InstagramAPI(client_id=client_id, client_secret=client_secret, redirect_uri=redirect_uri)
 
 class InstagramView(TemplateView):
     template_name = "instagram/instagram_oauth.html"
