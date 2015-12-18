@@ -13,7 +13,6 @@ from instagram import client
 from instagram.client import InstagramAPI
 from instagram_url import api as in_api
 from mezzanine.conf import settings
-import beaker.middleware
 import bottle
 from instagram_url.models import InstagramPlayer
 from .models import Instagram, Media
@@ -24,8 +23,6 @@ unauthenticated_api = client.InstagramAPI(**CONFIG)
 logger = logging.getLogger(__name__)
 client_id = settings.INSTAGRAM_CLIENT_ID
 client_secret = settings.INSTAGRAM_CLIENT_SECRET
-app = beaker.middleware.SessionMiddleware(bottle.app(), T.session_opts)
-
 
 class InstagramView(TemplateView):
     template_name = "instagram/instagram_oauth.html"

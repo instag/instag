@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import beaker.middleware
 import bottle
 from django.core.management.base import BaseCommand
 from instagram import client
@@ -9,7 +8,6 @@ from common import template_text as T
 bottle.debug(True)
 CONFIG = T.CONFIG
 
-app = beaker.middleware.SessionMiddleware(bottle.app(), T.session_opts)
 unauthenticated_api = client.InstagramAPI(**CONFIG)
 
 class Command(BaseCommand):
