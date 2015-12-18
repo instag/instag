@@ -7,16 +7,9 @@ from instagram_url.models import InstagramPlayer
 from common import template_text as T
 
 bottle.debug(True)
-
-session_opts = {
-    'session.type': 'file',
-    'session.data_dir': './session/',
-    'session.auto': True,
-}
-
-app = beaker.middleware.SessionMiddleware(bottle.app(), session_opts)
-
 CONFIG = T.CONFIG
+
+app = beaker.middleware.SessionMiddleware(bottle.app(), T.session_opts)
 unauthenticated_api = client.InstagramAPI(**CONFIG)
 
 class Command(BaseCommand):

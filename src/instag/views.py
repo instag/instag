@@ -1,25 +1,9 @@
 from django.views import generic
 from instagram import client, subscriptions
 from .hostname import HOSTNAME
+from common import template_text as T
 
-session_opts = {
-    'session.type': 'file',
-    'session.data_dir': './session/',
-    'session.auto': True,
-}
-
-CONFIG = {
-    'client_id': '3dc77d748ec9434fba8d92569824b5ea',
-    'client_secret': '44dafb59c4d94095a0a326022d7e82c1',
-    'redirect_uri': 'http://127.0.0.1:8060/minsta/'
-}
-
-if HOSTNAME.startswith('wishtag.net'):
-    CONFIG = {
-        'client_id': '3dc77d748ec9434fba8d92569824b5ea',
-        'client_secret': '44dafb59c4d94095a0a326022d7e82c1',
-        'redirect_uri': 'http://ec2-52-68-85-32.ap-northeast-1.compute.amazonaws.com/minsta/'
-    }
+CONFIG = T.CONFIG
 
 unauthenticated_api = client.InstagramAPI(**CONFIG)
 

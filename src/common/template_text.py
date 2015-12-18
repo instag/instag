@@ -16,3 +16,9 @@ else:
         'client_secret': '44dafb59c4d94095a0a326022d7e82c1',
         'redirect_uri': 'http://127.0.0.1:8060/minsta/'
     }
+
+session_opts = {
+    'session.type': 'file',
+    'session.data_dir': './session/',
+    'session.auto': True,
+}
