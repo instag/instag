@@ -13,7 +13,9 @@ from instagram import client
 from instagram.client import InstagramAPI
 from instagram_url import api as in_api
 from mezzanine.conf import settings
-
+import beaker.middleware
+import bottle
+from instagram_url.models import InstagramPlayer
 from .models import Instagram, Media
 
 CONFIG = T.CONFIG
@@ -22,11 +24,13 @@ unauthenticated_api = client.InstagramAPI(**CONFIG)
 logger = logging.getLogger(__name__)
 client_id = settings.INSTAGRAM_CLIENT_ID
 client_secret = settings.INSTAGRAM_CLIENT_SECRET
+app = beaker.middleware.SessionMiddleware(bottle.app(), T.session_opts)
+
 
 class InstagramView(TemplateView):
     template_name = "instagram/instagram_oauth.html"
-    def get_context_data(self, *args, **kwargs):
 
+    def get_context_data(self, *args, **kwargs):
         site_user = self.request.user
         code = self.request.GET.get('code')
         url = None
@@ -35,24 +39,31 @@ class InstagramView(TemplateView):
         insta_user = None
 
         if site_user and code:
-
-            # if 'access_token' in self.request.session:
-            #     print 111
-            #     # DB에서 취득
-            #     access_token = self.request.session['access_token']
-            #     instagram_player = InstagramPlayer.get_instagram_play(site_user.id)
-            #     return {"profile_picture": instagram_player.profile_picture}
-            # else:
-            # DB에서 취득
             access_token, user_info = unauthenticated_api.exchange_code_for_access_token(code)
-            # self.request.session['access_token'] = access_token
             if user_info:
                 instagram_player = in_api.get_instagram_player(user_info,
                                                                code,
                                                                access_token,
                                                                site_user)
+                insta_user = InstagramPlayer.get_instagram_play(site_user.id)
+                api = client.InstagramAPI(access_token=insta_user.oauth_token, client_secret=CONFIG['client_secret'])
+                recent_media, next = api.user_recent_media()
 
-            return {"profile_picture": instagram_player.profile_picture}
+            return {"profile_picture": instagram_player.profile_picture,
+                    "media":recent_media}
+
+        # MY샵의 경우
+        if site_user:
+            insta_user = InstagramPlayer.get_instagram_play(site_user.id)
+
+            """
+            api부분 삭제하고 db에서 취득하게 고쳐야 함
+            """
+            api = client.InstagramAPI(access_token=insta_user.oauth_token, client_secret=CONFIG['client_secret'])
+            recent_media, next = api.user_recent_media()
+        return {"profile_picture": insta_user.profile_picture,"media":recent_media}
+
+
 
 class InstagramTagsView(TemplateView):
     template_name = "instagram/instagram.html"
