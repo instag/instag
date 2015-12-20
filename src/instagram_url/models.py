@@ -32,6 +32,27 @@ class InstagramPlayer(models.Model):
         return cls.objects.filter(user_site_id=user_site_id)[0]
         
 
+class InstagramPlayerMedia(models.Model):
+    user = models.ForeignKey(InstagramPlayer)
+    media_id = models.CharField(u'media_id', max_length=100, default="")
+    low_resolution_url = models.TextField(u'low_resolution_url', default="")
+    standard_resolution_url = models.TextField(u'standard_resolution_url', default="")
+    thumbnail_url = models.TextField(u'_thumbnail_url', default="")
+    media_link = models.CharField(u'link', max_length=100, default="")
+    tags = models.TextField(u'tags', default="")
+    media_type = models.CharField(u'media_type', max_length=100, default="")
+
+    @classmethod
+    def get_or_create_user(cls, access_token, username, user_id):
+        result = Instagram.objects.get_or_create(user_id=user_id)[0]
+        result.access_token = access_token
+        result.username = username
+        result.full_name = username
+        result.user_id = user_id
+        result.save()
+        return result
+
+
 class InstagramPlayerFollowHistory(models.Model):
     user_id = models.IntegerField(u'uer_id', default=0, db_index=True)
     target_id = models.IntegerField(u'target_id', default=0, db_index=True)

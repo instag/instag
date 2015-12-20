@@ -4,6 +4,8 @@ import datetime
 from .hostname import HOSTNAME
 
 
+WISHTAG = 'wishtag'
+
 if HOSTNAME.startswith('wishtag.net'):
     CONFIG = {
         'client_id': '3dc77d748ec9434fba8d92569824b5ea',
