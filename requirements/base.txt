@@ -18,5 +18,5 @@ pip install MySQL-python==1.2.3
 pip install Django==1.8.6
 pip install python-instagram
 pip install mezzanine
-
+pip install httplib2
 

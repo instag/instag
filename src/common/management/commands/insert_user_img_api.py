@@ -5,26 +5,16 @@ from instagram import client
 from instagram_url.models import InstagramPlayer, InstagramPlayerMedia
 
 CONFIG = T.CONFIG
-
 unauthenticated_api = client.InstagramAPI(**CONFIG)
 
 class Command(BaseCommand):
-    """
-    instagramからimgを取得する
-    """
-
     def handle(self, *args, **options):
-
         for i in InstagramPlayer.objects.all():
             api = client.InstagramAPI(access_token=i.oauth_token, client_secret=CONFIG['client_secret'])
             recent_media, next = api.user_recent_media()
-
             for media in recent_media:
-                print media
                 for k in media.tags:
-                    print k.name
                     if k.name == T.WISHTAG:
-                        # タグにwishtagが含まれている場合
                         result, is_new = InstagramPlayerMedia.objects.get_or_create(user=i, media_id=media.id)
                         if is_new:
                             result.low_resolution_url = media.get_low_resolution_url()
