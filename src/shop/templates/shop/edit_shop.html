@@ -4,7 +4,12 @@
 {% load crispy_forms_tags %}
 {% load thumbnail %}
 
-{% block title %}{{ block.super }}Profile{% endblock %}
+{% block title %}{{ block.super }}Shop Edit{% endblock %}
+
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="about" %}
+{% endblock %}
+
 
 <!-- Benefits of the Django application -->
 {% block container %}
