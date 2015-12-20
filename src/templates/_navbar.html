@@ -4,6 +4,7 @@
 {% if user.name %}
 	<li><a href="{% url 'minsta:instagram' %}">MY샵</a></li>
 	<li><a href="{{url_test}}">샵 오픈</a></li>
+	<li><a href="{% url 'shop:edit' %}">샵 편집</a></li>
 {% else %}
 	<li><a href="{% url 'accounts:login' %}">MY샵</a></li>
 	<li><a href="{% url 'accounts:login' %}">샵 오픈</a></li>

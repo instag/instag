@@ -80,6 +80,7 @@ INSTALLED_APPS = (
     'minsta',
     'instagram_url',
     'common',
+    'shop',
 )
 
 DASHBOARD_TAGS = (
