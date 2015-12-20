@@ -12,7 +12,7 @@ from django.views.generic import TemplateView, RedirectView, DeleteView, View
 from instagram import client
 from instagram.client import InstagramAPI
 from instagram_url import api as in_api
-from instagram_url.models import InstagramPlayer
+from instagram_url.models import InstagramPlayer, InstagramPlayerMedia
 from mezzanine.conf import settings
 
 from .models import Instagram, Media
@@ -52,13 +52,14 @@ class InstagramView(TemplateView):
         # MY샵의 경우
         if site_user:
             insta_user = InstagramPlayer.get_instagram_play(site_user.id)
-
+            insta_user_media = InstagramPlayerMedia.get_player_media_list(insta_user)
             """
             api부분 삭제하고 db에서 취득하게 고쳐야 함
             """
-            api = client.InstagramAPI(access_token=insta_user.oauth_token, client_secret=CONFIG['client_secret'])
-            recent_media, next = api.user_recent_media()
-        return {"profile_picture": insta_user.profile_picture,"media":recent_media}
+            # api = client.InstagramAPI(access_token=insta_user.oauth_token, client_secret=CONFIG['client_secret'])
+            # recent_media, next = api.user_recent_media()
+
+        return {"profile_picture": insta_user.profile_picture,"media":insta_user_media}
 
 
 

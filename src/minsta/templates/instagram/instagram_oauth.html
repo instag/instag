@@ -1,6 +1,17 @@
 {% extends "base.html" %}
 
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ block.super }}About{% endblock %}
+
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="about" %}
+{% endblock %}
+
+<!-- Benefits of the Django application -->
 {% block container %}
+
 	<br />
 	<br />
 	<br />
@@ -11,8 +22,8 @@
   <p>테스트 페이지 2.</p>
   
   
-  {% for instagram in media %}
-  <img src="{{ instagram.images.thumbnail.url }}" width="{{ instagram.images.thumbnail.width }}" height="{{ instagram.images.thumbnail.height }}">
+  {% for m in media %}
+    <img src="{{ m.standard_resolution_url }}" width="200" height="200">
   {% empty %}
   <p>There're no images to display.</p>
   {% endfor %}

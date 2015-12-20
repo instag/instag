@@ -1,3 +1,18 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ block.super }}About{% endblock %}
+
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="about" %}
+{% endblock %}
+
+<!-- Benefits of the Django application -->
+{% block container %}
+
+
 <div class="module" id="recent-actions-module">
   <h2>Instagram</h2>
   {% if instagram %}
@@ -7,3 +22,5 @@
   <h3><a href="{{ authorize_url }}">Authorize Instagram</a></h3>
   {% endif %}
 </div>
+
+{% endblock container %}
