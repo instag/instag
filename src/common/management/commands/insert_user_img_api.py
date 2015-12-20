@@ -20,7 +20,9 @@ class Command(BaseCommand):
             recent_media, next = api.user_recent_media()
 
             for media in recent_media:
+                print media
                 for k in media.tags:
+                    print k.name
                     if k.name == T.WISHTAG:
                         # タグにwishtagが含まれている場合
                         result, is_new = InstagramPlayerMedia.objects.get_or_create(user=i, media_id=media.id)
