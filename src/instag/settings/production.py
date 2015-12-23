@@ -82,15 +82,6 @@ LOGGING = {
     }
 }
 
-
-    'loggers': {
-        'project': {
-            'handlers': ['proj_log_file'],
-            'level': 'DEBUG',
-        },
-    }
-
-
 logging.config.dictConfig(LOGGING)
 
 DATABASES = {
