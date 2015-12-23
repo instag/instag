@@ -7,7 +7,6 @@ import logging.config
 DEBUG = False
 TEMPLATE_DEBUG = False
 
-
 ALLOWED_HOSTS = [
     'ec2-52-68-85-32.ap-northeast-1.compute.amazonaws.com',
     'ec2-52-68-85-32.ap-northeast-1.compute.amazonaws.com/instag',
@@ -73,7 +72,7 @@ LOGGING = {
             'handlers': ['console'],
         },
         'django.request': {
-            'handlers': ['mail_admins'],
+            'handlers': ['proj_log_file'],
             'level': 'ERROR',
             'propagate': False,
         },
