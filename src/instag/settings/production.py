@@ -65,12 +65,29 @@ LOGGING = {
         }
     },
     'loggers': {
-        'project': {
-            'handlers': ['proj_log_file'],
-            'level': 'DEBUG',
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        '': {
+            'handlers': ['logfile','console'],
+            'level': 'WARNING',
+            'propagate': True,
         },
     }
 }
+
+
+
+
+    # 'loggers': {
+    #     'project': {
+    #         'handlers': ['proj_log_file'],
+    #         'level': 'DEBUG',
+    #     },
+    # }
+
 
 logging.config.dictConfig(LOGGING)
 
