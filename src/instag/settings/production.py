@@ -69,6 +69,17 @@ LOGGING = {
             'handlers': ['proj_log_file'],
             'level': 'DEBUG',
         },
+        'django': {
+            'handlers': ['console'],
+        },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'py.warnings': {
+            'handlers': ['console'],
+        },
     }
 }
 
