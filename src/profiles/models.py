@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.utils.encoding import python_2_unicode_compatible
 import uuid
@@ -6,8 +7,7 @@ from django.conf import settings
 
 
 class BaseProfile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL,
-                                primary_key=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,primary_key=True)
     slug = models.UUIDField(default=uuid.uuid4, blank=True, editable=False)
     # Add more user profile fields here. Make sure they are nullable
     # or with default values

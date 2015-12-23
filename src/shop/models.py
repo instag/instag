@@ -1,9 +1,16 @@
-from __future__ import unicode_literals
-from django.utils.encoding import python_2_unicode_compatible
-import uuid
+# -*- coding: utf-8 -*-
 from django.db import models
-from django.conf import settings
+from instagram_url.models import InstagramPlayer
 
 
-class BaseShop(models.Model):
-    pass
+class Shop(models.Model):
+    user = models.ForeignKey(InstagramPlayer)
+    shop_title = models.CharField(u"SHOP 이름", max_length=200, blank=True, null=True)
+    shop_description = models.TextField(u"SHOP 소개", default='')
+
+    @classmethod
+    def get_or_create(cls, user_id):
+        instagramplayer = InstagramPlayer.get_instagram_play(user_id)
+        result, is_new = cls.objects.get_or_create(user=instagramplayer)
+
+        return result

@@ -6,6 +6,10 @@
 
 {% block title %}{{ block.super }}Profile{% endblock %}
 
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="about" %}
+{% endblock %}
+
 <!-- Benefits of the Django application -->
 {% block container %}
 
@@ -16,7 +20,7 @@
     <!-- left column -->
     <div class="col-md-3">
       <div class="text-center">
-        <img title="profile picture" class="img-circle img-responsive" src="{% thumbnail user.profile.picture|default:'default_profile.png' 140x140 crop %}">
+        <img title="profile picture" class="img-circle img-responsive" src="{{profile_picture}}">
       </div>
     </div>
 
@@ -24,7 +28,7 @@
     <div class="col-md-9">
       <h3>샵 정보를 입력해주세요</h3>
       <form enctype="multipart/form-data" method="post">
-       {% crispy form %}
+       {% crispy shop_form %}
       </form>
     </div>
   </div>

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.views import generic
 from django.shortcuts import get_object_or_404, redirect
@@ -5,7 +6,6 @@ from django.contrib import messages
 from braces.views import LoginRequiredMixin
 from . import forms
 from . import models
-
 
 class ShowProfile(LoginRequiredMixin, generic.TemplateView):
     template_name = "profiles/show_profile.html"
@@ -34,13 +34,16 @@ class EditProfile(LoginRequiredMixin, generic.TemplateView):
         user = self.request.user
         if "user_form" not in kwargs:
             kwargs["user_form"] = forms.UserForm(instance=user)
+
         if "profile_form" not in kwargs:
             kwargs["profile_form"] = forms.ProfileForm(instance=user.profile)
+
         return super(EditProfile, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         user = self.request.user
         user_form = forms.UserForm(request.POST, instance=user)
+
         profile_form = forms.ProfileForm(request.POST,
                                          request.FILES,
                                          instance=user.profile)

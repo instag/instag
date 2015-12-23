@@ -63,7 +63,6 @@ SECRET_KEY = env('SECRET_KEY')
 ALLOWED_HOSTS = []
 
 # Application definition
-
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django_admin_bootstrapped',
@@ -82,6 +81,7 @@ INSTALLED_APPS = (
     'common',
     'shop',
 )
+
 
 DASHBOARD_TAGS = (
     ("mezzanine_tags.recent_actions", 'instagram_tags.instagram',),

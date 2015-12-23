@@ -4,9 +4,10 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from braces.views import LoginRequiredMixin
 from django.shortcuts import render
-from forms import MessageForm
-
-from . import models
+from forms import ShopForm
+from instagram_url.models import InstagramPlayer, InstagramPlayerMedia
+from . import forms
+from .models import Shop
 
 
 class ShowShop(LoginRequiredMixin, generic.TemplateView):
@@ -14,7 +15,17 @@ class ShowShop(LoginRequiredMixin, generic.TemplateView):
     http_method_names = ['get']
 
     def get(self, request, *args, **kwargs):
-        print 111
+        user = self.request.user
+        instagram_player = InstagramPlayer.objects.get(user_site_id=user.id)
+        shop = Shop.objects.get(user=instagram_player)
+        insta_user_media = InstagramPlayerMedia.get_player_media_list(instagram_player)
+
+        kwargs["shop"] = shop
+        kwargs["profile_picture"] = instagram_player.profile_picture
+        kwargs["media"] = insta_user_media
+
+
+
         return super(ShowShop, self).get(request, *args, **kwargs)
 
 
@@ -24,32 +35,29 @@ class EditShop(LoginRequiredMixin, generic.TemplateView):
     http_method_names = ['get', 'post']
 
     def get(self, request, *args, **kwargs):
-        print 22
         user = self.request.user
-        return super(EditShop, self).get(request,
-                                         form=MessageForm())
+        instagram_player = InstagramPlayer.objects.get(user_site_id=user.id)
+        shop = Shop.objects.get(user=instagram_player)
+
+        if "shop_form" not in kwargs:
+            kwargs["shop_form"] = forms.ShopForm(instance=shop)
+
+        kwargs["profile_picture"] = instagram_player.profile_picture
+        return super(EditShop, self).get(request, *args, **kwargs)
+
 
     def post(self, request, *args, **kwargs):
-        print 33
-        # user = self.request.user
-        # user_form = forms.UserForm(request.POST, instance=user)
-        # profile_form = forms.ProfileForm(request.POST,
-        #                                  request.FILES,
-        #                                  instance=user.profile)
-        # if not (user_form.is_valid() and profile_form.is_valid()):
-        #     messages.error(request, "There was a problem with the form. "
-        #                    "Please check the details.")
-        #     user_form = forms.UserForm(instance=user)
-        #     profile_form = forms.ProfileForm(instance=user.profile)
-        #     return super(EditShop, self).get(request,
-        #                                         user_form=user_form,
-        #                                         profile_form=profile_form)
-        # Both forms are fine. Time to save!
-        # user_form.save()
-        # profile = profile_form.save(commit=False)
-        # profile.user = user
-        # profile.save()
-        # messages.success(request, " details saved!")
-        return redirect("shop:show_self")
+        user = self.request.user
+        print request.POST['shop_title']
+        print request.POST['shop_description']
 
-        # return redirect("profiles:show_self")
+        shop_title = request.POST['shop_title']
+        shop_description = request.POST['shop_description']
+
+        result = Shop.get_or_create(user.id)
+        result.shop_title = shop_title
+        result.shop_description = shop_description
+        result.save()
+
+        messages.success(request, " details saved!")
+        return redirect("shop:show_self")
