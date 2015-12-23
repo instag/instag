@@ -70,7 +70,7 @@ LOGGING = {
             'level': 'DEBUG',
         },
         'django.request': {
-            'handlers': ['mail_admins'],
+            'handlers': ['proj_log_file'],
             'level': 'ERROR',
             'propagate': True,
         },
