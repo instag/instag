@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     url(r'^me$', views.ShowShop.as_view(), name='show_self'),
-    url(r'^shop/edit$', views.EditShop.as_view(), name='edit'),
-    url(r'^(?P<slug>[\w\-]+)$', views.ShowShop.as_view(), name='show'),
+    url(r'^me/edit$', views.EditShop.as_view(), name='edit_self'),
+    url(r'^(?P<slug>[\w\-]+)$', views.ShowShop.as_view(),
+        name='show'),
 ]
-1

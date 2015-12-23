@@ -3,28 +3,31 @@ from django.views import generic
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from braces.views import LoginRequiredMixin
+from django.shortcuts import render
+from forms import MessageForm
 
 from . import models
 
 
 class ShowShop(LoginRequiredMixin, generic.TemplateView):
-    template_name = "shop/show_shop.html"
+    template_name = "shop/shop_show.html"
     http_method_names = ['get']
 
     def get(self, request, *args, **kwargs):
         print 111
-        # return super(ShowShop, self).get(request, *args, **kwargs)
+        return super(ShowShop, self).get(request, *args, **kwargs)
 
 
 class EditShop(LoginRequiredMixin, generic.TemplateView):
     
-    template_name = "shop/edit_shop.html"
+    template_name = "shop/shop_edit.html"
     http_method_names = ['get', 'post']
 
     def get(self, request, *args, **kwargs):
         print 22
         user = self.request.user
-        return super(EditShop, self).get(request, *args, **kwargs)
+        return super(EditShop, self).get(request,
+                                         form=MessageForm())
 
     def post(self, request, *args, **kwargs):
         print 33
@@ -46,5 +49,7 @@ class EditShop(LoginRequiredMixin, generic.TemplateView):
         # profile = profile_form.save(commit=False)
         # profile.user = user
         # profile.save()
-        messages.success(request, " details saved!")
+        # messages.success(request, " details saved!")
         return redirect("shop:show_self")
+
+        # return redirect("profiles:show_self")
