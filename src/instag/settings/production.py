@@ -7,13 +7,12 @@ import logging.config
 DEBUG = False
 TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = [
-    'ec2-52-68-85-32.ap-northeast-1.compute.amazonaws.com',
-    'ec2-52-68-85-32.ap-northeast-1.compute.amazonaws.com/instag',
-    'whois.co.kr',
-    'wishtag.net',
-    'www.wishtag.net',
-]
+ALLOWED_HOSTS = ['*']
+
+# ALLOWED_HOSTS = [
+#     'wishtag.net',
+#     'www.wishtag.net',
+# ]
 
 
 # Must mention ALLOWED_HOSTS in production!
