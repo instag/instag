@@ -64,8 +64,6 @@ class EditShop(LoginRequiredMixin, generic.TemplateView):
 
     def post(self, request, *args, **kwargs):
         user = self.request.user
-        print request.POST['shop_title']
-        print request.POST['shop_description']
 
         shop_title = request.POST['shop_title']
         shop_description = request.POST['shop_description']
