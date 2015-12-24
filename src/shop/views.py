@@ -24,7 +24,7 @@ class ShowShop(LoginRequiredMixin, generic.TemplateView):
         kwargs["profile_picture"] = instagram_player.profile_picture
         kwargs["media"] = insta_user_media
 
-        return super(ShowShop, self).get(self.request, *args, **kwargs)
+        return super(ShowShop, self).get(request, *args, **kwargs)
 
 
 class EditShop(LoginRequiredMixin, generic.TemplateView):
