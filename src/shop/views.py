@@ -24,10 +24,12 @@ class ShowShop(LoginRequiredMixin, generic.TemplateView):
         shop = Shop.objects.get(user=instagram_player)
         insta_user_media = InstagramPlayerMedia.get_player_media_list(instagram_player)
 
+        print 22
         kwargs["shop"] = shop
         kwargs["profile_picture"] = instagram_player.profile_picture
         kwargs["media"] = insta_user_media
 
+        print 33
         return {"profile_picture": instagram_player.profile_picture,
                 "media":insta_user_media,
                 "shop":shop
