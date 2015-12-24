@@ -12,10 +12,13 @@ from .models import Shop
 
 
 class ShowShop(LoginRequiredMixin, generic.TemplateView):
+    # template_name = "shop/shop_show.html"
+    # http_method_names = ['get']
     template_name = "shop/shop_show.html"
-    http_method_names = ['get']
 
-    def get(self, request, *args, **kwargs):
+    # def get(self, request, *args, **kwargs):
+    def get_context_data(self, *args, **kwargs):
+        print 11
         user = self.request.user
         instagram_player = InstagramPlayer.objects.get(user_site_id=user.id)
         shop = Shop.objects.get(user=instagram_player)
@@ -25,9 +28,13 @@ class ShowShop(LoginRequiredMixin, generic.TemplateView):
         kwargs["profile_picture"] = instagram_player.profile_picture
         kwargs["media"] = insta_user_media
 
+        return {"profile_picture": instagram_player.profile_picture,
+                "media":insta_user_media,
+                "shop":shop
+                }
 
 
-        return super(ShowShop, self).get(request, *args, **kwargs)
+        # return super(ShowShop, self).dispatch(self.request, *args, **kwargs)
 
 
 class EditShop(LoginRequiredMixin, generic.TemplateView):

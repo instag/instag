@@ -2,7 +2,7 @@
 <li {% if active_link == "about" %}class="active"{% endif %}><a href="{% url 'about' %}">About</a></li>
 
 {% if user.name %}
-	<li><a href="{% url 'shop:shop_show' %}">MY샵</a></li>
+	<li><a href="{% url 'shop:show_self' %}">MY샵</a></li>
 	<li><a href="{{url_test}}">샵 오픈</a></li>
 	<li><a href="{% url 'shop:edit_self' %}">샵 편집</a></li>
 {% else %}
