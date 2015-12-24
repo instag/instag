@@ -19,6 +19,8 @@ class ShowShop(LoginRequiredMixin, generic.TemplateView):
     # def get(self, request, *args, **kwargs):
     def get_context_data(self, *args, **kwargs):
         print 11
+        print self
+        print self.request
         user = self.request.user
         instagram_player = InstagramPlayer.objects.get(user_site_id=user.id)
         shop = Shop.objects.get(user=instagram_player)
