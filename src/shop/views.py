@@ -12,37 +12,19 @@ from .models import Shop
 
 
 class ShowShop(LoginRequiredMixin, generic.TemplateView):
-    # template_name = "shop/shop_show.html"
-    # http_method_names = ['get']
     template_name = "shop/shop_show.html"
+    http_method_names = ['get']
 
-    # def get(self, request, *args, **kwargs):
-    def get_context_data(self, *args, **kwargs):
-        print 11
-        print self
-        print self.request
-        print self.request.user
-
+    def get(self, request, *args, **kwargs):
         user = self.request.user
-        print 22
         instagram_player = InstagramPlayer.objects.get(user_site_id=user.id)
-        print 33
         shop = Shop.objects.get_or_create(user=instagram_player)
-        print 4544
         insta_user_media = InstagramPlayerMedia.get_player_media_list(instagram_player)
-
-        print 55
         kwargs["shop"] = shop
         kwargs["profile_picture"] = instagram_player.profile_picture
         kwargs["media"] = insta_user_media
 
-        return {"profile_picture": instagram_player.profile_picture,
-                "media":insta_user_media,
-                "shop":shop
-                }
-
-
-        # return super(ShowShop, self).dispatch(self.request, *args, **kwargs)
+        return super(ShowShop, self).get(self.request, *args, **kwargs)
 
 
 class EditShop(LoginRequiredMixin, generic.TemplateView):
