@@ -20,7 +20,8 @@ class ShowShop(LoginRequiredMixin, generic.TemplateView):
         instagram_player = InstagramPlayer.objects.get(user_site_id=user.id)
         shop = Shop.objects.get_or_create(user=instagram_player)
         insta_user_media = InstagramPlayerMedia.get_player_media_list(instagram_player)
-        kwargs["shop"] = shop
+
+        kwargs["shop"] = shop[0]
         kwargs["profile_picture"] = instagram_player.profile_picture
         kwargs["media"] = insta_user_media
 

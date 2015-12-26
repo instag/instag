@@ -11,14 +11,11 @@
 
 
 {% block container %}
-
 <div class="container profile-head">
   <div class="row">
     <div class="col-sm-10">
-      <h1>{{ show_user.get_full_name }}</h1>
-      {% if editable %}
-      <a href="{% url 'profiles:edit_self' %}" class="btn btn-info">Edit Profile</a>
-      {% endif %}
+        <h1>{{shop.shop_title}}</h1>
+        <p class="lead">{{shop.shop_description}}</p>
     </div>
     <div class="col-sm-2"><img title="profile picture" class="img-circle img-responsive" src="{{profile_picture}}">
     </div>
