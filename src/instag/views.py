@@ -2,6 +2,9 @@ from django.views import generic
 from instagram import client, subscriptions
 from .hostname import HOSTNAME
 from common import template_text as T
+from instagram_url.models import InstagramPlayer, InstagramPlayerMedia
+from shop.models import Shop
+
 
 CONFIG = T.CONFIG
 
@@ -21,12 +24,20 @@ unauthenticated_api = client.InstagramAPI(**CONFIG)
 
 class HomePage(generic.TemplateView):
     template_name = "home.html"
-    def get_context_data(self, *args, **kwargs):
-        url = unauthenticated_api.get_authorize_url(scope=["likes","comments"])
-        url_test = '<a href="%s">Connect with Instagram</a>' % url
-        site_user = self.request.user
-        return {"url_test": url, "blocked_media": "test"}
-    
+
+    def get(self, request, *args, **kwargs):
+        # url = unauthenticated_api.get_authorize_url(scope=["likes","comments"])
+
+        user = self.request.user
+        instagram_player = InstagramPlayer.objects.get(user_site_id=user.id)
+        shop = Shop.objects.get_or_create(user=instagram_player)
+        insta_user_media = InstagramPlayerMedia.get_player_media_list(instagram_player)
+        kwargs["shop"] = shop[0]
+        kwargs["profile_picture"] = instagram_player.profile_picture
+        kwargs["media"] = insta_user_media
+
+        return super(HomePage, self).get(request, *args, **kwargs)
+
 
 class AboutPage(generic.TemplateView):
     template_name = "about.html"

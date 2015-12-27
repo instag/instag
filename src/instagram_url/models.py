@@ -40,6 +40,7 @@ class InstagramPlayerMedia(models.Model):
     thumbnail_url = models.TextField(u'_thumbnail_url', default="")
     media_link = models.CharField(u'link', max_length=100, default="")
     tags = models.TextField(u'tags', default="")
+    caption = models.TextField(u'caption', default="")
     media_type = models.CharField(u'media_type', max_length=100, default="")
 
     @classmethod

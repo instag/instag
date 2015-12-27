@@ -119,6 +119,11 @@ body>.navbar-transparent {
     background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAJklEQVQIW2NkAIILFy78NzAwYATRjCABZEGwAEwFiA1WBlIOUwkA72gTdDIYVO4AAAAASUVORK5CYII=) repeat;
 }
 
+/* home page styling */
+#sec2 {
+    background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAJklEQVQIW2NkAIILFy78NzAwYATRjCABZEGwAEwFiA1WBlIOUwkA72gTdDIYVO4AAAAASUVORK5CYII=) repeat;
+}
+
 /* Profile page styling */
 .profile-head {
     background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAJklEQVQIW2NkAIILFy78NzAwYATRjCABZEGwAEwFiA1WBlIOUwkA72gTdDIYVO4AAAAASUVORK5CYII=) repeat;
@@ -130,6 +135,10 @@ body>.navbar-transparent {
 
 .text-page {
     padding: 120px 0;
+}
+
+.text-page_home {
+    padding: 60px 0;
 }
 
 #map-outer {
@@ -176,4 +185,36 @@ body>.navbar-transparent {
 
 .form-box form .form-control:focus {
   z-index: 2;
+}
+
+.item {
+    width: 250px;
+    margin: 10px;
+    float:left;
+}
+
+#wrapper {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;   /*全体の中央寄せ*/
+}
+#container {
+  width: 100%;
+  margin: 0 auto;   /*中央寄せ*/
+  position: relative;
+}
+.item {
+  margin: 10px;
+  width: 140px;
+  padding: 8px;
+  border: 1px solid #eee;
+}
+.item.x2 {
+  width: 320px;
+}
+.item.x3 {
+  width: 500px;
+}
+.item img {
+  width: 100%;
 }

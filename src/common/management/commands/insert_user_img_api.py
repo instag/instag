@@ -22,5 +22,6 @@ class Command(BaseCommand):
                             result.thumbnail_url = media.get_thumbnail_url()
                             result.media_link = media.link
                             result.media_type = media.type
+                            result.caption = media.caption.text
                             result.tags = str(media.tags)
                             result.save()
