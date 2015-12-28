@@ -59,6 +59,13 @@ class InstagramPlayerMedia(models.Model):
     def get_player_media_list(cls, user):
         return cls.objects.filter(user=user)
 
+    @classmethod
+    def get_all(cls):
+        try:
+            return cls.objects.all()
+        except:
+            return None
+
 
 class InstagramPlayerFollowHistory(models.Model):
     user_id = models.IntegerField(u'uer_id', default=0, db_index=True)

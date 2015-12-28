@@ -14,3 +14,10 @@ class Shop(models.Model):
         result, is_new = cls.objects.get_or_create(user=instagramplayer)
 
         return result
+
+    @classmethod
+    def get_all(cls):
+        try:
+            return cls.objects.all()
+        except:
+            return None

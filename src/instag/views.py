@@ -37,6 +37,9 @@ class HomePage(generic.TemplateView):
             kwargs["shop"] = shop[0]
             kwargs["profile_picture"] = instagram_player.profile_picture
             kwargs["media"] = insta_user_media
+        else :
+            kwargs["media"] = InstagramPlayerMedia.get_all()
+
 
         return super(HomePage, self).get(request, *args, **kwargs)
 
