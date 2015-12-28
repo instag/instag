@@ -28,8 +28,10 @@ class InstagramPlayer(models.Model):
     
     @classmethod
     def get_instagram_play(cls, user_site_id):
-        
-        return cls.objects.filter(user_site_id=user_site_id)[0]
+        try:
+            return cls.objects.filter(user_site_id=user_site_id)[0]
+        except:
+            return None
         
 
 class InstagramPlayerMedia(models.Model):

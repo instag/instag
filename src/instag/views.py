@@ -29,12 +29,14 @@ class HomePage(generic.TemplateView):
         # url = unauthenticated_api.get_authorize_url(scope=["likes","comments"])
 
         user = self.request.user
-        instagram_player = InstagramPlayer.objects.get(user_site_id=user.id)
-        shop = Shop.objects.get_or_create(user=instagram_player)
-        insta_user_media = InstagramPlayerMedia.get_player_media_list(instagram_player)
-        kwargs["shop"] = shop[0]
-        kwargs["profile_picture"] = instagram_player.profile_picture
-        kwargs["media"] = insta_user_media
+        # instagram_player = InstagramPlayer.objects.get(user_site_id=user.id)
+        instagram_player = InstagramPlayer.get_instagram_play(user_site_id=user.id)
+        if instagram_player:
+            shop = Shop.objects.get_or_create(user=instagram_player)
+            insta_user_media = InstagramPlayerMedia.get_player_media_list(instagram_player)
+            kwargs["shop"] = shop[0]
+            kwargs["profile_picture"] = instagram_player.profile_picture
+            kwargs["media"] = insta_user_media
 
         return super(HomePage, self).get(request, *args, **kwargs)
 
