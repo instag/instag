@@ -1,10 +1,15 @@
 <!--<li {% if active_link == "home" %}class="active"{% endif %}><a href="{% url 'home' %}">Home</a></li>-->
 <li {% if active_link == "about" %}class="active"{% endif %}><a href="{% url 'about' %}">About</a></li>
-
 {% if user.name %}
 	<li><a href="{% url 'shop:show_self' %}">MY샵</a></li>
-	<li><a href="{{url_test}}">샵 오픈</a></li>
-	<li><a href="{% url 'shop:edit_self' %}">샵 편집</a></li>
+
+	{% if shop %}
+		<li><a href="{% url 'shop:edit_self' %}">샵 편집</a></li>
+	{% else %}
+		<li><a href="{{url_test}}">샵 오픈</a></li>
+	{% endif %}
+
+
 {% else %}
 	<li><a href="{% url 'accounts:login' %}">MY샵</a></li>
 	<li><a href="{% url 'accounts:login' %}">샵 오픈</a></li>
