@@ -19,4 +19,7 @@ pip install Django==1.8.6
 pip install python-instagram
 pip install mezzanine
 pip install httplib2
-
+django-cms>=3.0
+django-connected
+python-instagram
+mezzanine
