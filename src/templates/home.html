@@ -56,21 +56,94 @@
         </div>
         <div  class="col-md-8">
           <div class="panel-body">
-          {% for m in media %}
-            <div class="item">
-              <img src="{{ m.standard_resolution_url }}" alt="{{m.caption}}">
-              <p>{{m.caption}}</p>
-            </div>
-          {% endfor %}
+
+            <ul class="unstyled wall">
+                {% for product in media %}
+                <li class="brick item">
+                    <div class="thumbnail">
+                        <a href="{{ product.standard_resolution_url }}">
+                            <img src="{{ product.standard_resolution_url }}" alt="">
+                        </a>
+                        <div>
+                            <h3>
+                                <a href="{{ product.standard_resolution_url }}">
+                                    name</a>
+                            </h3>
+                            <div class="description muted">
+                                {{ product.caption|capfirst|striptags }}
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
           </div>
+            <h1>{% include "_pagination.html" %}</h1>
+
         </div>
       </div>
+
     </div>
   </div>
 </div>
 {% endblock container %}
 
+
+
+
+
+
 {% block scripts %}
+
+
+<script>
+var $container = $(".wall");
+
+$(function () {
+    $container.imagesLoaded(function () {
+        $container.masonry({
+            itemSelector : '.brick',
+            gutterWidth: 25,
+            columnWidth: function () {
+                var screenWidth = parseInt(
+                    document.documentElement.getBoundingClientRect().width,
+                    10
+                ) || parseInt(screen.width, 10);
+
+                if (screenWidth < 768) {
+                    return $container.width();
+                } else if (screenWidth > 768 && screenWidth < 980) {
+                    return ($container.width() / 2) - 20;
+                }
+                return ($container.width() / 3) - 20;
+            }
+        });
+    });
+
+    $container.infinitescroll(
+        {
+            navSelector: ".pagination",
+            nextSelector: ".next",
+            itemSelector: ".wall .brick",
+            loading: {
+                finishedMsg: "",
+                img: "http://pathtoyour.com/loading.gif",
+                msg: null,
+                msgText: ""
+            }
+        },
+        function (newProducts) {
+            var $newProds = $(newProducts).css({"opacity": 0});
+            $newProds.imagesLoaded(function () {
+                $newProds.animate({"opacity": 1});
+                $container.masonry("appended", $newProds, true);
+            });
+        }
+    );
+});
+
+</script>
+
 <script src="{% static 'site/js/site.js' %}"></script>
 <script src="{% static 'site/js/imagesloaded.js' %}"></script>
 <script src="{% static 'site/js/masonry.pkgd.min.js' %}"></script>
