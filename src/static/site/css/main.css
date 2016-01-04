@@ -203,18 +203,11 @@ body>.navbar-transparent {
   margin: 0 auto;   /*中央寄せ*/
   position: relative;
 }
+
 .item {
   margin: 10px;
   width: 140px;
   padding: 8px;
   border: 1px solid #eee;
-}
-.item.x2 {
-  width: 320px;
-}
-.item.x3 {
-  width: 500px;
-}
-.item img {
-  width: 100%;
+  float: left;   /*Lazy Load 用に追加 */
 }

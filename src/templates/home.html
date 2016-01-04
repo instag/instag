@@ -33,119 +33,77 @@
   </div>
 </div>
 
-
-<div id="sec3">
-  <div class="container">
-
-    <div class="row">
-      <div id="map-outer" class="col-md-12">
-        <div id="address" class="col-md-2">
-          <h3 class="text-center">추천 My샵</h3>
-              <div class="text-center">
-                <img class="img-circle centered" width="50" src="http://lorempixel.com/128/128/people/9/" alt="profile pic">
-              </div>
-              <p class="heavy text-center">홍대 네일샵</p>
-              <div class="text-center">
-                <img class="img-circle centered" width="50" src="http://lorempixel.com/128/128/people/2/" alt="profile pic">
-              </div>
-              <p class="heavy text-center">신촌 네일샵</p>
-              <div class="text-center">
-                <img class="img-circle centered" width="50" src="http://lorempixel.com/128/128/people/1/" alt="profile pic">
-              </div>
-              <p class="heavy text-center">하라주쿠 네일샵</p>
-        </div>
-        <div  class="col-md-8">
-          <div class="panel-body">
-
-            <ul class="unstyled wall">
-                {% for product in media %}
-                <li class="brick item">
-                    <div class="thumbnail">
-                        <a href="{{ product.standard_resolution_url }}">
-                            <img src="{{ product.standard_resolution_url }}" alt="">
-                        </a>
-                        <div>
-                            <h3>
-                                <a href="{{ product.standard_resolution_url }}">
-                                    name</a>
-                            </h3>
-                            <div class="description muted">
-                                {{ product.caption|capfirst|striptags }}
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
-          </div>
-            <h1>{% include "_pagination.html" %}</h1>
-
-        </div>
+<div id="wrapper">
+  <div id="container">
+      <div class="panel-body">
+        {% for m in media %}
+            <div class="item">
+                <a href="{{ m.standard_resolution_url }}">
+                <img class="lazy" src="{{ m.standard_resolution_url }}" data-original="{{ m.standard_resolution_url }}" width="140" height="183" alt="">
+                </a>
+                <div class="description muted">
+                    <p>{{ m.caption|capfirst|striptags }}</p>
+                </div>
+            </div>
+        {% endfor %}
       </div>
-
-    </div>
   </div>
 </div>
 {% endblock container %}
 
-
-
-
-
-
 {% block scripts %}
-
-
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
 <script>
-var $container = $(".wall");
+jQuery(function($){
 
-$(function () {
-    $container.imagesLoaded(function () {
+  //この部分が lazyload のイニシャライズ
+  $("img.lazy").lazyload({
+    effect: 'fadeIn',
+    effectspeed: 1000,
+    threshold: 400
+  });
+
+  //以下は同じ
+  var flag;
+  var min_width = 480;
+
+  //画面幅による分岐と imagesLoaded, Masonry のイニシャライズを関数化
+  function masonry_update() {
+    var $container = $('#container');
+    if ( $('html').width() < min_width ) {
+      $container.masonry('destroy');
+      flag = 0;
+    } else {
+      $container.imagesLoaded(function(){
         $container.masonry({
-            itemSelector : '.brick',
-            gutterWidth: 25,
-            columnWidth: function () {
-                var screenWidth = parseInt(
-                    document.documentElement.getBoundingClientRect().width,
-                    10
-                ) || parseInt(screen.width, 10);
-
-                if (screenWidth < 768) {
-                    return $container.width();
-                } else if (screenWidth > 768 && screenWidth < 980) {
-                    return ($container.width() / 2) - 20;
-                }
-                return ($container.width() / 3) - 20;
-            }
+          itemSelector: '.item',　
+          isFitWidth: true,　
+          columnWidth: 180
         });
-    });
+      });
+    }
+  }
 
-    $container.infinitescroll(
-        {
-            navSelector: ".pagination",
-            nextSelector: ".next",
-            itemSelector: ".wall .brick",
-            loading: {
-                finishedMsg: "",
-                img: "http://pathtoyour.com/loading.gif",
-                msg: null,
-                msgText: ""
-            }
-        },
-        function (newProducts) {
-            var $newProds = $(newProducts).css({"opacity": 0});
-            $newProds.imagesLoaded(function () {
-                $newProds.animate({"opacity": 1});
-                $container.masonry("appended", $newProds, true);
-            });
-        }
-    );
+  masonry_update();
+
+  //リサイズ時の処理
+  var timer = false;
+  $(window).resize(function(){
+    if (timer !== false) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(function() {
+      masonry_update();
+    }, 200);
+  });
+
 });
-
 </script>
 
 <script src="{% static 'site/js/site.js' %}"></script>
-<script src="{% static 'site/js/imagesloaded.js' %}"></script>
+<!--<script src="{% static 'site/js/imagesloaded.js' %}"></script>-->
 <script src="{% static 'site/js/masonry.pkgd.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.0.0/imagesloaded.pkgd.min.js"></script>
 {% endblock scripts %}
 

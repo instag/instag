@@ -44,6 +44,9 @@ class InstagramPlayerMedia(models.Model):
     tags = models.TextField(u'tags', default="")
     caption = models.TextField(u'caption', default="")
     media_type = models.CharField(u'media_type', max_length=100, default="")
+    created_at = models.DateTimeField(u'作成日時', auto_now_add=True)
+    updated_at = models.DateTimeField(u'更新日時', auto_now=True)
+
 
     @classmethod
     def get_or_create_user(cls, access_token, username, user_id):
@@ -57,12 +60,12 @@ class InstagramPlayerMedia(models.Model):
 
     @classmethod
     def get_player_media_list(cls, user):
-        return cls.objects.filter(user=user)
+        return cls.objects.filter(user=user, media_type='image').order_by('-updated_at')[:1000]
 
     @classmethod
     def get_all(cls):
         try:
-            return cls.objects.all()
+            return cls.objects.filter(media_type='image').order_by('-updated_at')[:1000]
         except:
             return None
 
