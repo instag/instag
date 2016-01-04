@@ -33,21 +33,26 @@
   </div>
 </div>
 
-<div id="wrapper">
-  <div id="container">
-      <div class="panel-body">
-        {% for m in media %}
-            <div class="item">
-                <a href="{{ m.standard_resolution_url }}">
-                <img class="lazy" src="{{ m.standard_resolution_url }}" data-original="{{ m.standard_resolution_url }}" width="140" height="183" alt="">
-                </a>
-                <div class="description muted">
-                    <p>{{ m.caption|capfirst|striptags }}</p>
+
+<div id="sec3">
+      <div id="container">
+          <div class="row">
+              <div  class="col-md-8">
+                  <div class="panel-body">
+                    {% for m in media %}
+                        <div class="item">
+                            <a href="{{ m.standard_resolution_url }}">
+                            <img class="lazy" src="{{ m.standard_resolution_url }}" data-original="{{ m.standard_resolution_url }}" width="140" height="183" alt="">
+                            </a>
+                            <div class="description muted">
+                                <p>{{ m.caption|capfirst|striptags }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                  </div>
                 </div>
             </div>
-        {% endfor %}
       </div>
-  </div>
 </div>
 {% endblock container %}
 
