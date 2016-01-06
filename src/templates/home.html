@@ -54,14 +54,15 @@
             </div>
       </div>
 </div>
+{% include "_pagination.html" %}
 {% endblock container %}
 
 {% block scripts %}
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-infinitescroll/2.1.0/jquery.infinitescroll.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
 <script>
 jQuery(function($){
-
   //この部分が lazyload のイニシャライズ
   $("img.lazy").lazyload({
     effect: 'fadeIn',
@@ -102,8 +103,53 @@ jQuery(function($){
       masonry_update();
     }, 200);
   });
-
 });
+
+var $container = $(".item");
+$(function () {
+    <!--$container.imagesLoaded(function () {-->
+        <!--$container.masonry({-->
+            <!--itemSelector : '.brick',-->
+            <!--gutterWidth: 25,-->
+            <!--columnWidth: function () {-->
+                <!--var screenWidth = parseInt(-->
+                    <!--document.documentElement.getBoundingClientRect().width,-->
+                    <!--10-->
+                <!--) || parseInt(screen.width, 10);-->
+
+                <!--if (screenWidth < 768) {-->
+                    <!--return $container.width();-->
+                <!--} else if (screenWidth > 768 && screenWidth < 980) {-->
+                    <!--return ($container.width() / 2) - 20;-->
+                <!--}-->
+                <!--return ($container.width() / 3) - 20;-->
+            <!--}-->
+        <!--});-->
+    <!--});-->
+
+    $container.infinitescroll(
+        {
+            navSelector: "#next",
+            nextSelector: "#next a",
+            itemSelector: ".item",
+            loading: {
+                finishedMsg: "",
+                img: "http://market.osclass.org/oc-content/uploads/4/1191.png",
+                msg: null,
+                msgText: ""
+            }
+        },
+        function (newProducts) {
+            var $newProds = $(newProducts).css({"opacity": 0});
+            $newProds.imagesLoaded(function () {
+                $newProds.animate({"opacity": 1});
+                $container.masonry("appended", $newProds, true);
+            });
+        }
+    );
+});
+
+
 </script>
 
 <script src="{% static 'site/js/site.js' %}"></script>
