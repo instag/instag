@@ -38,9 +38,12 @@
       <div id="works_list">
             {% for m in media %}
                 <div class="work_item">
-                    <img class="lazy" src="{{ m.standard_resolution_url }}" data-original="{{ m.standard_resolution_url }}" width="140" height="183" alt="">
-                    <p>{{ m.caption|capfirst|striptags }}</p>
+                    <a href="{{ m.standard_resolution_url }}">
+                        <img class="lazy" src="{{ m.standard_resolution_url }}" data-original="{{ m.standard_resolution_url }}" width="140" height="183" alt="ニューヨークのグラフティ">
+                    </a>
+                        <p>{{ m.caption|capfirst|striptags }}</p>
                 </div>
+
             {% endfor %}
       </div>
 </div>
@@ -49,6 +52,8 @@
 
 {% block scripts %}
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.0.1/jquery.magnific-popup.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-infinitescroll/2.1.0/jquery.infinitescroll.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
 <script>
@@ -88,6 +93,33 @@ jQuery(function($){
             masonry_update();
         }, 200);
     });
+
+
+
+   //lmagnificPopup のイニシャライズ
+    $('#container').magnificPopup({
+          delegate: 'a',
+          type: 'image',
+          disableOn: function() {
+              if( $(window).width() < 480 ) {
+                  return false;
+              }
+              return true;
+          },
+          gallery: { //ギャラリーオプション
+              enabled:true
+          },
+          image: {
+              // image コンテントタイプのオプション
+              cursor: null,
+              titleSrc: function(item) {
+                  return item.el.find('img').attr('alt');
+              }
+          }
+    });
+
+
+
 });
 
 var $container = $(".work_item");
