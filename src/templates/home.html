@@ -34,24 +34,14 @@
 </div>
 
 
-<div id="sec3">
-      <div id="container">
-          <div class="row">
-              <div  class="col-md-8">
-                  <div class="panel-body">
-                    {% for m in media %}
-                        <div class="item">
-                            <a href="{{ m.standard_resolution_url }}">
-                            <img class="lazy" src="{{ m.standard_resolution_url }}" data-original="{{ m.standard_resolution_url }}" width="140" height="183" alt="">
-                            </a>
-                            <div class="description muted">
-                                <p>{{ m.caption|capfirst|striptags }}</p>
-                            </div>
-                        </div>
-                    {% endfor %}
-                  </div>
+<div id="container">
+      <div id="works_list">
+            {% for m in media %}
+                <div class="work_item">
+                    <img class="lazy" src="{{ m.standard_resolution_url }}" data-original="{{ m.standard_resolution_url }}" width="140" height="183" alt="">
+                    <p>{{ m.caption|capfirst|striptags }}</p>
                 </div>
-            </div>
+            {% endfor %}
       </div>
 </div>
 {% include "_pagination.html" %}
@@ -63,75 +53,50 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
 <script>
 jQuery(function($){
-  //この部分が lazyload のイニシャライズ
-  $("img.lazy").lazyload({
-    effect: 'fadeIn',
-    effectspeed: 1000,
-    threshold: 400
-  });
 
-  //以下は同じ
-  var flag;
-  var min_width = 480;
+    $("img.lazy").lazyload({
+        effect: 'fadeIn',
+        effectspeed: 1000,
+        threshold: 200
+    });
 
-  //画面幅による分岐と imagesLoaded, Masonry のイニシャライズを関数化
-  function masonry_update() {
-    var $container = $('#container');
-    if ( $('html').width() < min_width ) {
-      $container.masonry('destroy');
-      flag = 0;
-    } else {
-      $container.imagesLoaded(function(){
-        $container.masonry({
-          itemSelector: '.item',　
-          isFitWidth: true,　
-          columnWidth: 180
+    $('img.lazy').load(function() {
+        masonry_update();
+    });
+
+    function masonry_update() {
+        ww = $(window).width();
+        var cw = 180;
+        if(ww < 460) { cw = 160; }
+        var $works_list = $('#works_list');
+        $works_list.imagesLoaded(function(){
+            $works_list.masonry({
+                itemSelector: '.work_item',　
+                isFitWidth: true,　
+                columnWidth: cw
+            });
         });
-      });
-    }
-  }
+     }
 
-  masonry_update();
-
-  //リサイズ時の処理
-  var timer = false;
-  $(window).resize(function(){
-    if (timer !== false) {
-      clearTimeout(timer);
-    }
-    timer = setTimeout(function() {
-      masonry_update();
-    }, 200);
-  });
+    var timer = false;
+    $(window).resize(function(){
+        ww = $(window).width();
+        if (timer !== false) {
+            clearTimeout(timer);
+        }
+        timer = setTimeout(function() {
+            masonry_update();
+        }, 200);
+    });
 });
 
-var $container = $(".item");
+var $container = $(".work_item");
 $(function () {
-    <!--$container.imagesLoaded(function () {-->
-        <!--$container.masonry({-->
-            <!--itemSelector : '.brick',-->
-            <!--gutterWidth: 25,-->
-            <!--columnWidth: function () {-->
-                <!--var screenWidth = parseInt(-->
-                    <!--document.documentElement.getBoundingClientRect().width,-->
-                    <!--10-->
-                <!--) || parseInt(screen.width, 10);-->
-
-                <!--if (screenWidth < 768) {-->
-                    <!--return $container.width();-->
-                <!--} else if (screenWidth > 768 && screenWidth < 980) {-->
-                    <!--return ($container.width() / 2) - 20;-->
-                <!--}-->
-                <!--return ($container.width() / 3) - 20;-->
-            <!--}-->
-        <!--});-->
-    <!--});-->
-
     $container.infinitescroll(
         {
             navSelector: "#next",
             nextSelector: "#next a",
-            itemSelector: ".item",
+            itemSelector: ".work_item",
             loading: {
                 finishedMsg: "",
                 img: "http://matemedia.com/wp-content/uploads/2014/02/loading-scroll-transparent.png",

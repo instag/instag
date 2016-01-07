@@ -187,12 +187,6 @@ body>.navbar-transparent {
   z-index: 2;
 }
 
-.item {
-    width: 250px;
-    margin: 10px;
-    float:left;
-}
-
 #wrapper {
   position: relative;
   max-width: 900px;
@@ -203,6 +197,21 @@ body>.navbar-transparent {
   margin: 0 auto;   /*中央寄せ*/
   position: relative;
 }
+.item {
+  margin: 10px;
+  width: 140px;
+  padding: 8px;
+  border: 1px solid #eee;
+}
+.item.x2 {
+  width: 320px;
+}
+.item.x3 {
+  width: 500px;
+}
+.item img {
+  width: 100%;
+}
 
 .item {
   margin: 10px;
@@ -210,4 +219,52 @@ body>.navbar-transparent {
   padding: 8px;
   border: 1px solid #eee;
   float: left;   /*Lazy Load 用に追加 */
+}
+
+
+#works_list {
+  margin: 0 auto;
+}
+
+.work_item {
+  margin: 10px;
+  width: 120px;
+  max-width: 120px;
+  padding: 4px;
+  background-color: #fcfcfc;
+  float: left;
+}
+
+.work_item.x2 {
+  width: 300px;
+  max-width:300px;
+}
+
+.work_item img {
+  width: 100%;
+}
+.work_item p {
+  text-align: center;
+  margin: 10px auto 0;
+}
+
+.work_item.description p {
+  text-align: left;
+  padding: 1em;
+  margin: 0 auto;
+}
+
+@media screen and (min-width : 480px){
+  .work_item {
+  margin: 10px;
+  width: 140px;
+  max-width: 140px;
+  padding: 9px;
+  float: left;
+  }
+
+  .work_item.x2 {
+  width: 320px;
+  max-width:320px;
+  }
 }
