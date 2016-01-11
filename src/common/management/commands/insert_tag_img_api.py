@@ -3,6 +3,9 @@ from common import template_text as T
 from django.core.management.base import BaseCommand
 from instagram import client
 from instagram_url.models import InstagramPlayer, InstagramPlayerMedia
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 CONFIG = T.CONFIG
 unauthenticated_api = client.InstagramAPI(**CONFIG)
@@ -12,7 +15,7 @@ class Command(BaseCommand):
         for i in InstagramPlayer.objects.all():
             api = client.InstagramAPI(access_token=i.oauth_token, client_secret=CONFIG['client_secret'])
 
-            tag_search, next_tag = api.tag_search(q=u'nails')
+            tag_search, next_tag = api.tag_search(u'네일')
             tag_recent_media, next = api.tag_recent_media(tag_name=tag_search[0].name)
 
             for media in tag_recent_media:
