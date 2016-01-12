@@ -5,7 +5,7 @@
 
 	{% if shop %}
 		{{instagram_player}}
-		{% if instagram_player %}
+		{% if instagram_player.id %}
 			<li><a href="{% url 'shop:edit_self' %}">샵 편집</a></li>
 		{% endif %}
 	{% else %}
