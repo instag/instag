@@ -17,7 +17,7 @@ class ShowShop(LoginRequiredMixin, generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
         user = self.request.user
-        instagram_player = InstagramPlayer.objects.get_instagram_play(user_site_id=user.id)
+        instagram_player = InstagramPlayer.get_instagram_play(user_site_id=user.id)
         shop = Shop.objects.get_or_create(user=instagram_player)
         insta_user_media = InstagramPlayerMedia.get_player_media_list(instagram_player)
 
