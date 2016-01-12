@@ -4,7 +4,9 @@
 	<li><a href="{% url 'shop:show_self' %}">MY샵</a></li>
 
 	{% if shop %}
+		{% if instagram_player %}
 		<li><a href="{% url 'shop:edit_self' %}">샵 편집</a></li>
+		{% endif %}
 	{% else %}
 		<li><a href="{{url_test}}">샵 오픈</a></li>
 	{% endif %}
