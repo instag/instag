@@ -35,7 +35,6 @@ class HomePage(generic.TemplateView):
 
         kwargs["media"] = page_obj
         kwargs["page_obj"] = page_obj
-        kwargs["instagram_player"] = instagram_player
 
         #ログインユーザ
         if instagram_player:
