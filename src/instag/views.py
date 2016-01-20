@@ -14,7 +14,7 @@ unauthenticated_api = client.InstagramAPI(**CONFIG)
 
 class HomePage(generic.TemplateView):
     template_name = "home.html"
-    paginate_by = 20
+    paginate_by = 10
 
 
     def get(self, request, *args, **kwargs):
