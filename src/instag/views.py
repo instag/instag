@@ -48,3 +48,6 @@ class HomePage(generic.TemplateView):
 
 class AboutPage(generic.TemplateView):
     template_name = "about.html"
+
+class ShopListPage(generic.TemplateView):
+    template_name = "shop_list.html"

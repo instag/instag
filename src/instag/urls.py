@@ -11,6 +11,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.HomePage.as_view(), name='home'),
     url(r'^about/$', views.AboutPage.as_view(), name='about'),
+    url(r'^shop_list/$', views.ShopListPage.as_view(), name='shop_list'),
     url(r'^users/', include(profiles.urls, namespace='profiles')),
     url(r'^minsta/', include(minsta.urls, namespace='minsta')),
     url(r'^admin/', include(admin.site.urls)),

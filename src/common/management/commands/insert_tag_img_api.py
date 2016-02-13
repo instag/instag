@@ -15,7 +15,7 @@ class Command(BaseCommand):
         for i in InstagramPlayer.objects.all():
             api = client.InstagramAPI(access_token=i.oauth_token, client_secret=CONFIG['client_secret'])
 
-            tag_search, next_tag = api.tag_search(u'네일')
+            tag_search, next_tag = api.tag_search(u'네일아트')
             tag_recent_media, next = api.tag_recent_media(tag_name=tag_search[0].name)
 
             for media in tag_recent_media:
