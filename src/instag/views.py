@@ -18,7 +18,7 @@ class HomePage(generic.TemplateView):
 
 
     def get(self, request, *args, **kwargs):
-        # url = unauthenticated_api.get_authorize_url(scope=["likes","comments"])
+        url = unauthenticated_api.get_authorize_url(scope=["likes","comments"])
         user = self.request.user
         instagram_player = InstagramPlayer.get_instagram_play(user_site_id=user.id)
 
@@ -36,6 +36,7 @@ class HomePage(generic.TemplateView):
         kwargs["media"] = page_obj
         kwargs["page_obj"] = page_obj
         kwargs["instagram_player"] = instagram_player
+        kwargs["url_test"] = url
 
         #ログインユーザ
         if instagram_player:
