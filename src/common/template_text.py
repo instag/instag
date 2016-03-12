@@ -3,7 +3,6 @@ from django.conf import settings
 import datetime
 from .hostname import HOSTNAME
 
-
 WISHTAG = 'wishtag'
 
 if HOSTNAME.startswith('wishtag.net'):
