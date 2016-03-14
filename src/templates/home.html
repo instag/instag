@@ -37,7 +37,7 @@
     <div id="works_list">
       {% for m in media %}
         <div class="work_item">
-          <a href="{{ m.standard_resolution_url }}">
+          <a href="{{ m.media_link }}" target="_blank">
             <img class="lazy" src="{{ m.standard_resolution_url }}" data-original="{{ m.standard_resolution_url }}" width="140" height="183" alt="ニューヨークのグラフティ">
           </a>
           <p>{{ m.caption|capfirst|striptags }}</p>
@@ -94,7 +94,7 @@ jQuery(function($){
     });
 
 
-
+   /*
    //lmagnificPopup のイニシャライズ
     $('#container').magnificPopup({
           delegate: 'a',
@@ -116,6 +116,7 @@ jQuery(function($){
               }
           }
     });
+    */
 
 
 
