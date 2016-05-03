@@ -10,7 +10,7 @@ import os
 import sys
 import site
 
-envpath = '/var/www/instag/instag/lib/python2.6/site-packages'
+envpath = '/var/www/instag_new/instag/lib/python2.6/site-packages'
 
 # we add currently directory to path and change to it
 pwd = os.path.dirname(os.path.abspath(__file__))
