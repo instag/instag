@@ -5,6 +5,7 @@ import logging.config
 DEBUG = True
 TEMPLATE_DEBUG = True
 
+
 # Turn off debug while imported by Celery with a workaround
 # See http://stackoverflow.com/a/4806384
 if "celery" in sys.argv[0]:

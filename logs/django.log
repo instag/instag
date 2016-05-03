@@ -66,3 +66,7 @@
 [03/May/2016 19:09:36] DEBUG [/Users/free31/.virtualenvs/wemake/lib/python2.7/site-packages/django/db/backends/utils.py:89] (0.000) SET SQL_AUTO_IS_NULL = 0; args=None
 [03/May/2016 19:09:36] DEBUG [/Users/free31/.virtualenvs/wemake/lib/python2.7/site-packages/django/db/backends/utils.py:89] (0.053) SHOW FULL TABLES; args=None
 [03/May/2016 19:09:36] DEBUG [/Users/free31/.virtualenvs/wemake/lib/python2.7/site-packages/django/db/backends/utils.py:89] (0.000) SELECT `django_migrations`.`app`, `django_migrations`.`name` FROM `django_migrations`; args=()
+[03/May/2016 20:59:07] DEBUG [/Users/free31/.virtualenvs/wemake/lib/python2.7/site-packages/django/db/backends/utils.py:89] (0.000) SET SQL_AUTO_IS_NULL = 0; args=None
+[03/May/2016 20:59:07] DEBUG [/Users/free31/.virtualenvs/wemake/lib/python2.7/site-packages/django/db/backends/utils.py:89] (0.000) SET SQL_AUTO_IS_NULL = 0; args=None
+[03/May/2016 20:59:07] DEBUG [/Users/free31/.virtualenvs/wemake/lib/python2.7/site-packages/django/db/backends/utils.py:89] (0.148) SHOW FULL TABLES; args=None
+[03/May/2016 20:59:07] DEBUG [/Users/free31/.virtualenvs/wemake/lib/python2.7/site-packages/django/db/backends/utils.py:89] (0.000) SELECT `django_migrations`.`app`, `django_migrations`.`name` FROM `django_migrations`; args=()
