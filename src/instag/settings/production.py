@@ -86,7 +86,7 @@ logging.config.dictConfig(LOGGING)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'instag_db',
+        'NAME': 'instag_db2',
         'USER': 'instag',
         'PASSWORD': 'instagpw',
         'HOST': 'ec2-52-68-85-32.ap-northeast-1.compute.amazonaws.com',
@@ -98,7 +98,7 @@ DATABASES = {
     },
     'read': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'instag_db',
+        'NAME': 'instag_db2',
         'USER': 'instag',
         'PASSWORD': 'instagpw',
         'HOST': 'ec2-52-68-85-32.ap-northeast-1.compute.amazonaws.com',
