@@ -10,7 +10,8 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 from django.core.urlresolvers import reverse_lazy
 from os.path import dirname, join, exists
 
-SITE_ID = 1
+# SITE_ID = 1
+SITE_ID = 2
 
 # Build paths inside the project like this: join(BASE_DIR, "directory")
 BASE_DIR = dirname(dirname(dirname(__file__)))
