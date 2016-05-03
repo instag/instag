@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from .json_import import simplejson
 from six.moves.urllib.parse import urlencode
 from httplib2 import Http
@@ -5,6 +6,9 @@ from hashlib import sha256
 import mimetypes
 import six
 import hmac
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 
 class OAuth2AuthExchangeError(Exception):

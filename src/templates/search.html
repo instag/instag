@@ -25,7 +25,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 text-center">
-        <h1>{% include "_brandname.html" %}</h1>
+        <h1>"{{search_tag}}" 의 검색 결과 입니다.</h1>
         <p class="lead"><sapn id="font_bold">#핫이슈키워드</sapn>로 최신 트랜드를 한눈에!!</p>
       </div>
     </div>
@@ -35,10 +35,10 @@
 <div id="sec3">
   <div id="container">
     <div id="works_list">
-      {% for m in media %}
+      {% for m in tag_recent_media %}
         <div class="work_item">
-          <a href="{{ m.media_link }}" target="_blank">
-            <img class="lazy" src="{{ m.standard_resolution_url }}" data-original="{{ m.standard_resolution_url }}" width="140" height="183" alt="ニューヨークのグラフティ">
+          <a href="{{ m.link }}" target="_blank">
+            <img class="lazy" src="{{ m.get_standard_resolution_url }}" data-original="{{ m.standard_resolution_url }}" width="140" height="183" alt="ニューヨークのグラフティ">
           </a>
           <p>{{ m.caption|capfirst|striptags }}</p>
         </div>
@@ -46,9 +46,7 @@
     </div>
   </div>
 </div>
-{% include "_pagination.html" %}
 {% endblock container %}
-
 {% block scripts %}
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.0.1/jquery.magnific-popup.js"></script>
@@ -154,4 +152,3 @@ $(function () {
 <script src="{% static 'site/js/masonry.pkgd.min.js' %}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.0.0/imagesloaded.pkgd.min.js"></script>
 {% endblock scripts %}
-

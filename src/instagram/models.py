@@ -1,5 +1,9 @@
+# -*- coding: utf-8 -*-
 from .helper import timestamp_to_datetime
 import six
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 
 class ApiModel(object):

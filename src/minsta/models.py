@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 
 
@@ -20,6 +21,9 @@ class Instagram(models.Model):
 
 class Tag(models.Model):
     tag = models.CharField(max_length=255)
+    tag_flg = models.IntegerField(u'tag_flg', default=0, db_index=True)
+    created_at = models.DateTimeField(u'작성 일자', auto_now_add=True)
+    updated_at = models.DateTimeField(u'갱신 일자', auto_now=True)
 
     def __unicode__(self):
         return self.tag

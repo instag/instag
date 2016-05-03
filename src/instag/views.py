@@ -7,15 +7,16 @@ from django.views import generic
 from instagram import client
 from instagram_url.models import InstagramPlayer, InstagramPlayerMedia
 from shop.models import Shop
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 CONFIG = T.CONFIG
-
 unauthenticated_api = client.InstagramAPI(**CONFIG)
 
 class HomePage(generic.TemplateView):
     template_name = "home.html"
     paginate_by = 10
-
 
     def get(self, request, *args, **kwargs):
         url = unauthenticated_api.get_authorize_url(scope=["likes","comments"])
@@ -46,6 +47,18 @@ class HomePage(generic.TemplateView):
 
         return super(HomePage, self).get(request, *args, **kwargs)
 
+class SearchPage(generic.TemplateView):
+    template_name = "search.html"
+    paginate_by = 10
+
+    def get(self, request, *args, **kwargs):
+
+        search_tag = request.GET.get('search_tag')
+        tag_search, next_tag = unauthenticated_api.tag_search(search_tag.encode('utf8'))
+        tag_recent_media, next = unauthenticated_api.tag_recent_media(tag_name=tag_search[0].name)
+        kwargs['tag_recent_media'] = tag_recent_media
+        kwargs['search_tag'] = search_tag
+        return super(SearchPage, self).get(request, *args, **kwargs)
 
 class AboutPage(generic.TemplateView):
     template_name = "about.html"

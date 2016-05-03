@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import urllib
 from .oauth2 import OAuth2Request
 import re
@@ -7,9 +8,11 @@ from hashlib import sha256
 import six
 from six.moves.urllib.parse import quote
 import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
 
 re_path_template = re.compile('{\w+}')
-
 
 def encode_string(value):
     return value.encode('utf-8') \
@@ -95,7 +98,8 @@ def bind_method(**config):
                 name = variable.strip('{}')
 
                 try:
-                    value = quote(self.parameters[name])
+                    # value = quote(self.parameters[name])
+                    value = self.parameters[name].encode('utf8')
                 except KeyError:
                     raise Exception('No parameter value found for path variable: %s' % name)
                 del self.parameters[name]

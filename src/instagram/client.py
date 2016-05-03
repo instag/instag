@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from . import oauth2
 from .bind import bind_method
 from .models import MediaShortcode, Media, User, Location, Tag, Comment, Relationship
@@ -6,6 +7,9 @@ MEDIA_ACCEPT_PARAMETERS = ["count", "max_id"]
 SEARCH_ACCEPT_PARAMETERS = ["q", "count"]
 
 SUPPORTED_FORMATS = ['json']
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 
 class InstagramAPI(oauth2.OAuth2API):
