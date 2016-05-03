@@ -7,6 +7,9 @@ from instagram_url.models import InstagramPlayer, InstagramPlayerMedia
 CONFIG = T.CONFIG
 unauthenticated_api = client.InstagramAPI(**CONFIG)
 
+
+
+
 class Command(BaseCommand):
     def handle(self, *args, **options):
         for i in InstagramPlayer.objects.all():
