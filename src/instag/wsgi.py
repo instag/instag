@@ -44,8 +44,8 @@ site.addsitedir('/home/ec2-user/.virtualenvs/tag/lib/python2.7/site-packages')
 import os
 import sys
    
-sys.path.append('/var/www/instag')
-sys.path.append('/var/www/instag/src')
+sys.path.append('/var/www/instag_new')
+sys.path.append('/var/www/instag_new/src')
 # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instag.settings.production")
    
 os.environ['DJANGO_SETTINGS_MODULE'] = 'instag.settings.production'
