@@ -5,8 +5,8 @@ __pycache__/
 *.idea
 
 # Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+#pip-log.txt
+#pip-delete-this-directory.txt
 
 # Packaging files:
 *.egg*
@@ -20,7 +20,7 @@ build
 *.sqlite
 
 # Logs:
-*.log
+#*.log
 
 # Environment variables
 #local.env
@@ -32,7 +32,7 @@ build
 # Eclipse
 .project
 .pydevproject
-.settings
+#.settings
 
 # Linux Editors
 *~
