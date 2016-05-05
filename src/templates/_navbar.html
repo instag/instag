@@ -3,18 +3,18 @@
 <!--<li {% if active_link == "about" %}class="active"{% endif %}><a href="{% url 'about' %}">About</a></li>-->
 <!--<li {% if active_link == "shop_list" %}class="active"{% endif %}><a href="{% url 'shop_list' %}">네이샵 리스트</a></li>-->
 
-<li><a href="#">인기 태그 표시!!</a></li>
+<!--<li><a href="#">인기 태그 표시!!</a></li>-->
 <li>
 
 	<form action="{% url 'search' %}" method="get">
 		<table>
 			<tr>
 				<td>
-					<input class="textinput textInput form-control" placeholder="해시 태그 입력" id="id_shop_title" maxlength="200" name="search_tag" style="margin-top: 5px;" type="text">
+					<input class="textinput textInput form-control" placeholder="ハッシュタグ検索" id="id_shop_title" maxlength="200" name="search_tag" style="margin-top: 5px;" type="text">
 				</td>
 				<td>
 					&nbsp;<input type="submit"
-							 name="search" value="해시 태그 검색"
+							 name="search" value="ハッシュタグ検索"
 							 style="margin-top: 5px;"
 							 class="btn btn-primary btn-success"></input>
 				</td>
