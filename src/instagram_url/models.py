@@ -43,6 +43,8 @@ class InstagramPlayerMedia(models.Model):
     media_link = models.CharField(u'link', max_length=100, default="")
     tags = models.TextField(u'tags', default="")
     caption = models.TextField(u'caption', default="")
+    like_count = models.CharField(u'like_count', max_length=100, default="")
+    comment_count = models.CharField(u'comment_count', max_length=100, default="")
     media_type = models.CharField(u'media_type', max_length=100, default="")
     created_at = models.DateTimeField(u'作成日時', auto_now_add=True)
     updated_at = models.DateTimeField(u'更新日時', auto_now=True)
