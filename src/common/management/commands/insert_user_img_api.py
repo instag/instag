@@ -26,5 +26,7 @@ class Command(BaseCommand):
                             result.media_link = media.link
                             result.media_type = media.type
                             result.caption = media.caption.text
+                            result.like_count = media.like_count
+                            result.comment_count = media.comment_count
                             result.tags = str(media.tags)
                             result.save()

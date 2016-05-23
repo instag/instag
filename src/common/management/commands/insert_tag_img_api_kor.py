@@ -34,6 +34,8 @@ class Command(BaseCommand):
                             result.media_link = media.link
                             result.media_type = media.type
                             result.caption = media.caption.text[1:100]
+                            result.like_count = media.like_count
+                            result.comment_count = media.comment_count
                             result.tags = t.tag
                             result.save()
             except Exception as e:
