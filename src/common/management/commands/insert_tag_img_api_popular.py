@@ -3,6 +3,7 @@ from common import template_text as T
 from django.core.management.base import BaseCommand
 from instagram import client
 from instagram_url.models import InstagramPlayer, InstagramPlayerMedia
+import datetime
 import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
@@ -32,3 +33,15 @@ class Command(BaseCommand):
                         result.save()
             except:
                 print "[ERROR] player_id : %s" % i.id
+
+
+        delete_old_data()
+
+def delete_old_data():
+    now = datetime.datetime.now()
+    delete_time = now - datetime.timedelta(hours=1000)
+
+    print delete_time
+
+    InstagramPlayerMedia.objects.filter(created_at__lte=delete_time).delete()
+

@@ -3,6 +3,7 @@ from common import template_text as T
 from django.core.management.base import BaseCommand
 from instagram import client
 from instagram_url.models import InstagramPlayer, InstagramPlayerMedia
+import datetime
 
 CONFIG = T.CONFIG
 unauthenticated_api = client.InstagramAPI(**CONFIG)
@@ -12,6 +13,7 @@ unauthenticated_api = client.InstagramAPI(**CONFIG)
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
+
         for i in InstagramPlayer.objects.all():
             api = client.InstagramAPI(access_token=i.oauth_token, client_secret=CONFIG['client_secret'])
             recent_media, next = api.user_recent_media()
@@ -30,3 +32,4 @@ class Command(BaseCommand):
                             result.comment_count = media.comment_count
                             result.tags = str(media.tags)
                             result.save()
+
