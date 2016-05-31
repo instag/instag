@@ -10,6 +10,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.HomePage.as_view(), name='home'),
+    url(r'^snscom/$', views.Snscom.as_view(), name='home'),
     url(r'^about/$', views.AboutPage.as_view(), name='about'),
 
     url(r'^search/$', views.SearchPage.as_view(), name='search'),

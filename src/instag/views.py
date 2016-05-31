@@ -7,12 +7,30 @@ from django.views import generic
 from instagram import client
 from instagram_url.models import InstagramPlayer, InstagramPlayerMedia
 from shop.models import Shop
+from django.http import Http404, HttpResponse
 import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
+import json
 
 CONFIG = T.CONFIG
 unauthenticated_api = client.InstagramAPI(**CONFIG)
+
+
+class Snscom(generic.TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        print "get"
+        response = HttpResponse(json.dumps({'test':'test_value'}), content_type="application/json", status=200)
+        response['Access-Control-Allow-Origin'] = '*'
+        response['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+
+        return response
+
+    def post(self, request, *args, **kwargs):
+        print "post"
+        return HttpResponse("ok")
+
 
 class HomePage(generic.TemplateView):
     template_name = "home.html"
