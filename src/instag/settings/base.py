@@ -82,6 +82,7 @@ INSTALLED_APPS = (
     'instagram_url',
     'common',
     'shop',
+    'snscom',
 )
 
 

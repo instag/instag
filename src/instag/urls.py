@@ -6,11 +6,12 @@ import profiles.urls
 import accounts.urls
 import minsta.urls
 import shop.urls
+import snscom.urls
 from . import views
 
 urlpatterns = [
     url(r'^$', views.HomePage.as_view(), name='home'),
-    url(r'^snscom/$', views.Snscom.as_view(), name='home'),
+    # url(r'^snscom/$', views.Snscom.as_view(), name='home'),
     url(r'^about/$', views.AboutPage.as_view(), name='about'),
 
     url(r'^search/$', views.SearchPage.as_view(), name='search'),
@@ -21,6 +22,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include(accounts.urls, namespace='accounts')),
     url(r'^shop', include(shop.urls, namespace='shop')),
+    url(r'^snscom/', include(snscom.urls, namespace='snscom')),
 
 ]
 
