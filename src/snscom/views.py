@@ -37,7 +37,20 @@ class Profile(generic.TemplateView):
         print request.GET
         print request.body
 
-        response = HttpResponse(json.dumps({'test':'test_value'}), content_type="application/json", status=200)
+
+        list = [{
+        "title": "라면?",
+        "detail": "A shirt with plain design.",
+        "img": "http://ecx.images-amazon.com/images/I/51edhsNSz8L._AC_US160_.jpg"},
+      {"title": "골프모임",
+        "detail": "A shirt with plain design.",
+        "img": "http://ecx.images-amazon.com/images/I/41JREil%2B3sL.jpg"}]
+
+
+
+
+
+        response = HttpResponse(json.dumps({'test':list}), content_type="application/json", status=200)
         response['Access-Control-Allow-Origin'] = '*'
         response['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
 
