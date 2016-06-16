@@ -40,11 +40,11 @@
           <a href="{{ m.media_link }}" target="_blank">
             <img class="lazy" src="{{ m.standard_resolution_url }}" data-original="{{ m.standard_resolution_url }}" width="140" height="183" alt="ニューヨークのグラフティ">
           </a>
-          <p>
-            いいね数：<span style="color:red">{{ m.like_count}}</span><br />
-            コメント数：<span style="color:red">{{ m.comment_count}}</span><br />
-            {{ m.caption|capfirst|striptags }}
-          </p>
+          <!--<p>-->
+            <!--いいね数：<span style="color:red">{{ m.like_count}}</span><br />-->
+            <!--コメント数：<span style="color:red">{{ m.comment_count}}</span><br />-->
+            <!--{{ m.caption|capfirst|striptags }}-->
+          <!--</p>-->
         </div>
       {% endfor %}
     </div>

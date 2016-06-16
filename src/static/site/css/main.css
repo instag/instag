@@ -229,7 +229,7 @@ body>.navbar-transparent {
 }
 
 .work_item {
-  margin: 10px;
+  margin: 0px;
   width: 120px;
   max-width: 120px;
   padding: 4px;
@@ -258,9 +258,9 @@ body>.navbar-transparent {
 
 @media screen and (min-width : 480px){
   .work_item {
-  margin: 10px;
-  width: 140px;
-  max-width: 140px;
+  margin: 0px;
+  width: 180px;
+  max-width: 180px;
   padding: 9px;
   float: left;
   }
