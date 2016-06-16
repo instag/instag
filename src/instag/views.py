@@ -34,7 +34,7 @@ class Snscom(generic.TemplateView):
 
 class HomePage(generic.TemplateView):
     template_name = "home.html"
-    paginate_by = 10
+    paginate_by = 15
 
     def get(self, request, *args, **kwargs):
         url = unauthenticated_api.get_authorize_url(scope=["likes","comments"])
