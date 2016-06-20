@@ -19,12 +19,11 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         for t in Tag.objects.filter(tag_flg="1"):
             try :
-                print t.tag
                 tag_recent_media, next = unauthenticated_api.tag_recent_media(tag_name=t.tag)
                 for media in tag_recent_media:
 
                     # 스팸으로 인해 최소한 좋아요 클릭수가 20이상의 사진만을 취득함
-                    if media.like_count > 10:
+                    if media.like_count > 0:
                         print media
                         result, is_new = InstagramPlayerMedia.objects.get_or_create(user_id=1, media_id=media.id)
                         if is_new:
