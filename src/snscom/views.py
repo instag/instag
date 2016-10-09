@@ -90,7 +90,52 @@ class KpopRank(generic.TemplateView):
         out = cache.get(T.CACHE_KEY_KPOP_LIST, None)
         if out is None:
             logging.error("is NOne")
-            out = snscom_utils.get_youtube_list(snscom_utils.get_kpop_list(), 'KR', T.CACHE_KEY_KPOP_LIST, 'KR')
+            title_list = snscom_utils.get_kpop_list()
+            logging.error("get_title_list")
+
+            youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION,developerKey=DEVELOPER_KEY)
+            json_list = []
+            count = 0
+            rank = 1
+            for t in title_list:
+
+                search_q = t['title'] + " " + t['name']
+
+                search_response = youtube.search().list(
+                q=search_q,
+                regionCode='KR',
+                order="relevance",
+                part="id,snippet",
+                type="video",
+                safeSearch="moderate",
+                maxResults=1
+                ).execute()
+
+                for search_result in search_response.get("items", []):
+                    if search_result["id"]["kind"] == "youtube#video":
+                        json_dic = {
+                                    "id":count,
+                                    "rank":rank,
+                                    "videoId":search_result["id"]["videoId"],
+                                    "title":t['title'],
+                                    "name":t['name'],
+                                    "is_new":t['is_new'],
+                                    "img":search_result["snippet"]["thumbnails"]["default"]["url"],
+                                    "thumbnail_url":search_result["snippet"]["thumbnails"]["default"]["url"],
+                                    "url": 'http://m.youtube.com/watch?v=%s' % search_result["id"]["videoId"]
+                                   }
+                        json_list.append(json_dic)
+                count = count + 1
+                rank = rank + 1
+            cache.set(T.CACHE_KEY_KPOP_LIST, json_list, T.CACHE_TIME)
+
+            return json_list
+
+
+
+
+
+
         return snscom_utils.get_response(out)
 
 class JpopRank(generic.TemplateView):
