@@ -84,7 +84,7 @@ LOGGING = {
 logging.config.dictConfig(LOGGING)
 
 
-CACHE_BACKEND = 'memcached://instag.ksrpmm.cfg.apne1.cache.amazonaws.com:11211/'
+CACHE_BACKEND = 'locmem:///'
 
 
 # CACHES = {
