@@ -84,8 +84,12 @@ class SKSearch(generic.TemplateView):
 class KpopRank(generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
+        import logging
+
+        logging.error("kpopRank")
         out = cache.get(T.CACHE_KEY_KPOP_LIST, None)
         if out is None:
+            logging.error("is NOne")
             out = snscom_utils.get_youtube_list(snscom_utils.get_kpop_list(), 'KR', T.CACHE_KEY_KPOP_LIST, 'KR')
         return snscom_utils.get_response(out)
 
