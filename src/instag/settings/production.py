@@ -83,10 +83,17 @@ LOGGING = {
 
 logging.config.dictConfig(LOGGING)
 
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+#         'LOCATION': 'unique-snowflake'
+#     }
+# }
+
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'unique-snowflake'
+        'LOCATION': 'ec2-52-68-85-32.ap-northeast-1.compute.amazonaws.com:3306'
     }
 }
 

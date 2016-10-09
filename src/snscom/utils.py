@@ -128,8 +128,6 @@ def get_youtube_list(title_list, regionCode, CACHE_KEY, country):
         count = 0
         rank = 1
         for t in title_list:
-
-
             if country == 'KR' or country == 'USA':
                 search_q = t['title'] + " " + t['name']
             else:
