@@ -18,8 +18,6 @@ CONFIG = T.CONFIG
 unauthenticated_api = client.InstagramAPI(**CONFIG)
 
 
-CACHE_SK_LIST = 3600 * 24
-CACHE_POP_LIST = 3600 * 24
 TOP_100_KR_COUNT = 100
 TOP_100_JP_COUNT = 100
 IS_NEW_SONG_DAYS_JPOP = 10
@@ -60,7 +58,7 @@ def get_kpop_list():
                     dict_list['is_new'] = "NEW"
                 y_list.append(dict_list)
 
-        cache.set(T.CACHE_KEY_K_POP_TITLE_LIST, y_list, CACHE_SK_LIST)
+        cache.set(T.CACHE_KEY_K_POP_TITLE_LIST, y_list, T.CACHE_TIME)
         song_list = y_list
 
     return song_list
@@ -97,7 +95,7 @@ def get_jpop_list():
                     except:
                         pass
                     y_list.append(dict_list)
-            cache.set(T.CACHE_KEY_J_POP_TITLE_LIST, y_list, CACHE_SK_LIST)
+            cache.set(T.CACHE_KEY_J_POP_TITLE_LIST, y_list, T.CACHE_TIME)
             song_list = y_list
 
         return song_list
@@ -117,20 +115,22 @@ def get_pop_list():
             dict_list['title'] = entry['chart_item_title']
             dict_list['name'] = entry['artist']
             y_list.append(dict_list)
-        cache.set(T.CACHE_KEY_POP_TITLE_LIST, y_list, CACHE_SK_LIST)
+        cache.set(T.CACHE_KEY_POP_TITLE_LIST, y_list, T.CACHE_TIME)
         song_list = y_list
 
     return song_list
 
 
-def get_youtube_list(title_list, regionCode, CACHE_KEY):
+def get_youtube_list(title_list, regionCode, CACHE_KEY, country):
 
         youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION,developerKey=DEVELOPER_KEY)
         json_list = []
         count = 0
         rank = 1
         for t in title_list:
-            if t['name']:
+
+
+            if country == 'KR' or country == 'USA':
                 search_q = t['title'] + " " + t['name']
             else:
                 search_q = t['title']
@@ -164,6 +164,8 @@ def get_youtube_list(title_list, regionCode, CACHE_KEY):
         cache.set(CACHE_KEY, json_list, T.CACHE_TIME)
 
         return json_list
+
+
 
 def get_response(out):
     response = HttpResponse(json.dumps(out), content_type="application/json", status=200)

@@ -86,7 +86,7 @@ class KpopRank(generic.TemplateView):
     def get(self, request, *args, **kwargs):
         out = cache.get(T.CACHE_KEY_KPOP_LIST, None)
         if out is None:
-            out = snscom_utils.get_youtube_list(snscom_utils.get_kpop_list(), 'KR', T.CACHE_KEY_KPOP_LIST)
+            out = snscom_utils.get_youtube_list(snscom_utils.get_kpop_list(), 'KR', T.CACHE_KEY_KPOP_LIST, 'KR')
         return snscom_utils.get_response(out)
 
 class JpopRank(generic.TemplateView):
@@ -94,7 +94,7 @@ class JpopRank(generic.TemplateView):
     def get(self, request, *args, **kwargs):
         out = cache.get(T.CACHE_KEY_JPOP_LIST, None)
         if out is None:
-            out = snscom_utils.get_youtube_list(snscom_utils.get_jpop_list(), 'JP', T.CACHE_KEY_JPOP_LIST)
+            out = snscom_utils.get_youtube_list(snscom_utils.get_jpop_list(), 'JP', T.CACHE_KEY_JPOP_LIST, 'JP')
         return snscom_utils.get_response(out)
 
 class PopRank(generic.TemplateView):
@@ -102,5 +102,5 @@ class PopRank(generic.TemplateView):
     def get(self, request, *args, **kwargs):
         out = cache.get(T.CACHE_KEY_POP_LIST, None)
         if out is None:
-            out = snscom_utils.get_youtube_list(snscom_utils.get_pop_list(), 'JP', T.CACHE_KEY_POP_LIST)
+            out = snscom_utils.get_youtube_list(snscom_utils.get_pop_list(), 'JP', T.CACHE_KEY_POP_LIST, 'USA')
         return snscom_utils.get_response(out)
