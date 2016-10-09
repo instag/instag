@@ -39,6 +39,9 @@ def get_kpop_list():
     song_list = cache.get(T.CACHE_KEY_K_POP_TITLE_LIST, None)
     if song_list is None:
 
+        import logging
+        logging.error("is NOne title")
+
         url = 'http://apis.skplanetx.com/melon/charts/todaytopsongs?count=%d&page=%d&version=%d' % \
               (TOP_100_KR_COUNT, PAGE, VERSION)
         req = urllib2.Request(url, None, headers)
