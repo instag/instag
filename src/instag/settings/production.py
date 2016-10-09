@@ -87,12 +87,12 @@ logging.config.dictConfig(LOGGING)
 CACHE_BACKEND = 'locmem:///'
 
 
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-#         'LOCATION': 'instag.ksrpmm.cfg.apne1.cache.amazonaws.com:11211'
-#     }
-# }
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'instag324.ksrpmm.cfg.apne1.cache.amazonaws.com:11211'
+    }
+}
 
 # CACHES = {
 #     'default': {

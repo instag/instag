@@ -10,7 +10,8 @@ from django.http import HttpResponse
 from instagram_url.models import InstagramPlayer, InstagramPlayerMedia
 from snscom import utils as snscom_utils
 from apiclient.discovery import build
-from django.core.cache import cache
+# from django.core.cache import cache
+from django.core.cache import caches
 import time, datetime
 
 
@@ -87,7 +88,11 @@ class KpopRank(generic.TemplateView):
         import logging
 
         logging.error("kpopRank")
-        out = cache.get(T.CACHE_KEY_KPOP_LIST, None)
+        # out = cache.get(T.CACHE_KEY_KPOP_LIST, None)
+
+        out = caches['default'].get(T.CACHE_KEY_KPOP_LIST)
+
+
         if out is None:
             logging.error("is NOne")
             title_list = snscom_utils.get_kpop_list()
@@ -127,7 +132,8 @@ class KpopRank(generic.TemplateView):
                         json_list.append(json_dic)
                 count = count + 1
                 rank = rank + 1
-            cache.set(T.CACHE_KEY_KPOP_LIST, json_list, T.CACHE_TIME)
+            # cache.set(T.CACHE_KEY_KPOP_LIST, json_list, T.CACHE_TIME)
+            caches['default'].set(T.CACHE_KEY_KPOP_LIST, json_list, T.CACHE_TIME)
 
             out = json_list
 
