@@ -90,17 +90,10 @@ logging.config.dictConfig(LOGGING)
 #     }
 # }
 
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-#         'LOCATION': 'ec2-52-68-85-32.ap-northeast-1.compute.amazonaws.com:3306'
-#     }
-# }
-
 CACHES = {
     'default': {
-        'BACKEND': 'django_elasticache.memcached.ElastiCache',
-        'LOCATION': 'cache-c.draaaf.cfg.use1.cache.amazonaws.com:11211',
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'ec2-52-68-85-32.ap-northeast-1.compute.amazonaws.com:3306'
     }
 }
 
