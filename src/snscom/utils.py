@@ -46,7 +46,7 @@ def get_kpop_list():
         # Read the response
         resp = urllib2.urlopen(req).read()
         data = json.loads(resp.decode('utf8')).get("melon", [])
-
+        k = 0
         for d in data['songs'].iteritems():
             for s in d[1]:
                 dict_list = {}
@@ -57,6 +57,9 @@ def get_kpop_list():
                 if s['pastRank'] == 0:
                     dict_list['is_new'] = "NEW"
                 y_list.append(dict_list)
+                k = k + 1
+
+                if k > 5: break
 
         cache.set(T.CACHE_KEY_K_POP_TITLE_LIST, y_list, T.CACHE_TIME)
         song_list = y_list
