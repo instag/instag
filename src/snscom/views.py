@@ -129,7 +129,7 @@ class KpopRank(generic.TemplateView):
                 rank = rank + 1
             cache.set(T.CACHE_KEY_KPOP_LIST, json_list, T.CACHE_TIME)
 
-            return json_list
+            out = json_list
 
 
 
