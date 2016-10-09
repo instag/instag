@@ -85,7 +85,7 @@ logging.config.dictConfig(LOGGING)
 
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': 'instag.ksrpmm.cfg.apne1.cache.amazonaws.com:11211'
     }
 }
