@@ -83,12 +83,23 @@ LOGGING = {
 
 logging.config.dictConfig(LOGGING)
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'instag.ksrpmm.cfg.apne1.cache.amazonaws.com:11211'
-    }
-}
+
+CACHE_BACKEND = 'memcached://instag.ksrpmm.cfg.apne1.cache.amazonaws.com:11211/'
+
+
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+#         'LOCATION': 'instag.ksrpmm.cfg.apne1.cache.amazonaws.com:11211'
+#     }
+# }
+
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#         'LOCATION': 'instag.ksrpmm.cfg.apne1.cache.amazonaws.com:11211'
+#     }
+# }
 
 
 DATABASES = {
