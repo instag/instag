@@ -38,7 +38,8 @@ def get_kpop_list():
                'Accept-Languag': 'ko_KR'
                }
 
-    song_list = cache.get(T.CACHE_KEY_K_POP_TITLE_LIST, None)
+    song_list = caches['default'].get(T.CACHE_KEY_K_POP_TITLE_LIST)
+
     if song_list is None:
 
         import logging
@@ -62,7 +63,7 @@ def get_kpop_list():
                     dict_list['is_new'] = "NEW"
                 y_list.append(dict_list)
 
-        cache.set(T.CACHE_KEY_K_POP_TITLE_LIST, y_list, T.CACHE_TIME)
+        caches['default'].set(T.CACHE_KEY_K_POP_TITLE_LIST, y_list, T.CACHE_TIME)
         song_list = y_list
 
     return song_list
@@ -78,7 +79,7 @@ def get_jpop_list():
         r = urllib2.urlopen(url)
         result = json.loads(r.read())
 
-        song_list = cache.get(T.CACHE_KEY_J_POP_TITLE_LIST, None)
+        song_list = caches['default'].get(T.CACHE_KEY_J_POP_TITLE_LIST)
 
         if song_list is None:
             for r in result.iteritems():
@@ -99,15 +100,14 @@ def get_jpop_list():
                     except:
                         pass
                     y_list.append(dict_list)
-            cache.set(T.CACHE_KEY_J_POP_TITLE_LIST, y_list, T.CACHE_TIME)
+            caches['default'].set(T.CACHE_KEY_J_POP_TITLE_LIST, y_list, T.CACHE_TIME)
             song_list = y_list
 
         return song_list
 
 def get_pop_list():
     y_list = []
-    song_list = cache.get(T.CACHE_KEY_POP_TITLE_LIST, None)
-
+    song_list = caches['default'].get(T.CACHE_KEY_POP_TITLE_LIST)
     if song_list is None:
         url  = 'http://www.billboard.com/rss/charts/hot-100'
         data = feedparser.parse(url)
@@ -119,7 +119,7 @@ def get_pop_list():
             dict_list['title'] = entry['chart_item_title']
             dict_list['name'] = entry['artist']
             y_list.append(dict_list)
-        cache.set(T.CACHE_KEY_POP_TITLE_LIST, y_list, T.CACHE_TIME)
+        caches['default'].set(T.CACHE_KEY_POP_TITLE_LIST, y_list, T.CACHE_TIME)
         song_list = y_list
 
     return song_list
@@ -163,7 +163,6 @@ def get_youtube_list(title_list, regionCode, CACHE_KEY, country):
                     json_list.append(json_dic)
             count = count + 1
             rank = rank + 1
-        # cache.set(CACHE_KEY, json_list, T.CACHE_TIME)
         caches['default'].set(CACHE_KEY, json_list, T.CACHE_TIME)
 
         return json_list
