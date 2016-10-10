@@ -11,7 +11,9 @@ import json
 import time, datetime
 import feedparser
 from apiclient.discovery import build
+from django.core.cache import caches
 from django.core.cache import cache
+
 from django.http import HttpResponse
 
 CONFIG = T.CONFIG
@@ -165,7 +167,8 @@ def get_youtube_list(title_list, regionCode, CACHE_KEY, country):
                     json_list.append(json_dic)
             count = count + 1
             rank = rank + 1
-        cache.set(CACHE_KEY, json_list, T.CACHE_TIME)
+        # cache.set(CACHE_KEY, json_list, T.CACHE_TIME)
+        caches['default'].set(CACHE_KEY, json_list, T.CACHE_TIME)
 
         return json_list
 
