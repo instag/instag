@@ -137,12 +137,6 @@ class KpopRank(generic.TemplateView):
             caches['default'].set(T.CACHE_KEY_KPOP_LIST, json_list, T.CACHE_TIME)
 
             out = json_list
-
-
-
-
-
-
         return snscom_utils.get_response(out)
 
 class JpopRank(generic.TemplateView):
