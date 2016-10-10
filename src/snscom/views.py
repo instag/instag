@@ -1,24 +1,18 @@
 # -*- coding: utf-8 -*-
 import sys
-import urllib2
 
 from common import template_text as T
 from django.http import HttpResponse
+from django.http import HttpResponse
 from django.views import generic
 from instagram import client
-from django.http import HttpResponse
-from instagram_url.models import InstagramPlayer, InstagramPlayerMedia
 from snscom import utils as snscom_utils
-from apiclient.discovery import build
-# from django.core.cache import cache
 from django.core.cache import caches
-from django.core.cache import cache
-import time, datetime
-
 
 reload(sys)
 sys.setdefaultencoding("utf-8")
 import json
+import logging
 
 CONFIG = T.CONFIG
 unauthenticated_api = client.InstagramAPI(**CONFIG)
@@ -86,11 +80,11 @@ class SKSearch(generic.TemplateView):
 class KpopRank(generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
-        import logging
-        # logging.error("kpopRank")
+        logging.error("KpopRank")
 
         out = caches['default'].get(T.CACHE_KEY_KPOP_LIST)
         if out is None:
+            logging.error("is not cache KpopRank")
             out = snscom_utils.get_youtube_list(snscom_utils.get_kpop_list(), 'KR', T.CACHE_KEY_KPOP_LIST, 'KR')
 
         return snscom_utils.get_response(out)
@@ -98,16 +92,21 @@ class KpopRank(generic.TemplateView):
 class JpopRank(generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
-        # out = cache.get(T.CACHE_KEY_JPOP_LIST, None)
+
+        logging.error("JpopRank")
         out = caches['default'].get(T.CACHE_KEY_JPOP_LIST)
         if out is None:
+            logging.error("is not cache JpopRank")
             out = snscom_utils.get_youtube_list(snscom_utils.get_jpop_list(), 'JP', T.CACHE_KEY_JPOP_LIST, 'JP')
         return snscom_utils.get_response(out)
 
 class PopRank(generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
+
+        logging.error("PopRank")
         out = caches['default'].get(T.CACHE_KEY_POP_LIST)
         if out is None:
+            logging.error("is not cache PopRank")
             out = snscom_utils.get_youtube_list(snscom_utils.get_pop_list(), 'JP', T.CACHE_KEY_POP_LIST, 'USA')
         return snscom_utils.get_response(out)

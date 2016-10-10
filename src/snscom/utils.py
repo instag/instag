@@ -1,19 +1,15 @@
 # -*- coding: utf-8 -*-
 import sys
 import urllib2
-from common import template_text as T
-from instagram import client
-from django.core.cache import cache
-
 reload(sys)
 sys.setdefaultencoding("utf-8")
+from common import template_text as T
+from instagram import client
 import json
-import time, datetime
+import datetime
 import feedparser
 from apiclient.discovery import build
 from django.core.cache import caches
-from django.core.cache import cache
-
 from django.http import HttpResponse
 
 CONFIG = T.CONFIG
