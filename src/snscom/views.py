@@ -107,7 +107,7 @@ class JpopRank(generic.TemplateView):
 class PopRank(generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
-        out = cache.get(T.CACHE_KEY_POP_LIST, None)
+        out = caches['default'].get(T.CACHE_KEY_POP_LIST)
         if out is None:
             out = snscom_utils.get_youtube_list(snscom_utils.get_pop_list(), 'JP', T.CACHE_KEY_POP_LIST, 'USA')
         return snscom_utils.get_response(out)
