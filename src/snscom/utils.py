@@ -142,7 +142,6 @@ def get_youtube_list(title_list, regionCode, CACHE_KEY, country):
             safeSearch="moderate",
             maxResults=1
             ).execute()
-
             for search_result in search_response.get("items", []):
                 if search_result["id"]["kind"] == "youtube#video":
                     json_dic = {
