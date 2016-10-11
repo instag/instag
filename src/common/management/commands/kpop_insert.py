@@ -7,9 +7,6 @@ from instagram import client
 from instagram_url.models import InstagramPlayerMedia
 from snscom import utils as snscom_utils
 
-reload(sys)
-sys.setdefaultencoding("utf-8")
-
 CONFIG = T.CONFIG
 unauthenticated_api = client.InstagramAPI(**CONFIG)
 
