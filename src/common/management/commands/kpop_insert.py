@@ -7,10 +7,6 @@ from instagram import client
 from instagram_url.models import InstagramPlayerMedia
 from snscom import utils as snscom_utils
 
-CONFIG = T.CONFIG
-unauthenticated_api = client.InstagramAPI(**CONFIG)
-
-
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
