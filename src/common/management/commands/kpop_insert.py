@@ -39,7 +39,7 @@ class Command(BaseCommand):
         for p in pop_list:
             result, is_new = InstagramPlayerMedia.objects.get_or_create(id=pop_count, user_id=pop_count)
             result.media_type = 'POP'
-            result.standard_resolution_url = str(p)
+            result.standard_resolution_url = json.dumps(p, ensure_ascii=False)
             result.save()
             pop_count = pop_count + 1
 
