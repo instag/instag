@@ -34,7 +34,7 @@ class Command(BaseCommand):
 
 
         #POP
-        pop_count = 200
+        pop_count = 300
         pop_list = snscom_utils.get_youtube_list(snscom_utils.get_pop_list(), 'JP', T.CACHE_KEY_POP_LIST, 'USA')
         for p in pop_list:
             result, is_new = InstagramPlayerMedia.objects.get_or_create(id=pop_count, user_id=pop_count)
