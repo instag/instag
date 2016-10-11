@@ -87,26 +87,22 @@ class KpopRank(generic.TemplateView):
         #     logging.error("is not cache KpopRank")
         #     out = snscom_utils.get_youtube_list(snscom_utils.get_kpop_list(), 'KR', T.CACHE_KEY_KPOP_LIST, 'KR')
 
-        return snscom_utils.get_response(InstagramPlayerMedia.objects.get(id=1).standard_resolution_url)
+        return snscom_utils.get_response(InstagramPlayerMedia.objects.get(id=T.ID_KPOP).standard_resolution_url)
 
 class JpopRank(generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
-
-        logging.error("JpopRank")
-        out = caches['default'].get(T.CACHE_KEY_JPOP_LIST)
-        if out is None:
-            logging.error("is not cache JpopRank")
-            out = snscom_utils.get_youtube_list(snscom_utils.get_jpop_list(), 'JP', T.CACHE_KEY_JPOP_LIST, 'JP')
-        return snscom_utils.get_response(out)
+        # out = caches['default'].get(T.CACHE_KEY_JPOP_LIST)
+        # if out is None:
+        #     logging.error("is not cache JpopRank")
+        #     out = snscom_utils.get_youtube_list(snscom_utils.get_jpop_list(), 'JP', T.CACHE_KEY_JPOP_LIST, 'JP')
+        return snscom_utils.get_response(InstagramPlayerMedia.objects.get(id=T.ID_JPOP).standard_resolution_url)
 
 class PopRank(generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
-
-        logging.error("PopRank")
-        out = caches['default'].get(T.CACHE_KEY_POP_LIST)
-        if out is None:
-            logging.error("is not cache PopRank")
-            out = snscom_utils.get_youtube_list(snscom_utils.get_pop_list(), 'JP', T.CACHE_KEY_POP_LIST, 'USA')
-        return snscom_utils.get_response(out)
+        # out = caches['default'].get(T.CACHE_KEY_POP_LIST)
+        # if out is None:
+        #     logging.error("is not cache PopRank")
+        #     out = snscom_utils.get_youtube_list(snscom_utils.get_pop_list(), 'JP', T.CACHE_KEY_POP_LIST, 'USA')
+        return snscom_utils.get_response(InstagramPlayerMedia.objects.get(id=T.ID_POP).standard_resolution_url)
