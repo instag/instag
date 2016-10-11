@@ -8,6 +8,7 @@ from django.views import generic
 from instagram import client
 from snscom import utils as snscom_utils
 from django.core.cache import caches
+from instagram_url.models import InstagramPlayerMedia
 
 reload(sys)
 sys.setdefaultencoding("utf-8")
@@ -80,14 +81,13 @@ class SKSearch(generic.TemplateView):
 class KpopRank(generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
-        logging.error("KpopRank")
 
-        out = caches['default'].get(T.CACHE_KEY_KPOP_LIST)
-        if out is None:
-            logging.error("is not cache KpopRank")
-            out = snscom_utils.get_youtube_list(snscom_utils.get_kpop_list(), 'KR', T.CACHE_KEY_KPOP_LIST, 'KR')
+        # out = caches['default'].get(T.CACHE_KEY_KPOP_LIST)
+        # if out is None:
+        #     logging.error("is not cache KpopRank")
+        #     out = snscom_utils.get_youtube_list(snscom_utils.get_kpop_list(), 'KR', T.CACHE_KEY_KPOP_LIST, 'KR')
 
-        return snscom_utils.get_response(out)
+        return snscom_utils.get_response(InstagramPlayerMedia.objects.get(id=1).standard_resolution_url)
 
 class JpopRank(generic.TemplateView):
 
