@@ -14,6 +14,7 @@ class Command(BaseCommand):
 
         # KPOP
         k_count = 100
+        InstagramPlayerMedia.objects.all().delete()
         kpop_list = snscom_utils.get_youtube_list(snscom_utils.get_kpop_list(), 'KR', T.CACHE_KEY_KPOP_LIST, 'KR')
         for k in kpop_list:
             result, is_new = InstagramPlayerMedia.objects.get_or_create(id=k_count, user_id=k_count)

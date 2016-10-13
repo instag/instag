@@ -127,11 +127,19 @@ def get_youtube_list(title_list, regionCode, CACHE_KEY, country):
         json_list = []
         count = 0
         rank = 1
+
+        cnt_tmp = 1
+
         for t in title_list:
+            cnt_tmp = cnt_tmp + 1
+            if cnt_tmp > 15: break
+
             if country == 'KR' or country == 'USA':
                 search_q = t['title'] + " " + t['name']
             else:
                 search_q = t['title']
+
+            print search_q
 
             search_response = youtube.search().list(
             q=search_q,
