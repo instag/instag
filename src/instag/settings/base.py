@@ -80,6 +80,7 @@ INSTALLED_APPS = (
     'accounts',
     'minsta',
     'instagram_url',
+    'twitter_count',
     'common',
     'shop',
     'snscom',
