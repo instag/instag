@@ -62,7 +62,7 @@ class RealtimeJP(generic.TemplateView):
         return render_to_response('survey/twitter_url/api.html', ctxt)
 
 class RealtimeKO(generic.TemplateView):
-    def realtime_ko(request):
+    def get(self, request, *args, **kwargs):
         """
         최근 2시간동안의 인기 트윗만
         """
