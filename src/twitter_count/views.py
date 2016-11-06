@@ -30,7 +30,6 @@ VIEW_LIST_MAIN_CNT = 5
 class RealtimeJP(generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
-        print 2222222
         """
         최근 2시간동안의 인기 트윗만
         """
@@ -61,32 +60,33 @@ class RealtimeJP(generic.TemplateView):
         return HttpResponse(out, content_type='text/plain')
         ctxt = RequestContext(request, {'tag' : tag,})
         return render_to_response('survey/twitter_url/api.html', ctxt)
-#
-# def realtime_ko(request):
-#     """
-#     최근 2시간동안의 인기 트윗만
-#     """
-#     json_list = []
-#     entrys = []
-#     rank_count = 0
-#     now = datetime.datetime.now()
-#     limit_time = now - datetime.timedelta(hours=REAL_TIME)
-#     url_to = request.REQUEST.get('to','100')
-#     url_from = request.REQUEST.get('from','1')
-#     CACHE_KEY = 'twitter::ko::api::%s' % ( url_to)
-#     out = cache.get(CACHE_KEY, None)
-#     if out is None:
-# #     if True:
-#         twitter_ranking_list = TwitterCountKO.objects.filter(created_at__gte=limit_time).order_by('-rtCount')[:url_to]
-#         twitter_ranking_list = twitter_ranking_list[int(url_from)-1:url_to]
-#
-#         for t in twitter_ranking_list:
-#             json_dic = {"id":t.uniqu_id, "ownerProfileImgUrl":t.profile_image_url, "owner":t.owner,  "body":t.body, "rtRank":url_from, "rtCount":t.rtCount, "registDate":t.created_at.strftime("%Y/%m/%d %H:%M:%S"),  "rtTwitCount":0, "twitId":0}
-#             url_from = int(url_from) + 1
-#             json_list.append(json_dic)
-#         entrys.append(json.dumps({"rankedTwitList":json_list}))
-#         cache.set(CACHE_KEY, entrys, 900) # 15분 동안 캐쉬
-#         return HttpResponse(entrys, mimetype='text/plain')
-#     return HttpResponse(out, mimetype='text/plain')
-#     ctxt = RequestContext(request, {'tag' : tag,})
-#     return render_to_response('survey/twitter_url/api.html', ctxt)
+
+class RealtimeKO(generic.TemplateView):
+    def realtime_ko(request):
+        """
+        최근 2시간동안의 인기 트윗만
+        """
+        json_list = []
+        entrys = []
+        rank_count = 0
+        now = datetime.datetime.now()
+        limit_time = now - datetime.timedelta(hours=REAL_TIME)
+        url_to = request.REQUEST.get('to','100')
+        url_from = request.REQUEST.get('from','1')
+        CACHE_KEY = 'twitter::ko::api::%s' % ( url_to)
+        out = cache.get(CACHE_KEY, None)
+        if out is None:
+    #     if True:
+            twitter_ranking_list = TwitterCountKO.objects.filter(created_at__gte=limit_time).order_by('-rtCount')[:url_to]
+            twitter_ranking_list = twitter_ranking_list[int(url_from)-1:url_to]
+
+            for t in twitter_ranking_list:
+                json_dic = {"id":t.uniqu_id, "ownerProfileImgUrl":t.profile_image_url, "owner":t.owner,  "body":t.body, "rtRank":url_from, "rtCount":t.rtCount, "registDate":t.created_at.strftime("%Y/%m/%d %H:%M:%S"),  "rtTwitCount":0, "twitId":0}
+                url_from = int(url_from) + 1
+                json_list.append(json_dic)
+            entrys.append(json.dumps({"rankedTwitList":json_list}))
+            cache.set(CACHE_KEY, entrys, 900) # 15분 동안 캐쉬
+            return HttpResponse(entrys, content_type='text/plain')
+        return HttpResponse(out, content_type='text/plain')
+        ctxt = RequestContext(request, {'tag' : tag,})
+        return render_to_response('survey/twitter_url/api.html', ctxt)

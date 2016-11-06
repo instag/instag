@@ -107,9 +107,6 @@ def twitter_insert():
 
     for t in tl:
         insert_flag = True
-        
-        print t
-        
         try:
             for i in DELETE_TEXT_LIST:
                 if i == t.retweeted_status.user.screen_name:insert_flag = False
