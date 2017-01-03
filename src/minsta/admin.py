@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.cache import cache
 from django.core.urlresolvers import reverse
-from django.conf.urls import patterns, url
+# from django.conf.urls import patterns, url
 from django.contrib import admin
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.utils.decorators import method_decorator
@@ -14,11 +14,11 @@ class MediaAdmin(admin.ModelAdmin):
 
     def get_urls(self):
         urls = super(MediaAdmin, self).get_urls()
-        my_urls = patterns('',
-            url(r'^add/$', self.redirect_to_instagram_view),
-            url(r'^toggle-media/$', self.admin_site.admin_view(self.toggle_media), name='instagram-toggle-media'),
-        )
-        return my_urls + urls
+        # my_urls = patterns('',
+        #     url(r'^add/$', self.redirect_to_instagram_view),
+        #     url(r'^toggle-media/$', self.admin_site.admin_view(self.toggle_media), name='instagram-toggle-media'),
+        # )
+        # return my_urls + urls
 
     def redirect_to_instagram_view(self, request):
         return HttpResponseRedirect(reverse('admin:instagram_media_changelist'))
