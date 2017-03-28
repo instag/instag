@@ -6,6 +6,7 @@ import profiles.urls
 import accounts.urls
 import minsta.urls
 import shop.urls
+import felica.urls
 import snscom.urls
 import twitter_count.urls
 from . import views
@@ -14,15 +15,14 @@ urlpatterns = [
     url(r'^$', views.HomePage.as_view(), name='home'),
     # url(r'^snscom/$', views.Snscom.as_view(), name='home'),
     url(r'^about/$', views.AboutPage.as_view(), name='about'),
-
     url(r'^search/$', views.SearchPage.as_view(), name='search'),
-
     url(r'^shop_list/$', views.ShopListPage.as_view(), name='shop_list'),
     url(r'^users/', include(profiles.urls, namespace='profiles')),
     url(r'^minsta/', include(minsta.urls, namespace='minsta')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include(accounts.urls, namespace='accounts')),
     url(r'^shop', include(shop.urls, namespace='shop')),
+    url(r'^felica/', include(felica.urls, namespace='felica')),
     url(r'^snscom/', include(snscom.urls, namespace='snscom')),
     url(r'^twitter_count/', include(twitter_count.urls, namespace='twitter_count')),
 
