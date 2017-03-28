@@ -1,0 +1,12 @@
+INSERT INTO `shop_shop` (`id`, `user_id`, `sales`, `agency1_com`, `agency2_com`, `agency3_com`, `total`, `sp_cost`, `tour_code`, `people`, `created_at`, `updated_at`, `picture`, `memo`, `itc_name`, `itc_no`, `store`)
+VALUES
+	(60, 1, 5220, 543, 52, 189, 784, 0, 'RC151229SN', 26, '2017-01-04 15:18:05', '2017-01-04 15:18:05', '', 'メモ内容', 'C-CUIWENZHE(砂糖)', '12065', 'Fujinoeki');
+
+INSERT INTO `shop_shop` (`id`, `user_id`, `sales`, `agency1_com`, `agency2_com`, `agency3_com`, `total`, `sp_cost`, `tour_code`, `people`, `created_at`, `updated_at`, `picture`, `memo`, `itc_name`, `itc_no`, `store`)
+VALUES
+	(61, 1, 52200, 5430, 520, 1890, 7840, 0, 'RC151229SN', 26, '2017-01-04 15:18:05', '2017-01-04 15:18:05', '', 'メモ内容', 'C-CUIWENZHE(砂糖)', '12065', 'Joy1Osaka');
+
+
+INSERT INTO `shop_shop` (`id`, `user_id`, `sales`, `agency1_com`, `agency2_com`, `agency3_com`, `total`, `sp_cost`, `tour_code`, `people`, `created_at`, `updated_at`, `picture`, `memo`, `itc_name`, `itc_no`, `store`)
+VALUES
+	(64, 1, 999999999, 99999, 99999, 9999, 9999, 0, 'RC151229SN', 26, '2017-01-04 15:18:05', '2017-01-04 15:18:05', '', 'メモ内容', 'C-CUIWENZHE(砂糖)', '12065', 'Fujinoeki');
