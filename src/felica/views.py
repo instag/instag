@@ -1,38 +1,17 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from braces.views import LoginRequiredMixin
-from django.contrib import messages
-from django.shortcuts import redirect
-from django.views import generic
-from instagram_url.models import InstagramPlayer, InstagramPlayerMedia
-
-from . import forms
-from .models import Shop
-
 import sys
+
 from common import template_text as T
-from django.http import HttpResponse
-from django.http import HttpResponse
 from django.views import generic
 from instagram import client
-from snscom import utils as snscom_utils
-from django.core.cache import caches
-from instagram_url.models import InstagramPlayerMedia
-from django.template import RequestContext
-from django.shortcuts import render_to_response
-from django.views.decorators.csrf import csrf_protect
+
 reload(sys)
 sys.setdefaultencoding("utf-8")
-import json
-import logging
 
 CONFIG = T.CONFIG
 unauthenticated_api = client.InstagramAPI(**CONFIG)
-
-
-
-
 
 class Felica(generic.TemplateView):
 
