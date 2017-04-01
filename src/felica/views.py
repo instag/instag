@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+from braces.views import LoginRequiredMixin
 import sys
-
+from django.shortcuts import render, redirect, get_object_or_404
 from common import template_text as T
 from django.views import generic
 from instagram import client
+from profile import Profile
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
 
 reload(sys)
 sys.setdefaultencoding("utf-8")
@@ -16,69 +20,38 @@ unauthenticated_api = client.InstagramAPI(**CONFIG)
 class Felica(generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
-        print "felica.....1"
-
-        print request
-        print request.GET
-        print args
-        print kwargs
-
-        # response = HttpResponse(json.dumps({'test':'test_value'}), content_type="application/json", status=200)
-        # response['Access-Control-Allow-Origin'] = '*'
-        # response['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-
-        # return response.GET
-        # return response.POST
+        print "felica.....11111"
+        # 가게의 마스터 데이터가 있는지 확인
+        print request.GET['company_name']
+        master_user = User.objects.get(name=request.GET['company_name'])
+        if master_user:
+            print 44
 
     def post(self, request, *args, **kwargs):
         print "felica...2"
         # return HttpResponse("ok")
-#
-# class ShowShop(LoginRequiredMixin, generic.TemplateView):
-#     template_name = "shop/shop_show.html"
-#     http_method_names = ['get']
-#
-#     def get(self, request, *args, **kwargs):
-#         user = self.request.user
-#         instagram_player = InstagramPlayer.get_instagram_play(user_site_id=user.id)
-#         shop = Shop.objects.get_or_create(user=instagram_player)
-#         insta_user_media = InstagramPlayerMedia.get_player_media_list(instagram_player)
-#
-#         kwargs["shop"] = shop[0]
-#         if instagram_player:
-#             kwargs["profile_picture"] = instagram_player.profile_picture
-#         kwargs["media"] = insta_user_media
-#
-#         return super(ShowShop, self).get(request, *args, **kwargs)
-#
-#
-# class EditShop(LoginRequiredMixin, generic.TemplateView):
-#
-#     template_name = "shop/shop_edit.html"
-#     http_method_names = ['get', 'post']
-#
-#     def get(self, request, *args, **kwargs):
-#         user = self.request.user
-#         instagram_player = InstagramPlayer.objects.get(user_site_id=user.id)
-#         shop = Shop.objects.get(user=instagram_player)
-#
-#         if "shop_form" not in kwargs:
-#             kwargs["shop_form"] = forms.ShopForm(instance=shop)
-#
-#         kwargs["profile_picture"] = instagram_player.profile_picture
-#         return super(EditShop, self).get(request, *args, **kwargs)
-#
-#
-#     def post(self, request, *args, **kwargs):
-#         user = self.request.user
-#
-#         shop_title = request.POST['shop_title']
-#         shop_description = request.POST['shop_description']
-#
-#         result = Shop.get_or_create(user.id)
-#         result.shop_title = shop_title
-#         result.shop_description = shop_description
-#         result.save()
-#
-#         messages.success(request, " details saved!")
-#         return redirect("shop:show_self")
+
+
+
+class FelicaMemberList(LoginRequiredMixin, generic.TemplateView):
+    template_name = "felica/felica_member_list.html"
+    http_method_names = ['get']
+
+    def get(self, request, *args, **kwargs):
+        print 1111111
+
+        # if request.GET.get('bdaymonth'):
+        #     tstr_start = request.GET.get('bdaymonth') + '-01 00:00:00'
+        #     tdatetime_start = dt.strptime(tstr_start, '%Y-%m-%d %H:%M:%S')
+        #     tdatetime_end = dt.strptime(str(last_day_of_month(datetime.date(tdatetime_start.year, tdatetime_start.month, 1))) + ' 23:59:59', '%Y-%m-%d %H:%M:%S')
+        #     result_shop = Shop.get_shop_by_user(self.request.user, tdatetime_start, tdatetime_end)
+        #     kwargs["shop_list"] = paginator_list(result_shop, request.GET.get('page', 1), T.PAGE_COUNT)
+        # else:
+        #     result_shop = Shop.get_shop_by_user(self.request.user)
+        #     kwargs["shop_list"] = paginator_list(result_shop, request.GET.get('page', 1), T.PAGE_COUNT)
+
+        # kwargs["sales"], kwargs["a1"], kwargs["a2"], kwargs["a3"] = Shop.get_total_list(result_shop)
+        # return super(FelicaMemberList, self).get(request, *args, **kwargs)
+        return render(request, 'felica/felica_member_list.html', {'articles': ''})
+
+

@@ -84,6 +84,7 @@ INSTALLED_APPS = (
     'common',
     'shop',
     'snscom',
+    'felica',
 )
 
 

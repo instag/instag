@@ -21,8 +21,18 @@ class BaseProfile(models.Model):
     class Meta:
         abstract = True
 
+    @classmethod
+    def get_profile(cls, company_name):
+        print 888888
+        return cls.objects.get(bio=company_name)
+
 
 @python_2_unicode_compatible
 class Profile(BaseProfile):
     def __str__(self):
         return "{}'s profile". format(self.user)
+
+    @classmethod
+    def get_profile(cls, company_name):
+        print 888888
+        return cls.objects.get(bio=company_name)
