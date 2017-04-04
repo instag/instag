@@ -8,58 +8,90 @@
 {% block navbar-left %}
   {% include "_navbar.html" with active_link="about" %}
 {% endblock %}
-
+<style type="text/css">
+    .bs-example{
+    	margin: 20px;
+    }
+</style>
 
 {% block container %}
 <div class="container profile-head">
   <div class="row">
+
+      <div class="col-sm-12">
+        <p>
+        <!--<form action="{% url 'shop:show_self' %}">-->
+        <!--<input type="month" name="bdaymonth" /> <input type="submit" class="btn btn-info">-->
+        <!--</form>-->
+        </p>
+      </div>
     <div class="col-sm-10">
         <h1>{{shop.shop_title}}</h1>
         <p class="lead">{{shop.shop_description}}</p>
     </div>
-    <div class="col-sm-2"><img title="profile picture" class="img-circle img-responsive" src="{{profile_picture}}">
     </div>
   </div>
 </div>
-
 <div class="container profile-body">
+
   <div class="row">
-    <div class="col-sm-4">
-      <ul class="list-group">
-        <li class="list-group-item text-muted">Profile</li>
-        <li class="list-group-item text-right"><span class="pull-left"><strong>Email:</strong></span> {{ show_user.email|default:"missing" }}
-        {% if show_user.profile.email_verified %}
-          <span class="glyphicon glyphicon-ok-circle" aria-hidden="true" title="This email address has been verified"></span>
-          <span class="sr-only">Verified</span>
-        {% else %}
-          <span class="glyphicon glyphicon-warning-sign" aria-hidden="true" title="This email address is not verified"></span>
-          <span class="sr-only">Not Verified</span>
+    <div class="bs-example">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>STORE</th>
+                    <th>CO.</th>
+                    <th>People</th>
+                    <th>Guide</th>
+                    <th>Total</th>
+                    <th>Comm</th>
+                    <th>Co.(cm)</th>
+                    <th>Guide(cm)</th>
+                    <th>T/C(cm)</th>
+                    <th>Guide(bo)</th>
+                    <th>Co.(bo)</th>
+                    <th>Drink</th>
+                    <th>Guide(pa)</th>
+                    <th>Co.(pa)</th>
+                    <th>ETC</th>
+
+                </tr>
+            </thead>
+          <tbody>
+                {% for m in member_list %}
+                <tr>
+                    <td>{{m.company_name}}</td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if shop_list.has_other_pages %}
+          <ul class="pagination">
+            {% if shop_list.has_previous %}
+              <li><a href="?page={{ shop_list.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+              <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in shop_list.paginator.page_range %}
+              {% if shop_list.number == i %}
+                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+              {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if shop_list.has_next %}
+              <li><a href="?page={{ shop_list.next_page_number }}">&raquo;</a></li>
+            {% else %}
+              <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+          </ul>
         {% endif %}
-	    </li>
-
-        <li class="list-group-item text-right"><span class="pull-left"><strong>Joined</strong></span> {{ show_user.date_joined }}</li>
-        <li class="list-group-item text-right"><span class="pull-left"><strong>Last seen</strong></span> {{ show_user.last_login }}</li>
-      </ul>
     </div>
-    <div class="col-sm-8">
-      <div class="panel panel-default">
-        <div class="panel-heading">{{ user.name }}님의 샵
-	    <a href="">
-	    <span class="glyphicon glyphicon-link" aria-hidden="true" title="Profile permalink"></span>
-	    <span class="sr-only">Permalink</span></a> {{ show_user.profile.get_absolute_url }}
-	  </div>
-
-        <div class="panel-body">
-        {% for m in media %}
-          <img src="{{ m.standard_resolution_url }}" width="200" height="200">
-        {% empty %}
-        <p>There're no images to display.</p>
-        {% endfor %}
-	    </div>
-    </div>
-  </div>
   </div>
 </div>
+
 
 {% endblock %}
 
