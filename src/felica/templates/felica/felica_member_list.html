@@ -39,30 +39,21 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>STORE</th>
-                    <th>CO.</th>
-                    <th>People</th>
-                    <th>Guide</th>
-                    <th>Total</th>
-                    <th>Comm</th>
-                    <th>Co.(cm)</th>
-                    <th>Guide(cm)</th>
-                    <th>T/C(cm)</th>
-                    <th>Guide(bo)</th>
-                    <th>Co.(bo)</th>
-                    <th>Drink</th>
-                    <th>Guide(pa)</th>
-                    <th>Co.(pa)</th>
-                    <th>ETC</th>
-
+                    <th>company_name</th>
+                    <th>member_name</th>
+                    <th>felica_id</th>
+                    <th>created_at</th>
+                    <th>updated_at</th>
                 </tr>
             </thead>
           <tbody>
                 {% for m in member_list %}
                 <tr>
-                    <td>{{m.company_name}}</td>
-
+                    <td><a href="{% url 'felica:felica_member_edit' m.id %}" role="button">{{m.company_name}}</a></td>
+                    <td>{{m.member_name}}</td>
+                    <td>{{m.felica_id}}</td>
+                    <td>{{m.created_at}}</td>
+                    <td>{{m.updated_at}}</td>
                 </tr>
                 {% endfor %}
             </tbody>

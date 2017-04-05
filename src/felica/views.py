@@ -8,6 +8,9 @@ from django.views import generic
 from instagram import client
 from profile import Profile
 from .models import FelicaMember
+from . import forms
+from django.contrib import messages
+from django.shortcuts import redirect
 
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -23,13 +26,11 @@ class Felica(generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
         print "felica.....11111"
-
         # 가게의 마스터 데이터가 있는지 확인
         print request.GET['company_name']
         master_user = User.objects.get(name=request.GET['company_name'])
         if master_user:
             # 직원데이터 생성 및 취득
-            print 44
             FelicaMember.get_or_create_member(master_user,
                                             master_user.name,
                                             request.GET['company_name'])
@@ -40,13 +41,35 @@ class Felica(generic.TemplateView):
 
 
 
+class FelicaMemberEdit(LoginRequiredMixin, generic.TemplateView):
+
+    template_name = "felica/felica_member_edit.html"
+    http_method_names = ['get', 'post']
+
+    def get(self, request, *args, **kwargs):
+        print "edit...felica.get"
+        user = self.request.user
+
+        print kwargs
+        print user.id
+        felica_member = FelicaMember.objects.get(id=kwargs['id'], master_user=user.id)
+        kwargs["felica_member_form"] = forms.FelicaMemberForm(instance=felica_member)
+        return super(FelicaMemberEdit, self).get(request, *args, **kwargs)
+
+
+    def post(self, request, *args, **kwargs):
+        print "edit...felica.post"
+        user = self.request.user
+        result = FelicaMember.update(user.id, request.POST, kwargs['id'])
+        messages.success(request, " details saved!")
+        return redirect("felica:felica_member_list")
+
+
 class FelicaMemberList(LoginRequiredMixin, generic.TemplateView):
     template_name = "felica/felica_member_list.html"
     http_method_names = ['get']
 
     def get(self, request, *args, **kwargs):
-        print 1111111
-
         # if request.GET.get('bdaymonth'):
         #     tstr_start = request.GET.get('bdaymonth') + '-01 00:00:00'
         #     tdatetime_start = dt.strptime(tstr_start, '%Y-%m-%d %H:%M:%S')
