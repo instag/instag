@@ -27,13 +27,20 @@ class Felica(generic.TemplateView):
     def get(self, request, *args, **kwargs):
         print "felica.....11111"
         # 가게의 마스터 데이터가 있는지 확인
-        print request.GET['company_name']
         master_user = User.objects.get(name=request.GET['company_name'])
+
+        print master_user.name
+        print request.GET['felica_id']
+
         if master_user:
             # 직원데이터 생성 및 취득
-            FelicaMember.get_or_create_member(master_user,
-                                            master_user.name,
-                                            request.GET['company_name'])
+            fm = FelicaMember.get_or_create_member(master_user,
+                                                   master_user.name,
+                                                   request.GET['felica_id'])
+
+            print 2222222
+            print fm
+
 
     def post(self, request, *args, **kwargs):
         print "felica...2"

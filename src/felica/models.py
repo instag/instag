@@ -36,9 +36,9 @@ class FelicaMember(models.Model):
     직원정보
     """
     id = models.AutoField(primary_key=True)
-    master_user = models.OneToOneField(settings.AUTH_USER_MODEL)
+    master_user = models.ForeignKey(settings.AUTH_USER_MODEL)
     company_name = models.CharField(u'会社名', max_length=200, blank=True, null=True)
-    member_name = models.CharField(u'member_name', max_length=200, blank=True, null=True)
+    member_name = models.CharField(u'member_name', max_length=200, blank=True, null=True, default='')
     felica_id = models.CharField(u'member_name', max_length=200, blank=True, null=True)
     created_at = models.DateTimeField(u'作成日時', auto_now_add=True)
     updated_at = models.DateTimeField(u'更新日時', auto_now=True)
@@ -48,8 +48,17 @@ class FelicaMember(models.Model):
         """
         직원 정보 취득 없으면 생성
         """
-        result, is_new = cls.objects.get_or_create(master_user=master_user, company_name=company_name, felica_id=felica_id)
-        # result.save()
+        print "099999999"
+        print master_user
+        print company_name
+        print felica_id
+
+        try:
+            result, is_new = FelicaMember.objects.get_or_create(master_user=master_user, company_name=company_name, felica_id=felica_id)
+        except Exception as e:
+            print e
+
+        return result
 
     @classmethod
     def get_member_list(cls, master_user):
