@@ -7,7 +7,7 @@ from common import template_text as T
 from django.views import generic
 from instagram import client
 from profile import Profile
-from .models import FelicaMember
+from .models import FelicaMember, FelicaTime
 from . import forms
 from django.contrib import messages
 from django.shortcuts import redirect
@@ -29,17 +29,28 @@ class Felica(generic.TemplateView):
         # 가게의 마스터 데이터가 있는지 확인
         master_user = User.objects.get(name=request.GET['company_name'])
 
-        print master_user.name
-        print request.GET['felica_id']
-
         if master_user:
             # 직원데이터 생성 및 취득
             fm = FelicaMember.get_or_create_member(master_user,
                                                    master_user.name,
                                                    request.GET['felica_id'])
 
-            print 2222222
-            print fm
+
+            # 퇴근 기록
+            fswt = FelicaTime.set_work_time(master_user,
+                                            master_user.name,
+                                            request.GET['felica_id'])
+
+
+
+            # # 출퇴근 기록
+            # ft = FelicaTime.set_work_time(master_user,
+            #                                 master_user.name,
+            #                                 request.GET['felica_id'])
+
+
+            # print 2222222
+            # print fm
 
 
     def post(self, request, *args, **kwargs):
