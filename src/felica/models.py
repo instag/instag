@@ -70,10 +70,6 @@ class FelicaTime(models.Model):
 
     @classmethod
     def get_work_time_list(cls, wtm_start, wtm_end):
-
-        print wtm_start
-        print wtm_end
-
         return cls.objects.filter(work_start__gt=wtm_start, work_end__lt=wtm_end)
 
     @classmethod

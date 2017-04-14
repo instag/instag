@@ -71,9 +71,9 @@ class FelicaWorkTime(LoginRequiredMixin, generic.TemplateView):
     template_name = "felica/felica_work_time.html"
     http_method_names = ['get']
 
-
     def get(self, request, *args, **kwargs):
 
+        print request.GET
         if request.GET.get('bdaymonth'):
 
             from datetime import datetime as dt
@@ -85,9 +85,11 @@ class FelicaWorkTime(LoginRequiredMixin, generic.TemplateView):
             wtm_end = dt.strptime('%s-%s 23:59:59' % (request.GET.get('bdaymonth'), str(total_days)), '%Y-%m-%d %H:%M:%S')
 
             return render(request, 'felica/felica_work_time.html',
-                          {'work_time': FelicaTime.get_work_time_list(wtm_start, wtm_end)})
+                          {'work_time': FelicaTime.get_work_time_list(wtm_start, wtm_end),
+                           'member_list': FelicaMember.get_member_list(self.request.user)})
 
-        return render(request, 'felica/felica_work_time.html', {'work_time': FelicaTime.get_all()})
+        return render(request, 'felica/felica_work_time.html', {'work_time': FelicaTime.get_all(),
+                                                                'member_list': FelicaMember.get_member_list(self.request.user)})
 
 
 class FelicaMemberList(LoginRequiredMixin, generic.TemplateView):

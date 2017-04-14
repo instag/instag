@@ -17,18 +17,24 @@
 {% block container %}
 <div class="container profile-head">
   <div class="row">
-
       <div class="col-sm-12">
         <p>
         <form action="{% url 'felica:felica_work_time' %}">
         <input type="month" name="bdaymonth" /> <input type="submit" class="btn btn-info">
+
+        <select id="org" name="select_member" onChange="redirectUrl()">
+          <option  value="" selected="selected">---멤버 선택---</option>
+          {% for w in member_list %}
+           <option value="{{w.id}}" >{{w.member_name|capfirst}}</option>
+          {% endfor %}
+        </select>
+
         </form>
         </p>
+
+
+
       </div>
-    <div class="col-sm-10">
-        <h1>{{shop.shop_title}}</h1>
-        <p class="lead">{{shop.shop_description}}</p>
-    </div>
     </div>
   </div>
 </div>
