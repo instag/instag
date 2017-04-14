@@ -35,22 +35,10 @@ class Felica(generic.TemplateView):
                                                    master_user.name,
                                                    request.GET['felica_id'])
 
-
             # 퇴근 기록
             fswt = FelicaTime.set_work_time(master_user,
                                             master_user.name,
                                             request.GET['felica_id'])
-
-
-
-            # # 출퇴근 기록
-            # ft = FelicaTime.set_work_time(master_user,
-            #                                 master_user.name,
-            #                                 request.GET['felica_id'])
-
-
-            # print 2222222
-            # print fm
 
 
     def post(self, request, *args, **kwargs):
@@ -67,13 +55,9 @@ class FelicaMemberEdit(LoginRequiredMixin, generic.TemplateView):
     def get(self, request, *args, **kwargs):
         print "edit...felica.get"
         user = self.request.user
-
-        print kwargs
-        print user.id
         felica_member = FelicaMember.objects.get(id=kwargs['id'], master_user=user.id)
         kwargs["felica_member_form"] = forms.FelicaMemberForm(instance=felica_member)
         return super(FelicaMemberEdit, self).get(request, *args, **kwargs)
-
 
     def post(self, request, *args, **kwargs):
         print "edit...felica.post"
@@ -83,30 +67,34 @@ class FelicaMemberEdit(LoginRequiredMixin, generic.TemplateView):
         return redirect("felica:felica_member_list")
 
 
+class FelicaWorkTime(LoginRequiredMixin, generic.TemplateView):
+    template_name = "felica/felica_work_time.html"
+    http_method_names = ['get']
+
+
+    def get(self, request, *args, **kwargs):
+
+        if request.GET.get('bdaymonth'):
+
+            from datetime import datetime as dt
+            import calendar
+            wtm_start = dt.strptime('%s-01 00:00:00' % request.GET.get('bdaymonth'), '%Y-%m-%d %H:%M:%S')
+
+            # 월별 총 일수
+            total_days = calendar.monthrange(wtm_start.year,wtm_start.month)[1]
+            wtm_end = dt.strptime('%s-%s 23:59:59' % (request.GET.get('bdaymonth'), str(total_days)), '%Y-%m-%d %H:%M:%S')
+
+            return render(request, 'felica/felica_work_time.html',
+                          {'work_time': FelicaTime.get_work_time_list(wtm_start, wtm_end)})
+
+        return render(request, 'felica/felica_work_time.html', {'work_time': FelicaTime.get_all()})
+
+
 class FelicaMemberList(LoginRequiredMixin, generic.TemplateView):
     template_name = "felica/felica_member_list.html"
     http_method_names = ['get']
 
     def get(self, request, *args, **kwargs):
-        # if request.GET.get('bdaymonth'):
-        #     tstr_start = request.GET.get('bdaymonth') + '-01 00:00:00'
-        #     tdatetime_start = dt.strptime(tstr_start, '%Y-%m-%d %H:%M:%S')
-        #     tdatetime_end = dt.strptime(str(last_day_of_month(datetime.date(tdatetime_start.year, tdatetime_start.month, 1))) + ' 23:59:59', '%Y-%m-%d %H:%M:%S')
-        #     result_shop = Shop.get_shop_by_user(self.request.user, tdatetime_start, tdatetime_end)
-        #     kwargs["shop_list"] = paginator_list(result_shop, request.GET.get('page', 1), T.PAGE_COUNT)
-        # else:
-        #     result_shop = Shop.get_shop_by_user(self.request.user)
-        #     kwargs["shop_list"] = paginator_list(result_shop, request.GET.get('page', 1), T.PAGE_COUNT)
-
-        print FelicaMember.get_member_list(self.request.user)
-
-        # FelicaMember.get_or_create_member(master_user,
-        #                                     master_user.name,
-        #                                     request.GET['company_name'])
-
-
-        # kwargs["sales"], kwargs["a1"], kwargs["a2"], kwargs["a3"] = Shop.get_total_list(result_shop)
-        # return super(FelicaMemberList, self).get(request, *args, **kwargs)
         return render(request, 'felica/felica_member_list.html', {'member_list': FelicaMember.get_member_list(self.request.user)})
 
 

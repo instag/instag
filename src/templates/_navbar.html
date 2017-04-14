@@ -2,4 +2,5 @@
 <li {% if active_link == "about" %}class="active"{% endif %}><a href="{% url 'about' %}">About</a></li>
 {% if user.profile %}
 <li><a href="{% url 'felica:felica_member_list' %}">Member</a></li>
+<li><a href="{% url 'felica:felica_work_time' %}">work time</a></li>
 {% endif %}

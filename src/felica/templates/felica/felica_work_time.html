@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block title %}{{ block.super }}SHOP{% endblock %}
+
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="about" %}
+{% endblock %}
+<style type="text/css">
+    .bs-example{
+    	margin: 20px;
+    }
+</style>
+
+{% block container %}
+<div class="container profile-head">
+  <div class="row">
+
+      <div class="col-sm-12">
+        <p>
+        <form action="{% url 'felica:felica_work_time' %}">
+        <input type="month" name="bdaymonth" /> <input type="submit" class="btn btn-info">
+        </form>
+        </p>
+      </div>
+    <div class="col-sm-10">
+        <h1>{{shop.shop_title}}</h1>
+        <p class="lead">{{shop.shop_description}}</p>
+    </div>
+    </div>
+  </div>
+</div>
+<div class="container profile-body">
+
+  <div class="row">
+    <div class="bs-example">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>company_name</th>
+                    <th>member_name</th>
+                    <th>felica_id</th>
+                    <th>work_start</th>
+                    <th>work_end</th>
+                </tr>
+            </thead>
+          <tbody>
+                {% for m in work_time %}
+                <tr>
+                    <td><a href="{% url 'felica:felica_member_edit' m.id %}" role="button">{{m.company_name}}</a></td>
+                    <td>{{m.member_name}}</td>
+                    <td>{{m.felica_id}}</td>
+                    <td>{{m.work_start}}</td>
+                    <td>{{m.work_end}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if shop_list.has_other_pages %}
+          <ul class="pagination">
+            {% if shop_list.has_previous %}
+              <li><a href="?page={{ shop_list.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+              <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in shop_list.paginator.page_range %}
+              {% if shop_list.number == i %}
+                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+              {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if shop_list.has_next %}
+              <li><a href="?page={{ shop_list.next_page_number }}">&raquo;</a></li>
+            {% else %}
+              <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+          </ul>
+        {% endif %}
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
+
+

@@ -12,21 +12,34 @@ class FelicaTime(models.Model):
     master_user = models.ForeignKey(settings.AUTH_USER_MODEL)
     company_name = models.CharField(u'会社名', max_length=200, blank=True, null=True)
     member_name = models.CharField(u'会社名', max_length=200, blank=True, null=True)
+    work_time_key = models.CharField(u'work_time_key', max_length=100, blank=True, null=True)
     work_start = models.DateTimeField(u'work_start', null=True)
     work_end = models.DateTimeField(u'work_end', null=True)
     felica_id = models.CharField(u'felica_id', max_length=200, blank=True, null=True)
     created_at = models.DateTimeField(u'作成日時', auto_now_add=True)
     updated_at = models.DateTimeField(u'更新日時', auto_now=True)
 
-
-
     @classmethod
     def set_work_time(cls, master_user, company_name, felica_id):
         """
         출퇴근 기록
         """
-        print 3444444
+        todaydetail = datetime.datetime.today()
+        work_time_key = str(todaydetail.year) + str(todaydetail.month) + str(todaydetail.day) + str(todaydetail.hour) + str(todaydetail.minute)
         work_record = None
+        one_minuts_check = None
+
+        # 1분이내의 여러번 출퇴근을 금지하기 위해서 1분동안은 똑같은 레코드는 생성하지 않음
+        try:
+            one_minuts_check = cls.objects.get(master_user=master_user,
+                                               company_name=company_name,
+                                               work_time_key=work_time_key,
+                                               felica_id=felica_id)
+        except Exception as e:
+            print e
+
+        if not one_minuts_check is None: return None
+        print "true...."
         try:
             # 퇴근 기록이 없는 레코드가 존재한다면 퇴근을 기록
             work_record = cls.objects.get(master_user=master_user,
@@ -35,55 +48,33 @@ class FelicaTime(models.Model):
                                      work_end=None)
         except Exception as e:
             print e
-            pass
 
-        print 6666
+
         # 퇴근기록 경우
         if work_record:
-            print 111
             work_record.work_end = datetime.datetime.now()
             work_record.save()
         else:
-            print 222
             result, is_new = cls.objects.get_or_create(master_user=master_user,
                                                        company_name=company_name,
+                                                       work_time_key=work_time_key,
                                                        felica_id=felica_id)
 
             # 출근 기록
             if is_new:
-                print 33
+                result.work_time_key = work_time_key
                 result.work_start = datetime.datetime.now()
                 result.save()
 
         return result
 
+    @classmethod
+    def get_work_time_list(cls, wtm_start, wtm_end):
 
-    # @classmethod
-    # def set_work_time(cls, master_user, company_name, felica_id):
-    #     """
-    #     출퇴근 기록
-    #     """
-    #     try:
-    #         result, is_new = cls.objects.get_or_create(master_user=master_user,
-    #                                                    company_name=company_name,
-    #                                                    felica_id=felica_id)
-    #     except Exception as e:
-    #         print e
-    #
-    #
-    #     print 11111
-    #     # 출근 기록
-    #     if is_new:
-    #         result.work_start = datetime.datetime.now()
-    #         result.save()
-    #
-    #     # 퇴근 기록
-    #     else:
-    #         result.work_end = datetime.datetime.now()
-    #         result.save()
-    #
-    #     return result
+        print wtm_start
+        print wtm_end
 
+        return cls.objects.filter(work_start__gt=wtm_start, work_end__lt=wtm_end)
 
     @classmethod
     def get_all(cls):
