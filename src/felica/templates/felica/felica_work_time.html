@@ -25,7 +25,7 @@
         <select id="org" name="select_member" onChange="redirectUrl()">
           <option  value="" selected="selected">---멤버 선택---</option>
           {% for w in member_list %}
-           <option value="{{w.id}}" >{{w.member_name|capfirst}}</option>
+           <option value="{{w.felica_id}}" >{{w.member_name|capfirst}}</option>
           {% endfor %}
         </select>
 
@@ -50,6 +50,7 @@
                     <th>felica_id</th>
                     <th>work_start</th>
                     <th>work_end</th>
+                    <th>work_time_total</th>
                 </tr>
             </thead>
           <tbody>
@@ -57,9 +58,12 @@
                 <tr>
                     <td><a href="{% url 'felica:felica_member_edit' m.id %}" role="button">{{m.company_name}}</a></td>
                     <td>{{m.member_name}}</td>
+
                     <td>{{m.felica_id}}</td>
-                    <td>{{m.work_start}}</td>
-                    <td>{{m.work_end}}</td>
+                    <td>{{m.work_start|date:'Y-m-d H:i'}}</td>
+                    <td>{{m.work_end|date:'Y-m-d H:i'}}</td>
+                    <td>
+                        {% if m.work_time_hour %} {{m.work_time_hour}}시간 {% endif %}{{m.work_time_minute}}분</td>
                 </tr>
                 {% endfor %}
             </tbody>
