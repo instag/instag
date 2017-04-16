@@ -15,9 +15,10 @@ class FelicaMemberForm(forms.ModelForm):
         self.helper.layout = Layout(
             Field('company_name'),
             Field('member_name'),
+            Field('hour_price'),
             Submit('update', 'Update', css_class="btn-success"),
             )
 
     class Meta:
         model = models.FelicaMember
-        fields = ['company_name', 'member_name']
+        fields = ['company_name', 'member_name', 'hour_price']

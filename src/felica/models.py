@@ -107,6 +107,7 @@ class FelicaMember(models.Model):
     company_name = models.CharField(u'会社名', max_length=200, blank=True, null=True)
     member_name = models.CharField(u'member_name', max_length=200, blank=True, null=True, default='')
     felica_id = models.CharField(u'member_name', max_length=200, blank=True, null=True)
+    hour_price = models.IntegerField(u'hour_price', null=True)
     created_at = models.DateTimeField(u'作成日時', auto_now_add=True)
     updated_at = models.DateTimeField(u'更新日時', auto_now=True)
 
@@ -135,5 +136,6 @@ class FelicaMember(models.Model):
         result = cls.objects.get(id=id, master_user=user_id)
         result.company_name = post_data['company_name']
         result.member_name = post_data['member_name']
+        result.hour_price = post_data['hour_price']
         result.save()
         return result

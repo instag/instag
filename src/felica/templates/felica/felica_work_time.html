@@ -32,8 +32,6 @@
         </form>
         </p>
 
-
-
       </div>
     </div>
   </div>
@@ -45,12 +43,12 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>company_name</th>
-                    <th>member_name</th>
+                    <th>회사이름</th>
+                    <th>이름</th>
                     <th>felica_id</th>
-                    <th>work_start</th>
-                    <th>work_end</th>
-                    <th>work_time_total</th>
+                    <th>출근</th>
+                    <th>퇴근</th>
+                    <th>총 근무시간</th>
                 </tr>
             </thead>
           <tbody>
@@ -68,22 +66,22 @@
                 {% endfor %}
             </tbody>
         </table>
-        {% if shop_list.has_other_pages %}
+        {% if work_time.has_other_pages %}
           <ul class="pagination">
-            {% if shop_list.has_previous %}
-              <li><a href="?page={{ shop_list.previous_page_number }}">&laquo;</a></li>
+            {% if work_time.has_previous %}
+              <li><a href="?page={{ work_time.previous_page_number }}">&laquo;</a></li>
             {% else %}
               <li class="disabled"><span>&laquo;</span></li>
             {% endif %}
-            {% for i in shop_list.paginator.page_range %}
-              {% if shop_list.number == i %}
+            {% for i in work_time.paginator.page_range %}
+              {% if work_time.number == i %}
                 <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
               {% else %}
                 <li><a href="?page={{ i }}">{{ i }}</a></li>
               {% endif %}
             {% endfor %}
-            {% if shop_list.has_next %}
-              <li><a href="?page={{ shop_list.next_page_number }}">&raquo;</a></li>
+            {% if work_time.has_next %}
+              <li><a href="?page={{ work_time.next_page_number }}">&raquo;</a></li>
             {% else %}
               <li class="disabled"><span>&raquo;</span></li>
             {% endif %}

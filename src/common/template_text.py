@@ -6,6 +6,8 @@ from .hostname import HOSTNAME
 
 WISHTAG = 'wishtag'
 
+PAGE_COUNT = 35
+
 if HOSTNAME.startswith('wishtag.net'):
     CONFIG = {
         'client_id': '3dc77d748ec9434fba8d92569824b5ea',

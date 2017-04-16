@@ -11,6 +11,8 @@ from .models import FelicaMember, FelicaTime
 from . import forms
 from django.contrib import messages
 from django.shortcuts import redirect
+from .utils import paginator_list
+from common import template_text as T
 
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -84,11 +86,16 @@ class FelicaWorkTime(LoginRequiredMixin, generic.TemplateView):
             total_days = calendar.monthrange(wtm_start.year,wtm_start.month)[1]
             wtm_end = dt.strptime('%s-%s 23:59:59' % (request.GET.get('bdaymonth'), str(total_days)), '%Y-%m-%d %H:%M:%S')
 
+            work_time = paginator_list(FelicaTime.get_work_time_list(wtm_start, wtm_end, request.GET.get('select_member')),request.GET.get('page', 1),T.PAGE_COUNT)
+
             return render(request, 'felica/felica_work_time.html',
-                          {'work_time': FelicaTime.get_work_time_list(wtm_start, wtm_end, request.GET.get('select_member')),
+                          {'work_time': work_time,
                            'member_list': FelicaMember.get_member_list(self.request.user)})
 
-        return render(request, 'felica/felica_work_time.html', {'work_time': FelicaTime.get_all(),
+
+
+        work_time = paginator_list(FelicaTime.get_all(), request.GET.get('page', 1), T.PAGE_COUNT)
+        return render(request, 'felica/felica_work_time.html', {'work_time': work_time,
                                                                 'member_list': FelicaMember.get_member_list(self.request.user)})
 
 class FelicaMemberList(LoginRequiredMixin, generic.TemplateView):
