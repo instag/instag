@@ -19,18 +19,25 @@
   <div class="row">
       <div class="col-sm-12">
         <p>
-        <form action="{% url 'felica:felica_work_time' %}">
-        <input type="month" name="bdaymonth" /> <input type="submit" class="btn btn-info">
-
-        <select id="org" name="select_member" onChange="redirectUrl()">
-          <option  value="" selected="selected">---멤버 선택---</option>
-          {% for w in member_list %}
-           <option value="{{w.felica_id}}" >{{w.member_name|capfirst}}</option>
-          {% endfor %}
-        </select>
-
-        </form>
+            <h2>
+             {% if member %}
+              {{member.member_name}} &nbsp;&nbsp;&nbsp;
+              시급:{{member.hour_price}}&nbsp;&nbsp;&nbsp;
+              {{month}}&nbsp;월근무시간:{{f_total_hour}}시간&nbsp;&nbsp;{{f_total_minute}}분
+             {% endif %}
+            </h2>
+            <form action="{% url 'felica:felica_work_time' %}">
+            <input type="month" name="bdaymonth" /> <input type="submit" class="btn btn-info">
+            <select id="org" name="select_member_felica_id" onChange="redirectUrl()">
+              <option  value="" selected="selected">---멤버 선택---</option>
+              {% for w in member_list %}
+               <option value="{{w.felica_id}}" >{{w.member_name|capfirst}}</option>
+              {% endfor %}
+            </select>
+            </form>
         </p>
+
+
 
       </div>
     </div>
@@ -49,6 +56,7 @@
                     <th>출근</th>
                     <th>퇴근</th>
                     <th>총 근무시간</th>
+                    <th>지급액</th>
                 </tr>
             </thead>
           <tbody>
@@ -61,7 +69,10 @@
                     <td>{{m.work_start|date:'Y-m-d H:i'}}</td>
                     <td>{{m.work_end|date:'Y-m-d H:i'}}</td>
                     <td>
-                        {% if m.work_time_hour %} {{m.work_time_hour}}시간 {% endif %}{{m.work_time_minute}}분</td>
+                        {% if m.work_time_hour %} {{m.work_time_hour}}시간 {% endif %}
+                        {% if m.work_time_minute %} {{m.work_time_minute}}분{% endif %}
+                    </td>
+                    <td>{{m.work_end|date:'Y-m-d H:i'}}</td>
                 </tr>
                 {% endfor %}
             </tbody>

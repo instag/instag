@@ -77,7 +77,6 @@ class FelicaTime(models.Model):
 
             # 출근 기록
             if is_new:
-
                 result.work_time_key = work_time_key
                 result.work_start = todaydetail
                 result.save()
@@ -125,6 +124,15 @@ class FelicaMember(models.Model):
             print e
 
         return result
+
+
+    @classmethod
+    def get_member(cls, master_user, felica_id):
+        """
+        직원 정보 취득
+        """
+        return cls.objects.get(master_user=master_user,
+                               felica_id=felica_id)
 
     @classmethod
     def get_member_list(cls, master_user):

@@ -13,6 +13,9 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from .utils import paginator_list
 from common import template_text as T
+from datetime import datetime as dt
+import calendar
+from django.db.models import Sum
 
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -76,20 +79,33 @@ class FelicaWorkTime(LoginRequiredMixin, generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
 
-        if request.GET.get('bdaymonth') and request.GET.get('select_member'):
-
-            from datetime import datetime as dt
-            import calendar
+        if request.GET.get('bdaymonth') and request.GET.get('select_member_felica_id'):
             wtm_start = dt.strptime('%s-01 00:00:00' % request.GET.get('bdaymonth'), '%Y-%m-%d %H:%M:%S')
 
+            member = FelicaMember.get_member(self.request.user, request.GET.get('select_member_felica_id'))
+
             # 월별 총 일수
+            f_total_hour = 0
+            f_total_minute = 0
             total_days = calendar.monthrange(wtm_start.year,wtm_start.month)[1]
             wtm_end = dt.strptime('%s-%s 23:59:59' % (request.GET.get('bdaymonth'), str(total_days)), '%Y-%m-%d %H:%M:%S')
+            ft_list = FelicaTime.get_work_time_list(wtm_start, wtm_end, request.GET.get('select_member_felica_id'))
 
-            work_time = paginator_list(FelicaTime.get_work_time_list(wtm_start, wtm_end, request.GET.get('select_member')),request.GET.get('page', 1),T.PAGE_COUNT)
+            work_time = paginator_list(ft_list,request.GET.get('page', 1),T.PAGE_COUNT)
+
+
+            for f in ft_list:
+                if f.work_time_hour: f_total_hour =+ f.work_time_hour
+                if f.work_time_minute: f_total_minute =+ f.work_time_minute
+
+            print ft_list.annotate(Sum('work_time_minute'))
 
             return render(request, 'felica/felica_work_time.html',
                           {'work_time': work_time,
+                           'member': member,
+                           'f_total_hour': f_total_hour,
+                           'f_total_minute': f_total_minute,
+                           'month': request.GET.get('bdaymonth'),
                            'member_list': FelicaMember.get_member_list(self.request.user)})
 
 
