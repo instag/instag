@@ -21,9 +21,10 @@
         <p>
             <h2>
              {% if member %}
-              {{member.member_name}} &nbsp;&nbsp;&nbsp;
-              시급:{{member.hour_price}}&nbsp;&nbsp;&nbsp;
-              {{month}}&nbsp;월근무시간:{{f_total_hour}}시간&nbsp;&nbsp;{{f_total_minute}}분
+              {{member.member_name}} &nbsp;&nbsp;&nbsp;&nbsp;
+              시급:{{member.hour_price}}&nbsp;&nbsp;&nbsp;&nbsp;
+              총근무시간:{{f_total_hour}}시간&nbsp;{{f_total_minute}}분
+              &nbsp;&nbsp;&nbsp;{{month}}&nbsp;
              {% endif %}
             </h2>
             <form action="{% url 'felica:felica_work_time' %}">
@@ -62,7 +63,7 @@
           <tbody>
                 {% for m in work_time %}
                 <tr>
-                    <td><a href="{% url 'felica:felica_member_edit' m.id %}" role="button">{{m.company_name}}</a></td>
+                    <td><a href="{% url 'felica:felica_time_edit' m.id %}" role="button">{{m.company_name}}</a></td>
                     <td>{{m.member_name}}</td>
 
                     <td>{{m.felica_id}}</td>
@@ -72,7 +73,7 @@
                         {% if m.work_time_hour %} {{m.work_time_hour}}시간 {% endif %}
                         {% if m.work_time_minute %} {{m.work_time_minute}}분{% endif %}
                     </td>
-                    <td>{{m.work_end|date:'Y-m-d H:i'}}</td>
+                    <td>{{member.hour_price}}</td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -7,4 +7,5 @@ urlpatterns = [
         url(r'^felica/member/list$', views.FelicaMemberList.as_view(), name='felica_member_list'),
         url(r'^felica/work/time$', views.FelicaWorkTime.as_view(), name='felica_work_time'),
         url(r'^felica/member/edit/(?P<id>[\w\-]+)$', views.FelicaMemberEdit.as_view(), name='felica_member_edit'),
+        url(r'^felica/time/edit/(?P<id>[\w\-]+)$', views.FelicaTimeEdit.as_view(), name='felica_time_edit'),
 ]

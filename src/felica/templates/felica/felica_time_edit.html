@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load thumbnail %}
+
+{% block title %}{{ block.super }}Profile{% endblock %}
+
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="about" %}
+{% endblock %}
+
+<!-- Benefits of the Django application -->
+{% block container %}
+
+<div class="container">
+  <h1 class="text-primary">근무시간 수정</h1>
+  <hr>
+  <div class="row">
+    <div class="col-md-9">
+      <h3>수정</h3>
+      <form enctype="multipart/form-data" method="post">
+       {% crispy felica_time_form %}
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

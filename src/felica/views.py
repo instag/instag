@@ -98,8 +98,6 @@ class FelicaWorkTime(LoginRequiredMixin, generic.TemplateView):
                 if f.work_time_hour: f_total_hour =+ f.work_time_hour
                 if f.work_time_minute: f_total_minute =+ f.work_time_minute
 
-            print ft_list.annotate(Sum('work_time_minute'))
-
             return render(request, 'felica/felica_work_time.html',
                           {'work_time': work_time,
                            'member': member,
@@ -113,6 +111,25 @@ class FelicaWorkTime(LoginRequiredMixin, generic.TemplateView):
         work_time = paginator_list(FelicaTime.get_all(), request.GET.get('page', 1), T.PAGE_COUNT)
         return render(request, 'felica/felica_work_time.html', {'work_time': work_time,
                                                                 'member_list': FelicaMember.get_member_list(self.request.user)})
+
+
+class FelicaTimeEdit(LoginRequiredMixin, generic.TemplateView):
+
+    template_name = "felica/felica_time_edit.html"
+    http_method_names = ['get', 'post']
+
+    def get(self, request, *args, **kwargs):
+        user = self.request.user
+        felica_time = FelicaTime.objects.get(id=kwargs['id'], master_user=user.id)
+        kwargs["felica_time_form"] = forms.FelicaTimeForm(instance=felica_time)
+        return super(FelicaTimeEdit, self).get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        user = self.request.user
+        result = FelicaTime.update(user.id, request.POST, kwargs['id'])
+        messages.success(request, " work time saved!")
+        return redirect("felica:felica_work_time")
+
 
 class FelicaMemberList(LoginRequiredMixin, generic.TemplateView):
     template_name = "felica/felica_member_list.html"

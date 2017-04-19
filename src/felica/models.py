@@ -12,11 +12,11 @@ class FelicaTime(models.Model):
     """
     id = models.AutoField(primary_key=True)
     master_user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    company_name = models.CharField(u'会社名', max_length=200, blank=True, null=True)
-    member_name = models.CharField(u'会社名', max_length=200, blank=True, null=True)
+    company_name = models.CharField(u'회사명', max_length=200, blank=True, null=True)
+    member_name = models.CharField(u'이름', max_length=200, blank=True, null=True)
     work_time_key = models.CharField(u'work_time_key', max_length=100, blank=True, null=True)
-    work_start = models.DateTimeField(u'work_start', null=True)
-    work_end = models.DateTimeField(u'work_end', null=True)
+    work_start = models.DateTimeField(u'출근', null=True)
+    work_end = models.DateTimeField(u'퇴근', null=True)
     work_time_minute = models.IntegerField(u'work_time_minute', null=True)
     work_time_hour = models.IntegerField(u'work_time_hour', null=True)
     felica_id = models.CharField(u'felica_id', max_length=200, blank=True, null=True)
@@ -97,6 +97,20 @@ class FelicaTime(models.Model):
             return None
 
 
+    @classmethod
+    def update(cls, user_id, post_data, id):
+        result = cls.objects.get(id=id, master_user=user_id)
+        result.company_name = post_data['company_name']
+        result.member_name = post_data['member_name']
+        result.work_start = post_data['work_start']
+        result.work_end = post_data['work_end']
+        result.work_time_minute = post_data['work_time_minute']
+        result.work_time_hour = post_data['work_time_hour']
+        result.felica_id = post_data['felica_id']
+        result.save()
+        return result
+
+
 class FelicaMember(models.Model):
     """
     직원정보
@@ -105,7 +119,7 @@ class FelicaMember(models.Model):
     master_user = models.ForeignKey(settings.AUTH_USER_MODEL)
     company_name = models.CharField(u'会社名', max_length=200, blank=True, null=True)
     member_name = models.CharField(u'member_name', max_length=200, blank=True, null=True, default='')
-    felica_id = models.CharField(u'member_name', max_length=200, blank=True, null=True)
+    felica_id = models.CharField(u'felica_id', max_length=200, blank=True, null=True)
     hour_price = models.IntegerField(u'hour_price', null=True)
     created_at = models.DateTimeField(u'作成日時', auto_now_add=True)
     updated_at = models.DateTimeField(u'更新日時', auto_now=True)
