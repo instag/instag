@@ -34,7 +34,7 @@ class FelicaTime(models.Model):
         one_minute_check = None
 
 
-        1분이내의 여러번 출퇴근을 금지하기 위해서 1분동안은 똑같은 레코드는 생성하지 않음
+        # 1분이내의 여러번 출퇴근을 금지하기 위해서 1분동안은 똑같은 레코드는 생성하지 않음
         try:
             one_minute_check = cls.objects.get(master_user=master_user,
                                                company_name=company_name,
