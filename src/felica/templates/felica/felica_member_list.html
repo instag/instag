@@ -50,8 +50,8 @@
           <tbody>
                 {% for m in member_list %}
                 <tr>
-                    <td>{{m.company_name}}</td>
-                    <td><a href="{% url 'felica:felica_member_edit' m.id %}" role="button">{{m.member_name}}</a></td>
+                    <td><a href="{% url 'felica:felica_member_edit' m.id %}" role="button">{{m.company_name}}</a></td>
+                    <td>{{m.member_name}}</td>
                     <td>{{m.felica_id}}</td>
                     <td>{{m.hour_price}}</td>
                     <td>{{m.created_at|date:'Y-m-d H:i'}}</td>
