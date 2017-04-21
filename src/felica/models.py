@@ -99,13 +99,16 @@ class FelicaTime(models.Model):
 
     @classmethod
     def update(cls, user_id, post_data, id):
+
+
+
         result = cls.objects.get(id=id, master_user=user_id)
         result.company_name = post_data['company_name']
         result.member_name = post_data['member_name']
-        result.work_start = post_data['work_start']
-        result.work_end = post_data['work_end']
-        result.work_time_minute = post_data['work_time_minute']
-        result.work_time_hour = post_data['work_time_hour']
+        if post_data['work_start']: result.work_start = post_data['work_start']
+        if post_data['work_end']: result.work_end = post_data['work_end']
+        if post_data['work_time_minute']:result.work_time_minute = post_data['work_time_minute']
+        if post_data['work_time_hour']:result.work_time_hour = post_data['work_time_hour']
         result.felica_id = post_data['felica_id']
         result.save()
         return result
