@@ -64,8 +64,13 @@ class FelicaTime(models.Model):
             ws_all_time = (ws.toordinal() * 60 * 60 * 24) + (ws.hour*60*60) + (ws.minute*60)
 
             # 총 근무한 시간 (분으로 저장)
-            work_record.work_time_hour = (we_all_time - ws_all_time) / 60
-            work_record.work_time_minute = (we_all_time - ws_all_time) % 60
+            print we_all_time
+            print ws_all_time
+            print (we_all_time - ws_all_time)
+            print (we_all_time - ws_all_time) / 60
+
+            work_record.work_time_hour = ((we_all_time - ws_all_time) / 60) / 60
+            work_record.work_time_minute = ((we_all_time - ws_all_time) / 60) % 60
             work_record.save()
 
         else:
