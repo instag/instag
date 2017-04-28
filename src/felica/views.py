@@ -1,23 +1,24 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from braces.views import LoginRequiredMixin
+
+import calendar
 import sys
-from django.shortcuts import render, redirect, get_object_or_404
+from datetime import datetime as dt
+
+from braces.views import LoginRequiredMixin
 from common import template_text as T
+from django.contrib import messages
+from django.contrib.auth import get_user_model
+from django.http import HttpResponse
+from django.shortcuts import redirect
+from django.shortcuts import render, redirect
 from django.views import generic
 from instagram import client
-from profile import Profile
-from .models import FelicaMember, FelicaTime
-from . import forms
-from django.contrib import messages
-from django.shortcuts import redirect
-from .utils import paginator_list
-from common import template_text as T
-from datetime import datetime as dt
-import calendar
-from django.db.models import Sum
 
-from django.contrib.auth import get_user_model
+from . import forms
+from .models import FelicaMember, FelicaTime
+from .utils import paginator_list
+
 User = get_user_model()
 
 reload(sys)
@@ -29,7 +30,6 @@ unauthenticated_api = client.InstagramAPI(**CONFIG)
 class Felica(generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
-        print "felica.....11111"
         # 가게의 마스터 데이터가 있는지 확인
         master_user = User.objects.get(name=request.GET['company_name'])
 
@@ -40,11 +40,14 @@ class Felica(generic.TemplateView):
                                                    request.GET['felica_id'])
 
             # 퇴근 기록
-            fswt = FelicaTime.set_work_time(master_user,
+            fswt, msg = FelicaTime.set_work_time(master_user,
                                             master_user.name,
                                             request.GET['felica_id'],
-                                            fm.member_name
-                                            )
+                                            fm.member_name)
+
+            return HttpResponse(msg, status=200)
+
+        return HttpResponse('Error', status=200)
 
 
     def post(self, request, *args, **kwargs):

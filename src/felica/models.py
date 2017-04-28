@@ -5,6 +5,7 @@ from django.conf import settings
 import datetime
 import pytz
 from pytz import timezone
+from common import template_text as T
 
 class FelicaTime(models.Model):
     """
@@ -32,6 +33,8 @@ class FelicaTime(models.Model):
         work_time_key = str(todaydetail.year) + str(todaydetail.month) + str(todaydetail.day) + str(todaydetail.hour) + str(todaydetail.minute)
         work_record = None
         one_minute_check = None
+        msg = ""
+        result = None
 
 
         # 1분이내의 여러번 출퇴근을 금지하기 위해서 1분동안은 똑같은 레코드는 생성하지 않음
@@ -40,10 +43,11 @@ class FelicaTime(models.Model):
                                                company_name=company_name,
                                                work_time_key=work_time_key,
                                                felica_id=felica_id)
+            msg = T.CHECK_START_ERROR_MSG
         except Exception as e:
             print e
 
-        if not one_minute_check is None: return None
+        if not one_minute_check is None: return None, msg
 
         try:
             # 퇴근 기록이 없는 레코드가 존재한다면 퇴근을 기록
@@ -51,6 +55,7 @@ class FelicaTime(models.Model):
                                      company_name=company_name,
                                      felica_id=felica_id,
                                      work_end=None)
+            msg = T.CHECK_START_MSG
         except Exception as e:
             print e
 
@@ -64,14 +69,16 @@ class FelicaTime(models.Model):
             ws_all_time = (ws.toordinal() * 60 * 60 * 24) + (ws.hour*60*60) + (ws.minute*60)
 
             # 총 근무한 시간 (분으로 저장)
-            print we_all_time
-            print ws_all_time
-            print (we_all_time - ws_all_time)
-            print (we_all_time - ws_all_time) / 60
+            # print we_all_time
+            # print ws_all_time
+            # print (we_all_time - ws_all_time)
+            # print (we_all_time - ws_all_time) / 60
 
             work_record.work_time_hour = ((we_all_time - ws_all_time) / 60) / 60
             work_record.work_time_minute = ((we_all_time - ws_all_time) / 60) % 60
             work_record.save()
+            msg = T.CHECK_END_MSG
+            if member_name: msg = member_name + "님" + T.CHECK_END_MSG
 
         else:
             result, is_new = cls.objects.get_or_create(master_user=master_user,
@@ -85,8 +92,10 @@ class FelicaTime(models.Model):
                 result.work_time_key = work_time_key
                 result.work_start = todaydetail
                 result.save()
+                msg = T.CHECK_START_MSG
+                if member_name: msg = member_name + "님" + T.CHECK_START_MSG
 
-        return result
+        return result, msg
 
     @classmethod
     def get_work_time_list(cls, wtm_start, wtm_end, felica_id):
@@ -128,7 +137,7 @@ class FelicaMember(models.Model):
     company_name = models.CharField(u'会社名', max_length=200, blank=True, null=True)
     member_name = models.CharField(u'member_name', max_length=200, blank=True, null=True, default='')
     felica_id = models.CharField(u'felica_id', max_length=200, blank=True, null=True)
-    hour_price = models.IntegerField(u'hour_price', null=True)
+    hour_price = models.IntegerField(u'hour_price', null=True, default=0)
     created_at = models.DateTimeField(u'作成日時', auto_now_add=True)
     updated_at = models.DateTimeField(u'更新日時', auto_now=True)
 
@@ -166,6 +175,6 @@ class FelicaMember(models.Model):
         result = cls.objects.get(id=id, master_user=user_id)
         result.company_name = post_data['company_name']
         result.member_name = post_data['member_name']
-        result.hour_price = post_data['hour_price']
+        if post_data['hour_price']: result.hour_price = post_data['hour_price']
         result.save()
         return result
