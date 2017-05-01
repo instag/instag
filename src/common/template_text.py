@@ -8,9 +8,9 @@ WISHTAG = 'wishtag'
 
 PAGE_COUNT = 35
 
-CHECK_START_MSG = "출근!"
-CHECK_END_MSG = "퇴근!"
-CHECK_START_ERROR_MSG = "1분이내의 출퇴근 기록 불가"
+CHECK_START_MSG = "START TIME"
+CHECK_END_MSG = "END TIME"
+CHECK_START_ERROR_MSG = "wait! 1minute"
 
 
 if HOSTNAME.startswith('wishtag.net'):

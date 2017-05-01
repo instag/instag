@@ -80,7 +80,7 @@ class FelicaTime(models.Model):
             work_record.member_name = member_name
             work_record.save()
             msg = T.CHECK_END_MSG
-            if member_name: msg = member_name + "님" + T.CHECK_END_MSG
+            if member_name: msg = member_name + " " + T.CHECK_END_MSG
 
         else:
             result, is_new = cls.objects.get_or_create(master_user=master_user,
