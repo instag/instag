@@ -76,6 +76,7 @@ class FelicaTime(models.Model):
 
             work_record.work_time_hour = ((we_all_time - ws_all_time) / 60) / 60
             work_record.work_time_minute = ((we_all_time - ws_all_time) / 60) % 60
+            work_record.member_name = member_name
             work_record.save()
             msg = T.CHECK_END_MSG
             if member_name: msg = member_name + "님" + T.CHECK_END_MSG

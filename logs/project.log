@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [17/Mar/2017 12:33:42] ERROR [/usr/local/lib64/python2.7/site-packages/django/core/handlers/base.py:256] Internal Server Error: /
 Traceback (most recent call last):
   File "/usr/local/lib64/python2.7/site-packages/django/core/handlers/base.py", line 164, in get_response
@@ -2599,3 +2600,7 @@ Traceback (most recent call last):
   File "/usr/local/lib64/python2.7/site-packages/django/db/models/fields/__init__.py", line 1868, in get_prep_value
     return int(value)
 ValueError: invalid literal for int() with base 10: ''
+=======
+[28/Mar/2017 22:01:56] INFO [/Users/free31/git/instag2/src/profiles/signals.py:17] New user profile for test77 <test77@gmail.com> created
+[21/Apr/2017 17:11:58] INFO [/Users/free31/git/instag2/src/profiles/signals.py:17] New user profile for kimnam <orange3311@gmail.com> created
+>>>>>>> f87617cb4490af5557e2bf848ba74d42af86bdca
