@@ -59,6 +59,7 @@ class FelicaTime(models.Model):
         except Exception as e:
             print e
 
+
         # 퇴근기록 경우
         if work_record:
             work_record.work_end = todaydetail
