@@ -95,7 +95,7 @@ class FelicaTime(models.Model):
                 result.work_start = todaydetail
                 result.save()
                 msg = T.CHECK_START_MSG
-                if member_name: msg = member_name + "님" + T.CHECK_START_MSG
+                if member_name: msg = member_name + "" + T.CHECK_START_MSG
 
         return result, msg
 
