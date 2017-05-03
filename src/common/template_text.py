@@ -10,7 +10,7 @@ PAGE_COUNT = 35
 
 CHECK_START_MSG = "START TIME"
 CHECK_END_MSG = "END TIME"
-CHECK_START_ERROR_MSG = "wait! 1minute"
+CHECK_START_ERROR_MSG = "wait! one minute"
 
 
 if HOSTNAME.startswith('wishtag.net'):
