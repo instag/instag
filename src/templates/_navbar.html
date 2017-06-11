@@ -1,4 +1,4 @@
-<li {% if active_link == "home" %}class="active"{% endif %}><a href="{% url 'home' %}">Home</a></li>
+<!--<li {% if active_link == "home" %}class="active"{% endif %}><a href="{% url 'home' %}">Home</a></li>-->
 <li {% if active_link == "about" %}class="active"{% endif %}><a href="{% url 'about' %}">About</a></li>
 {% if user.profile %}
 <li><a href="{% url 'felica:felica_member_list' %}">社員リスト</a></li>
