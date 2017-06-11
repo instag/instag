@@ -12,69 +12,70 @@
 <!-- Benefits of the Django application -->
 {% block container %}
 
-<div id="sec1" class="text-page">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <h1>{% include "_brandname.html" %}</h1>
-        <p class="lead">An Awesome Tagline Goes Here</p>
-      </div>
-    </div>
-  </div>
-</div>
+<!--<div id="sec1" class="text-page">-->
+  <!--<div class="container">-->
+    <!--<div class="row">-->
+      <!--<div class="col-md-12 text-center">-->
+        <!--<h1>{% include "_brandname.html" %}</h1>-->
+        <!--<p class="lead">An Awesome Tagline Goes Here</p>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
 
 <div id="sec2" class="text-page">
   <div class="container">
     <div class="row">
-      <div class="col-md-12 text-center">
-        <h2>Meet The Team</h2>
-        <p class="lead">The Wonderful People Behind the Site</p>
-      </div>
+        <h2>システム構成</h2>
+        <p>社員の方々がお持ちのSuica・ICOCAなどのICカードや、FeliCa/NFC対応スマートフォンをタイムカードとして登録し、それらを使用して打刻した勤怠履歴をブラウザから管理することが可能です。</p>
+        <div class="text-center"><img src="{% static 'site/img/system1.png' %}" width="50%" alt="appstore"></div>
     </div>
+
+    <br /><br />
     <div class="row">
-      <div class="col-lg-4">
-        <div class="text-center"><img class="img-circle centered" src="http://lorempixel.com/128/128/people/9/" alt="profile pic"></div>
-        <p class="heavy text-center">Cassidy Coder</p>
-        <h2>Front-end developer</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      </div>
-      <div class="col-lg-4">
-        <div class="text-center"><img class="img-circle centered" src="http://lorempixel.com/128/128/people/2/" alt="profile pic"></div>
-        <p class="heavy text-center">James King</p>
-        <h2>CEO</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      </div>
-      <div class="col-lg-4">
-        <div class="text-center"><img class="img-circle centered" src="http://lorempixel.com/128/128/people/1/" alt="profile pic"></div>
-        <p class="heavy text-center">Kate Lamport</p>
-        <h2>Front-end designer</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      </div>
+        <h2>社員リスト</h2>
+        <p>社員登録、修正などを行う機能</p>
+        <div class="text-center"><img src="{% static 'site/img/member.png' %}" width="100%" alt="appstore"></div>
     </div>
+
+    <br /><br />
+    <div class="row">
+        <h2>勤務時間</h2>
+        <p>全社員の勤務時間を確認、修正が可能
+        <div class="text-center"><img src="{% static 'site/img/time_list.png' %}" width="100%" alt="appstore"></div>
     </div>
+
+    <br /><br />
+    <div class="row">
+        <h2>時給計算</h2>
+        <p>各社員の月間時給トータル計算機能
+        <div class="text-center"><img src="{% static 'site/img/total_sal.png' %}" width="100%" alt="appstore"></div>
+    </div>
+
+
   </div>
 </div>
 
-<div id="sec3">
-  <div class="container">
-    <div class="row">
-      <div id="map-outer" class="col-md-12">
-        <div id="address" class="col-md-4">
-          <h2>Our Location</h2>
-          <address>
-            <strong>Edge Solutions Ltd.</strong><br>
-            Taj Mahal<br>
-            Agra<br>
-            Uttar Pradesh<br>
-            India - 282001<br>
-            <abbr>P:</abbr> +91 0562 222 6431
-          </address>
-        </div>
-        <div id="map-container" class="col-md-8"></div>
-      </div>
-    </div>
-  </div>
-</div>
+<!--<div id="sec3">-->
+  <!--<div class="container">-->
+    <!--<div class="row">-->
+      <!--<div id="map-outer" class="col-md-12">-->
+        <!--<div id="address" class="col-md-4">-->
+          <!--<h2>Our Location</h2>-->
+          <!--<address>-->
+            <!--<strong>Edge Solutions Ltd.</strong><br>-->
+            <!--Taj Mahal<br>-->
+            <!--Agra<br>-->
+            <!--Uttar Pradesh<br>-->
+            <!--India - 282001<br>-->
+            <!--<abbr>P:</abbr> +91 0562 222 6431-->
+          <!--</address>-->
+        <!--</div>-->
+        <!--<div id="map-container" class="col-md-8"></div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
 {% endblock container %}
 
 {% block scripts %}
