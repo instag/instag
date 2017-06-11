@@ -22,15 +22,15 @@
             <h2>
              {% if member %}
               {{member.member_name}} &nbsp;&nbsp;&nbsp;&nbsp;
-              시급:{{member.hour_price}}&nbsp;&nbsp;&nbsp;&nbsp;
-              총근무시간:{{f_total_hour}}시간&nbsp;{{f_total_minute}}분
+              時給:{{member.hour_price}}&nbsp;&nbsp;&nbsp;&nbsp;
+              トータル勤務時間:{{f_total_hour}}時間&nbsp;{{f_total_minute}}分
               &nbsp;&nbsp;&nbsp;{{month}}&nbsp;
              {% endif %}
             </h2>
             <form action="{% url 'felica:felica_work_time' %}">
             <input type="month" name="bdaymonth" /> <input type="submit" class="btn btn-info">
             <select id="org" name="select_member_felica_id" onChange="redirectUrl()">
-              <option  value="" selected="selected">---멤버 선택---</option>
+              <option  value="" selected="selected">---社員選択---</option>
               {% for w in member_list %}
                <option value="{{w.felica_id}}" >{{w.member_name|capfirst}}</option>
               {% endfor %}
@@ -51,13 +51,13 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>회사이름</th>
-                    <th>이름</th>
+                    <th>会社名</th>
+                    <th>名前</th>
                     <th>felica_id</th>
-                    <th>출근</th>
-                    <th>퇴근</th>
-                    <th>총 근무시간</th>
-                    <th>지급액</th>
+                    <th>出勤</th>
+                    <th>退勤</th>
+                    <th>トータル勤務時間</th>
+                    <th>支給金額</th>
                 </tr>
             </thead>
           <tbody>
@@ -70,8 +70,8 @@
                     <td>{{m.work_start|date:'Y-m-d H:i'}}</td>
                     <td>{{m.work_end|date:'Y-m-d H:i'}}</td>
                     <td>
-                        {% if m.work_time_hour %} {{m.work_time_hour}}시간 {% endif %}
-                        {% if m.work_time_minute %} {{m.work_time_minute}}분{% endif %}
+                        {% if m.work_time_hour %} {{m.work_time_hour}}時間 {% endif %}
+                        {% if m.work_time_minute %} {{m.work_time_minute}}分{% endif %}
                     </td>
                     <td>{{member.hour_price}}</td>
                 </tr>
