@@ -12,19 +12,7 @@
 <!-- Benefits of the Django application -->
 {% block container %}
 
-<div id="sec1" class="text-page">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <h1>{% include "_brandname.html" %}</h1>
-        <p class="lead">An Awesome Tagline Goes Here</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
+<br /><br />
 <div id="sec3">
   <div class="container">
     <div class="row">
@@ -47,7 +35,35 @@
       </div>
     </div>
 
+    <div class="row">
+      <div id="map-outer" class="col-md-12">
+        <div id="address" class="col-md-2">
+          <h2>勤務時間</h2>
+          全社員の勤務時間を確認、修正が可能
+        </div>
+        <div class="text-center"><img src="{% static 'site/img/time_list.png' %}" width="70%" alt="appstore"></div>
+      </div>
+    </div>
 
+    <div class="row">
+      <div id="map-outer" class="col-md-12">
+        <div id="address" class="col-md-2">
+          <h2>時給計算</h2>
+          各社員の月間時給トータル計算機能
+        </div>
+        <div class="text-center"><img src="{% static 'site/img/total_sal.png' %}" width="70%" alt="appstore"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div id="map-outer" class="col-md-12">
+        <div id="address" class="col-md-2">
+          <h2>勤怠情報修正</h2>
+          各社員の勤怠情報報修正可能
+        </div>
+        <div class="text-center"><img src="{% static 'site/img/edit_time.png' %}" width="70%" alt="appstore"></div>
+      </div>
+    </div>
   </div>
 </div>
 
